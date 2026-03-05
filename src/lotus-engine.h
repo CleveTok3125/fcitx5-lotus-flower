@@ -42,7 +42,7 @@ namespace fcitx {
      * Handles input processing, configuration management, and UI actions.
      * Implements fcitx InputMethodEngine interface.
      */
-    class LotusEngine final : public InputMethodEngine {
+    class LotusEngine final : public InputMethodEngineV2 {
       public:
         /**
          * @brief Gets the fcitx instance.
@@ -133,11 +133,20 @@ namespace fcitx {
         std::string subMode(const InputMethodEntry& entry, InputContext& inputContext) override;
 
         /**
-         * @brief Gets the override icon name.
+         * @brief Sets the current sub-mode icon.
          * @param entry Input method entry.
+         * @param inputContext Current input context.
          * @return Icon name string.
          */
-        std::string overrideIcon(const InputMethodEntry& entry) override;
+        std::string subModeIconImpl(const InputMethodEntry& entry, InputContext& inputContext) override;
+
+        /**
+         * @brief Sets the current sub-mode label.
+         * @param entry Input method entry.
+         * @param inputContext Current input context.
+         * @return Label string.
+         */
+        std::string subModeLabelImpl(const InputMethodEntry& entry, InputContext& inputContext) override;
 
         /**
          * @brief Gets the current configuration.

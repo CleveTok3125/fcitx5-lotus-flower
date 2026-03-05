@@ -903,7 +903,9 @@ namespace fcitx {
         }
     }
 
-    std::string LotusEngine::overrideIcon(const InputMethodEntry& /*entry*/) {
+    std::string LotusEngine::subModeIconImpl(const InputMethodEntry& entry, InputContext& inputContext) {
+        FCITX_UNUSED(entry);
+        FCITX_UNUSED(inputContext);
         if (!*config_.useLotusIcons) {
             switch (realMode) {
                 case LotusMode::Off: return "fcitx-lotus-off-default";
@@ -915,6 +917,16 @@ namespace fcitx {
             case LotusMode::Off: return "fcitx-lotus-off";
             case LotusMode::Emoji: return "fcitx-lotus-emoji";
             default: return "fcitx-lotus";
+        }
+    }
+
+    std::string LotusEngine::subModeLabelImpl(const InputMethodEntry& entry, InputContext& inputContext) {
+        FCITX_UNUSED(entry);
+        FCITX_UNUSED(inputContext);
+        switch (realMode) {
+            case LotusMode::Off: return "Lotus - Off";
+            case LotusMode::Emoji: return "😄";
+            default: return "🪷";
         }
     }
 
