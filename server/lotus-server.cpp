@@ -224,9 +224,6 @@ int main(int argc, char* argv[]) {
                     close(fds[3].fd);
                     fds[3].fd = -1;
                 } else {
-                    if (count > 10) {
-                        count = 10;
-                    }
                     pending_backspaces += count - 1;
                     send_single_backspace();
                 }

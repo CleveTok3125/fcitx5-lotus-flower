@@ -229,6 +229,12 @@ namespace fcitx {
         void updateFreeMarkingAction(InputContext* ic);
 
         /**
+         * @brief Updates the dd free style action UI.
+         * @param ic Current input context.
+         */
+        void updateDdFreeStyleAction(InputContext* ic);
+
+        /**
          * @brief Updates the fix uinput with ACK action UI.
          * @param ic Current input context.
          */
@@ -327,6 +333,7 @@ namespace fcitx {
         std::unique_ptr<SimpleAction>                    autoNonVnRestoreAction_;
         std::unique_ptr<SimpleAction>                    modernStyleAction_;
         std::unique_ptr<SimpleAction>                    freeMarkingAction_;
+        std::unique_ptr<SimpleAction>                    ddFreeStyleAction_;
         std::unique_ptr<SimpleAction>                    fixUinputWithAckAction_;
         std::unique_ptr<SimpleAction>                    lotusIconsAction_;
         std::unique_ptr<SimpleAction>                    versionAction_;

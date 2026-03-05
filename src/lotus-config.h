@@ -207,6 +207,7 @@ namespace fcitx {
         Option<bool> autoNonVnRestore{this, "AutoNonVnRestore", _("Auto restore keys with invalid words"), true};
         Option<bool> modernStyle{this, "ModernStyle", _("Use oà, _uý (instead of òa, úy)"), true};
         Option<bool> freeMarking{this, "FreeMarking", _("Allow type with more freedom"), true};
+        Option<bool> ddFreeStyle{this, "DdFreeStyle", _("Allow dd to produce đ when Auto non-VN restore is On"), true};
         Option<bool> fixUinputWithAck{this, "FixUinputWithAck", _("Fix uinput mode with ack"), false};
         Option<bool> useLotusIcons{this, "UseLotusIcons", _("Use Lotus status icons"), false};
 #ifdef ENABLE_KEYMAP_EDITOR

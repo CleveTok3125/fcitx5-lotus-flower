@@ -498,14 +498,14 @@ Thêm dòng sau vào file `~/.config/kanata/kanata.kbd`
 | **Auto non-VN restore** | Bật/tắt tự động khôi phục với từ không phải tiếng Việt.                                                          | Bật             |
 | **Modern Style**        | Bật/tắt kiểu đặt dấu thanh hiện đại _(ví dụ: oà, *uý thay vì òa, *úy)_.                                          | Bật             |
 | **Free Marking**        | Bật/tắt bỏ dấu tự do.                                                                                            | Bật             |
+| **Dd Free Style**       | Bật/tắt cho phép "dd" tạo "đ" khi tuỳ chọn _Auto non-VN restore_ được bật.                                       | Bật             |
 | **Fix Uinput with ack** | Bật/tắt sửa lỗi chế độ Uinput với ack.<br/>Nên bật khi sử dụng các ứng dụng Chromium (Chrome, Brave, Edge, ...). | Tắt             |
 | **Lotus Icons**         | Bật/tắt sử dụng icon Lotus thay vì icon mặc định V E.                                                            | Tắt             |
 
 - Hoặc có thể nhấp chuột phải vào biểu tượng Lotus trên system tray -> **Input Method Settings** -> Chọn **Lotus** -> **Configure** (biểu tượng bánh răng ở giữa của giao diện _Fcitx Configuration_) để tuỳ chỉnh chi tiết một số tuỳ chọn khác, như:
-
-  + Gõ tắt/ Macro: nhấn vào biểu tượng bánh răng bên cạnh dòng chọn _Input Method_ để mở giao diện thêm bớt macro cho kiểu gõ hiện tại. **Lưu ý:** các từ gõ tắt chỉ có hiệu lực với kiểu gõ được chọn, nếu muốn áp dụng cho kiểu gõ khác, hãy đổi kiểu gõ và thêm từ gõ tắt từ đầu như trên.
-  + Keymap tuỳ chỉnh: nhấn vào biểu tượng bánh răng trên dòng _Custom Keymap_ để mở giao diện tuỳ chỉnh keymap, bạn có thể nhập keymap từ một kiểu gõ có sẵn, hoặc tự tạo keymap của riêng mình. Sau khi tuỳ chỉnh, chọn kiểu gõ **Custom** để áp dụng keymap tuỳ chỉnh.
-  + Phím tắt cho menu chế độ gõ: mặc định, menu này sử dụng phím `` ` `` để mở menu ở tất cả các ứng dụng, nếu công việc của bạn thường xuyên dùng phím này hoặc đơn giản bạn chỉ không thích phím `` ` ``, nhấn vào nút chọn phím tắt bên cạnh tuỳ chọn _Mode menu hotkey_ để nhập phím tắt mà bạn muốn. Bạn cũng có thể nhấn nút `+` để tạo thêm phím tắt mới nếu muốn.
+  - Gõ tắt/ Macro: nhấn vào biểu tượng bánh răng bên cạnh dòng chọn _Input Method_ để mở giao diện thêm bớt macro cho kiểu gõ hiện tại. **Lưu ý:** các từ gõ tắt chỉ có hiệu lực với kiểu gõ được chọn, nếu muốn áp dụng cho kiểu gõ khác, hãy đổi kiểu gõ và thêm từ gõ tắt từ đầu như trên.
+  - Keymap tuỳ chỉnh: nhấn vào biểu tượng bánh răng trên dòng _Custom Keymap_ để mở giao diện tuỳ chỉnh keymap, bạn có thể nhập keymap từ một kiểu gõ có sẵn, hoặc tự tạo keymap của riêng mình. Sau khi tuỳ chỉnh, chọn kiểu gõ **Custom** để áp dụng keymap tuỳ chỉnh.
+  - Phím tắt cho menu chế độ gõ: mặc định, menu này sử dụng phím `` ` `` để mở menu ở tất cả các ứng dụng, nếu công việc của bạn thường xuyên dùng phím này hoặc đơn giản bạn chỉ không thích phím `` ` ``, nhấn vào nút chọn phím tắt bên cạnh tuỳ chọn _Mode menu hotkey_ để nhập phím tắt mà bạn muốn. Bạn cũng có thể nhấn nút `+` để tạo thêm phím tắt mới nếu muốn.
 
 ### 2. Menu chuyển chế độ gõ
 

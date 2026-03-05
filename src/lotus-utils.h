@@ -35,7 +35,6 @@ extern std::atomic<bool>       needEngineReset;        ///< Flag to trigger engi
 extern std::string             BASE_SOCKET_PATH;       ///< Base path for Unix sockets
 extern std::atomic<bool>       g_mouse_clicked;        ///< Mouse click detection flag
 extern std::atomic<bool>       is_deleting_;           ///< Deletion in progress flag
-extern const int               MAX_BACKSPACE_COUNT;    ///< Maximum backspace limit
 extern std::once_flag          monitor_init_flag;      ///< One-time initialization flag
 extern std::atomic<bool>       stop_flag_monitor;      ///< Signal to stop monitor threads
 extern std::atomic<bool>       monitor_running;        ///< Monitor thread status

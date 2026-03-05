@@ -20,7 +20,6 @@ std::atomic<bool>       needEngineReset{false};
 std::string             BASE_SOCKET_PATH;
 std::atomic<bool>       g_mouse_clicked{false};
 std::atomic<bool>       is_deleting_{false};
-const int               MAX_BACKSPACE_COUNT = 8;
 std::once_flag          monitor_init_flag;
 std::atomic<bool>       stop_flag_monitor{false};
 std::atomic<bool>       monitor_running{false};

@@ -492,6 +492,7 @@ Add this line to file `~/.config/kanata/kanata.kbd`
 | **Auto non-VN restore** | Enable/disable auto-restore for non-Vietnamese words.                                                                          | On              |
 | **Modern Style**        | Enable/disable modern tone mark placement style _(e.g. oà, *uý instead of òa, *úy)_.                                           | On              |
 | **Free Marking**        | Enable/disable free tone marking.                                                                                              | On              |
+| **Dd Free Style**       | Enable/disable allowing "dd" to produce "đ" when _Auto non-VN restore_ is On                                                   | On              |
 | **Fix Uinput with ack** | Enable/disable fixing Uinput mode with ack.<br/>Recommended when using Chromium-based applications (Chrome, Brave, Edge, ...). | Off             |
 | **Lotus Icons**         | Enable/disable using Lotus icons instead of the default V E icons.                                                             | Off             |
 

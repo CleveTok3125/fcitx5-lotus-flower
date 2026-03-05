@@ -258,6 +258,18 @@ namespace fcitx {
         }));
         uiManager.registerAction("lotus-freemarking", freeMarkingAction_.get());
 
+        ddFreeStyleAction_ = std::make_unique<SimpleAction>();
+        ddFreeStyleAction_->setLongText(_("Allow dd to produce đ when Auto non-VN restore is On"));
+        ddFreeStyleAction_->setIcon("text-x-generic");
+        ddFreeStyleAction_->setCheckable(true);
+        connections_.emplace_back(ddFreeStyleAction_->connect<SimpleAction::Activated>([this](InputContext* ic) {
+            config_.ddFreeStyle.setValue(!*config_.ddFreeStyle);
+            saveConfig();
+            refreshOption();
+            updateDdFreeStyleAction(ic);
+        }));
+        uiManager.registerAction("lotus-ddfreestyle", ddFreeStyleAction_.get());
+
         fixUinputWithAckAction_ = std::make_unique<SimpleAction>();
         fixUinputWithAckAction_->setLongText(_("Fix uinput mode with ack"));
         fixUinputWithAckAction_->setIcon("network-transmit-receive");
@@ -353,6 +365,7 @@ namespace fcitx {
         updateAutoNonVnRestoreAction(nullptr);
         updateModernStyleAction(nullptr);
         updateFreeMarkingAction(nullptr);
+        updateDdFreeStyleAction(nullptr);
         updateFixUinputWithAckAction(nullptr);
         updateLotusIconsAction(nullptr);
     }
@@ -442,6 +455,7 @@ namespace fcitx {
         statusArea.addAction(StatusGroup::InputMethod, autoNonVnRestoreAction_.get());
         statusArea.addAction(StatusGroup::InputMethod, modernStyleAction_.get());
         statusArea.addAction(StatusGroup::InputMethod, freeMarkingAction_.get());
+        statusArea.addAction(StatusGroup::InputMethod, ddFreeStyleAction_.get());
         statusArea.addAction(StatusGroup::InputMethod, fixUinputWithAckAction_.get());
         statusArea.addAction(StatusGroup::InputMethod, lotusIconsAction_.get());
     }
@@ -745,6 +759,14 @@ namespace fcitx {
         freeMarkingAction_->setShortText(*config_.freeMarking ? _("Free Marking: On") : _("Free Marking: Off"));
         if (ic) {
             freeMarkingAction_->update(ic);
+        }
+    }
+
+    void LotusEngine::updateDdFreeStyleAction(InputContext* ic) {
+        ddFreeStyleAction_->setChecked(*config_.ddFreeStyle);
+        ddFreeStyleAction_->setShortText(*config_.ddFreeStyle ? _("Dd -> Đ: On") : _("Dd -> Đ: Off"));
+        if (ic) {
+            ddFreeStyleAction_->update(ic);
         }
     }
 

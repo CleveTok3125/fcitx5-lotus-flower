@@ -67,7 +67,7 @@ namespace fcitx {
             return;
         FcitxBambooEngineOption option = {
             .autoNonVnRestore    = *engine_->config().autoNonVnRestore,
-            .ddFreeStyle         = true,
+            .ddFreeStyle         = *engine_->config().ddFreeStyle,
             .macroEnabled        = *engine_->config().macro,
             .autoCapitalizeMacro = *engine_->config().capitalizeMacro,
             .spellCheckWithDicts = *engine_->config().spellCheck,
@@ -111,8 +111,6 @@ namespace fcitx {
     void LotusState::send_backspace_uinput(int count) {
         if (uinput_client_fd_ < 0 && !connect_uinput_server())
             return;
-        if (count > MAX_BACKSPACE_COUNT)
-            count = MAX_BACKSPACE_COUNT;
 
         if (uinput_client_fd_ < 0) {
             if (!connect_uinput_server())
