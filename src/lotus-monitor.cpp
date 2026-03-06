@@ -8,6 +8,7 @@
 #include "lotus-monitor.h"
 #include "lotus-utils.h"
 
+#include <cstdio>
 #include <fcntl.h>
 #include <poll.h>
 #include <sys/socket.h>
@@ -111,7 +112,9 @@ void mousePressResetThread() {
                     snprintf(path, sizeof(path), "/proc/%d/cmdline", cred.pid);
                     int fd = open(path, O_RDONLY);
                     if (fd >= 0) {
-                        read(fd, exe_path, sizeof(exe_path) - 1);
+                        if (read(fd, exe_path, sizeof(exe_path) - 1) < 0) {
+                            perror("Failed to read cmdline");
+                        }
                         close(fd);
                     }
                 }

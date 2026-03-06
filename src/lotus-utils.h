@@ -16,6 +16,7 @@
 
 #include <condition_variable>
 #include <mutex>
+#include <atomic>
 
 // Forward declaration for fcitx types
 typedef uint32_t KeySym;

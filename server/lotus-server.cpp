@@ -9,8 +9,12 @@
 #include "lotus-server.h"
 
 #include <iostream>
-#include <signal.h>
+#include <cstring>
 #include <vector>
+
+#include <signal.h>
+#include <limits.h>
+#include <unistd.h>
 
 int               uinput_fd_ = -1;
 std::atomic<bool> g_running{true};
@@ -52,11 +56,15 @@ void send_single_backspace() {
     ev[1].type  = EV_SYN;
     ev[1].code  = SYN_REPORT;
     ev[1].value = 0;
-    write(uinput_fd_, ev, sizeof(ev));
+    if (write(uinput_fd_, ev, sizeof(ev)) < 0) {
+        perror("Failed to write to uinput");
+    }
 
     // Release
     ev[0].value = 0;
-    write(uinput_fd_, ev, sizeof(ev));
+    if (write(uinput_fd_, ev, sizeof(ev)) < 0) {
+        perror("Failed to write to uinput");
+    }
 }
 
 int open_restricted(const char* path, int flags, void* /*user_data*/) {

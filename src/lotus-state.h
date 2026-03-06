@@ -21,6 +21,8 @@
 
 #include <fcitx/inputcontext.h>
 
+#include <atomic>
+
 struct EmojiEntry;
 
 namespace fcitx {

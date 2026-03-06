@@ -18,7 +18,11 @@
 #include <fcitx/userinterfacemanager.h>
 #include <fcitx-utils/utf8.h>
 
+#include <atomic>
+#include <filesystem>
 #include <fstream>
+
+#include <fcntl.h>
 
 namespace fcitx {
     constexpr const char*     InputMethodActionPrefix = "lotus-input-method-";
