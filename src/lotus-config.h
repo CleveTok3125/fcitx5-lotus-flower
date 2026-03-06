@@ -15,15 +15,9 @@
 #ifndef _FCITX5_LOTUS_CONFIG_H_
 #define _FCITX5_LOTUS_CONFIG_H_
 
-#include <algorithm>
 #include <fcitx-config/configuration.h>
-#include <fcitx-config/option.h>
 #include <fcitx-utils/i18n.h>
 #include <fcitx-utils/stringutils.h>
-#include <string>
-#include <string_view>
-#include <unordered_map>
-#include <vector>
 
 namespace fcitx {
 

@@ -16,7 +16,6 @@
 #define _FCITX5_LOTUS_H_
 
 #include "bamboo-core.h"
-#include <cstdint>
 #include <optional>
 
 namespace fcitx {

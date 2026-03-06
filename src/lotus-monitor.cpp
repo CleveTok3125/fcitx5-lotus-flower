@@ -9,21 +9,9 @@
 #include "lotus-utils.h"
 
 #include <fcntl.h>
-#include <limits.h>
-#include <linux/limits.h>
 #include <poll.h>
 #include <sys/socket.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/types.h>
 #include <sys/un.h>
-#include <unistd.h>
-
-#include <cerrno>
-#include <cstdint>
-#include <cstring>
-#include <mutex>
-#include <thread>
 
 void deletingTimeMonitor() {
     while (!stop_flag_monitor.load()) {

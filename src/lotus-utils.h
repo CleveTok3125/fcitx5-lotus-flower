@@ -14,13 +14,8 @@
 #ifndef _FCITX5_LOTUS_UTILS_H_
 #define _FCITX5_LOTUS_UTILS_H_
 
-#include "lotus-config.h"
-#include <fcitx-utils/utf8.h>
-#include <cstdint>
-#include <atomic>
 #include <condition_variable>
 #include <mutex>
-#include <string>
 
 // Forward declaration for fcitx types
 typedef uint32_t KeySym;

@@ -5,6 +5,7 @@ set(fcitx_lotus_sources
   lotus-candidates.cpp
   lotus-utils.cpp
   lotus-monitor.cpp
+  "${PROJECT_SOURCE_DIR}/data/emoji/emoji_data.cpp"
 )
 
 add_library(lotus MODULE ${fcitx_lotus_sources})

@@ -19,17 +19,11 @@
 #include "emoji.h"
 #include "lotus.h"
 #include <fcitx-config/iniparser.h>
-#include <fcitx-utils/i18n.h>
 #include <fcitx/action.h>
 #include <fcitx/addonfactory.h>
 #include <fcitx/addonmanager.h>
-#include <fcitx/inputcontextproperty.h>
 #include <fcitx/inputmethodengine.h>
 #include <fcitx/instance.h>
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <vector>
 
 namespace fcitx {
 

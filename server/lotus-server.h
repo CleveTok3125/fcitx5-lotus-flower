@@ -22,21 +22,14 @@
 #include <atomic>
 #include <fcntl.h>
 #include <libinput.h>
-#include <libudev.h>
-#include <limits.h>
-#include <linux/input.h>
 #include <linux/uinput.h>
 #include <poll.h>
 #include <pwd.h>
-#include <sched.h>
 #include <string>
-#include <sys/ioctl.h>
 #include <sys/resource.h>
 #include <sys/socket.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/un.h>
-#include <unistd.h>
 
 /**
  * @brief Uinput device file descriptor.

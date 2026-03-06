@@ -6,13 +6,9 @@
  *
  */
 #include "lotus-utils.h"
+#include "lotus-config.h"
 
-#include <fcitx-utils/keysymgen.h>
 #include <fcitx-utils/utf8.h>
-
-#include <chrono>
-#include <cstdlib>
-#include <cstring>
 
 // Global variables
 fcitx::LotusMode        realMode = fcitx::LotusMode::Smooth;

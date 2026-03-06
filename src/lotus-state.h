@@ -16,14 +16,10 @@
 #define _FCITX5_LOTUS_STATE_H_
 
 #include "lotus.h"
-#include "emoji.h"
+#include "emoji_data.h"
 #include "lotus-utils.h"
-#include <fcitx-utils/key.h>
+
 #include <fcitx/inputcontext.h>
-#include <fcitx/inputcontextproperty.h>
-#include <atomic>
-#include <string>
-#include <vector>
 
 struct EmojiEntry;
 

@@ -13,20 +13,11 @@
 #ifndef EMOJI_H
 #define EMOJI_H
 
+#include "emoji_data.h"
+
 #include <algorithm>
-#include <cstddef>
 #include <string>
 #include <vector>
-
-/**
- * @brief Single emoji entry with trigger and output.
- */
-struct EmojiEntry {
-    std::string trigger; ///< Trigger text (e.g., "smile")
-    std::string output;  ///< Actual emoji character
-};
-
-#include "emoji_data.h"
 
 /**
  * @brief Emoji loader with fuzzy search capability.

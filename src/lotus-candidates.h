@@ -14,9 +14,7 @@
 #define _FCITX5_LOTUS_CANDIDATES_H_
 
 #include <fcitx/candidatelist.h>
-#include <fcitx/inputcontext.h>
 #include <functional>
-#include <string>
 
 namespace fcitx {
 

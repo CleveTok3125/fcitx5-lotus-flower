@@ -6,7 +6,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  */
-#include "lotus.h"
 #include "lotus-engine.h"
 #include "lotus-state.h"
 #include "lotus-candidates.h"
@@ -15,23 +14,10 @@
 #include "ack-apps.h"
 #include "lotus-version.h"
 
-#include <algorithm>
-#include <cctype>
-#include <fcitx-utils/i18n.h>
-#include <fcntl.h>
-
-#include <cstdlib>
-#include <fcitx-config/iniparser.h>
-#include <fcitx-utils/standardpath.h>
-#include <fcitx-utils/stringutils.h>
-#include <fcitx/inputcontext.h>
-#include <fcitx/inputpanel.h>
 #include <fcitx/menu.h>
-#include <fcitx/statusarea.h>
-#include <fcitx/userinterface.h>
 #include <fcitx/userinterfacemanager.h>
+#include <fcitx-utils/utf8.h>
 
-#include <filesystem>
 #include <fstream>
 
 namespace fcitx {

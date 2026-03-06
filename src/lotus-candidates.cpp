@@ -4,12 +4,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  */
-#include "lotus.h"
 #include "lotus-candidates.h"
 #include "lotus-state.h"
 
 #include <fcitx/inputpanel.h>
-#include <fcitx/userinterface.h>
 
 namespace fcitx {
 

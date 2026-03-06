@@ -6,15 +6,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  *
  */
-#include "lotus.h"
 #include "lotus-state.h"
 #include "lotus-engine.h"
+#include "lotus-candidates.h"
 
 #include <sys/socket.h>
 #include <sys/un.h>
-#include <unistd.h>
-#include "lotus-candidates.h"
-#include "lotus-utils.h"
 
 namespace fcitx {
     constexpr int      MAX_SCAN_LENGTH = 15;
