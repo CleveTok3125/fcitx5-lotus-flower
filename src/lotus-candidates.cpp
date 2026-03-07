@@ -18,6 +18,7 @@ namespace fcitx {
     void EmojiCandidateWord::select(InputContext* inputContext) const {
         FCITX_UNUSED(inputContext);
         state_->ic_->commitString(emojiOutput_);
+        LOTUS_INFO("Emoji committed: " + emojiOutput_);
 
         state_->emojiBuffer_.clear();
         state_->emojiCandidates_.clear();

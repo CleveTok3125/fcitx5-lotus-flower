@@ -10,8 +10,18 @@
 #include "lotus-engine.h"
 #include "lotus-candidates.h"
 
+#include <fcitx-utils/log.h>
+#include <fcitx-utils/utf8.h>
+#include <fcitx/candidatelist.h>
+#include <fcitx/inputpanel.h>
+#include <fcitx/menu.h>
+#include <fcitx/userinterface.h>
+
+#include <string>
 #include <sys/socket.h>
 #include <sys/un.h>
+
+#include <thread>
 
 namespace fcitx {
     constexpr int      MAX_SCAN_LENGTH = 15;
@@ -19,19 +29,6 @@ namespace fcitx {
     static inline bool isWordBreak(uint32_t ucs4) {
         return ucs4 == ' ' || ucs4 == '\t' || ucs4 == '\n' || ucs4 == '\r' || ucs4 == 0 || (ucs4 < 65 && ucs4 > 57);
     }
-}
-
-#include <fcitx-utils/utf8.h>
-#include <fcitx/candidatelist.h>
-#include <fcitx/inputpanel.h>
-#include <fcitx/menu.h>
-#include <fcitx/userinterface.h>
-
-#include <thread>
-
-namespace fcitx {
-
-    FCITX_DEFINE_LOG_CATEGORY(lotus, "lotus");
 
     LotusState::LotusState(LotusEngine* engine, InputContext* ic) : engine_(engine), ic_(ic) {
         setEngine();
@@ -81,8 +78,10 @@ namespace fcitx {
         BASE_SOCKET_PATH               = buildSocketPath("kb_socket");
         const std::string current_path = BASE_SOCKET_PATH;
         int               current_fd   = socket(AF_UNIX, SOCK_STREAM, 0);
-        if (current_fd < 0)
+        if (current_fd < 0) {
+            LOTUS_ERROR("Failed to create socket: " + std::string(strerror(errno)));
             return false;
+        }
 
         struct sockaddr_un addr;
         memset(&addr, 0, sizeof(addr));
@@ -96,6 +95,7 @@ namespace fcitx {
             uinput_client_fd_ = current_fd;
             return true;
         }
+        LOTUS_ERROR("Failed to connect to socket: " + std::string(strerror(errno)));
         close(current_fd);
         uinput_client_fd_ = -1;
         return false;
@@ -106,25 +106,32 @@ namespace fcitx {
     }
 
     void LotusState::send_backspace_uinput(int count) {
-        if (uinput_client_fd_ < 0 && !connect_uinput_server())
+        if (uinput_client_fd_ < 0 && !connect_uinput_server()) {
+            LOTUS_ERROR("Cannot send backspace since cannot connect to uinput server");
             return;
+        }
 
         if (uinput_client_fd_ < 0) {
-            if (!connect_uinput_server())
+            if (!connect_uinput_server()) {
+                LOTUS_ERROR("Cannot send backspace since cannot connect to uinput server");
                 return;
+            }
         }
 
         ssize_t n = send(uinput_client_fd_, &count, sizeof(count), MSG_NOSIGNAL);
 
         if (n < 0) {
+            LOTUS_WARN("Failed to send backspace: " + std::string(strerror(errno)));
             close(uinput_client_fd_);
             uinput_client_fd_ = -1;
             if (connect_uinput_server()) {
+                LOTUS_INFO("Reconnected to uinput server successfully");
                 send(uinput_client_fd_, &count, sizeof(count), MSG_NOSIGNAL);
             }
         }
 
         if (waitAck_) {
+            LOTUS_INFO("Waiting for ack");
             std::this_thread::sleep_for(std::chrono::milliseconds(count * 5));
         }
     }
@@ -200,6 +207,7 @@ namespace fcitx {
             keyEvent.filterAndAccept();
         if (auto commit = UniqueCPtr<char>(EnginePullCommit(lotusEngine_.handle()))) {
             if (commit && commit.get()[0]) {
+                LOTUS_INFO("Commit: " + std::string(commit.get()));
                 ic_->commitString(commit.get());
             }
         }
@@ -391,6 +399,7 @@ namespace fcitx {
     void LotusState::selectEmojiCandidate(int index) {
         if (index >= 0 && index < static_cast<int>(emojiCandidates_.size())) {
             ic_->commitString(emojiCandidates_[index].output);
+            LOTUS_INFO("Emoji committed: " + emojiCandidates_[index].output);
             emojiBuffer_.clear();
             emojiCandidates_.clear();
             ic_->inputPanel().reset();
@@ -456,6 +465,7 @@ namespace fcitx {
                 replacement_thread_id_.store(0, std::memory_order_release);
                 std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
                 ic_->commitString(pending_commit_string_);
+                LOTUS_INFO("Commit: " + pending_commit_string_);
                 expected_backspaces_     = 0;
                 current_backspace_count_ = -1;
                 pending_commit_string_   = "";
@@ -469,6 +479,7 @@ namespace fcitx {
     }
 
     void LotusState::performReplacement(const std::string& deletedPart, const std::string& addedPart) {
+        LOTUS_INFO("Perform replacement: " + deletedPart + " -> " + addedPart);
         int my_id                = ++current_thread_id_;
         current_backspace_count_ = 0;
         pending_commit_string_   = addedPart;
@@ -484,6 +495,7 @@ namespace fcitx {
         is_deleting_.store(true, std::memory_order_release);
         monitor_cv.notify_one();
         send_backspace_uinput(expected_backspaces_);
+        LOTUS_INFO("Send " + std::to_string(expected_backspaces_) + " backspaces");
     }
 
     void LotusState::checkForwardSpecialKey(KeyEvent& keyEvent, KeySym& currentSym) {
@@ -554,6 +566,7 @@ namespace fcitx {
             } else {
                 std::string keyUtf8Check = Key::keySymToUTF8(currentSym);
                 if (!keyUtf8Check.empty() && buffered_keys_.size() < MAX_BUFFERED_KEYS) {
+                    LOTUS_WARN("Typing so fast, add key to queue");
                     buffered_keys_.push_back({currentSym, keyEvent.rawKey().states()});
                 }
                 keyEvent.filterAndAccept();
@@ -606,6 +619,7 @@ namespace fcitx {
                     addedPart = addedPart.substr(0, addedPart.size() - 1);
 #endif
                     ic_->commitString(addedPart);
+                    LOTUS_INFO("Commit: " + addedPart);
                 }
                 keyEvent.forward();
             }
@@ -644,6 +658,7 @@ namespace fcitx {
                 performReplacement(deletedPart, addedPart);
             } else if (!addedPart.empty()) {
                 ic_->commitString(addedPart);
+                LOTUS_INFO("Commit: " + addedPart);
             }
 
             history_.clear();
@@ -665,6 +680,7 @@ namespace fcitx {
                     oldPreBuffer_ = preeditStr;
                     if (addedPart != keyUtf8) {
                         ic_->commitString(addedPart);
+                        LOTUS_INFO("Commit: " + addedPart);
                         keyEvent.filterAndAccept();
                         isCommit = true;
                     }
@@ -674,6 +690,7 @@ namespace fcitx {
                 }
             } else {
                 if (uinput_client_fd_ < 0) {
+                    LOTUS_ERROR("Cannot connect to uinput server, commit rawkey");
                     std::string rawKey = keyEvent.key().toString();
                     if (!rawKey.empty()) {
                         ic_->commitString(rawKey);
@@ -696,12 +713,14 @@ namespace fcitx {
         checkForwardSpecialKey(keyEvent, currentSym);
         auto ic = keyEvent.inputContext();
         if (!ic || !ic->capabilityFlags().test(CapabilityFlag::SurroundingText)) {
+            LOTUS_WARN("Surrounding text not supported");
             keyEvent.forward();
             return;
         }
 
         const auto& surrounding = ic->surroundingText();
         if (!surrounding.isValid()) {
+            LOTUS_WARN("Surrounding text is invalid");
             keyEvent.forward();
             return;
         }
@@ -789,6 +808,7 @@ namespace fcitx {
 
                 if (!addedPart.empty()) {
                     ic->commitString(addedPart);
+                    LOTUS_INFO("Commit: " + addedPart);
                 }
 
                 ResetEngine(lotusEngine_.handle());
@@ -813,8 +833,10 @@ namespace fcitx {
             if (preeditPtr && preeditPtr.get()[0])
                 out += preeditPtr.get();
 
-            if (!out.empty())
+            if (!out.empty()) {
+                LOTUS_INFO("Commit: " + out);
                 ic->commitString(out);
+            }
 
             ResetEngine(lotusEngine_.handle());
             keyEvent.filterAndAccept();
@@ -827,6 +849,7 @@ namespace fcitx {
         if (!lotusEngine_ || keyEvent.isRelease())
             return;
         if (uinput_client_fd_ < 0) {
+            LOTUS_WARN("Cannot connect to uinput server, reconnecting....");
             connect_uinput_server();
         }
         if (current_backspace_count_ >= expected_backspaces_ && is_deleting_.load()) {
@@ -835,6 +858,7 @@ namespace fcitx {
             expected_backspaces_     = 0;
         }
         if (needEngineReset.load() && realMode != LotusMode::Off) {
+            LOTUS_INFO("Need engine reset");
             oldPreBuffer_.clear();
             history_.clear();
             ResetEngine(lotusEngine_.handle());
@@ -844,6 +868,7 @@ namespace fcitx {
         }
 
         if (needFallbackCommit.load(std::memory_order_acquire)) {
+            LOTUS_INFO("Need fallback commit");
             needFallbackCommit.store(false, std::memory_order_release);
             if (current_thread_id_.load(std::memory_order_acquire) == replacement_thread_id_.load(std::memory_order_acquire)) {
                 if (!pending_commit_string_.empty()) {
@@ -906,6 +931,7 @@ namespace fcitx {
                 UniqueCPtr<char> commit(EnginePullCommit(lotusEngine_.handle()));
                 if (commit && commit.get()[0]) {
                     ic_->commitString(commit.get());
+                    LOTUS_INFO("Commit: " + std::string(commit.get()));
                 }
             }
             ResetEngine(lotusEngine_.handle());
@@ -976,6 +1002,7 @@ namespace fcitx {
     }
 
     void LotusState::clearAllBuffers() {
+        LOTUS_DEBUG("Clear all buffers");
         if (is_deleting_.load(std::memory_order_acquire)) {
             return;
         }
@@ -998,6 +1025,7 @@ namespace fcitx {
     }
 
     void LotusState::replayBufferedKeys() {
+        LOTUS_INFO("Starting replay buffered keys");
         if (buffered_keys_.empty()) {
             return;
         }
@@ -1111,5 +1139,6 @@ namespace fcitx {
                 }
             }
         }
+        LOTUS_INFO("Replay buffered keys done");
     }
 } // namespace fcitx

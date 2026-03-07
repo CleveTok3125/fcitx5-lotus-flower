@@ -7,6 +7,7 @@
  *
  */
 #include "lotus-engine.h"
+#include "lotus-config.h"
 #include "lotus-state.h"
 #include "lotus-candidates.h"
 #include "lotus-monitor.h"
@@ -83,8 +84,10 @@ namespace fcitx {
 #else
         auto fd = StandardPath::global().open(StandardPath::Type::PkgData, "lotus/vietnamese.cm.dict", O_RDONLY);
 #endif
-        if (!fd.isValid())
+        if (!fd.isValid()) {
+            LOTUS_ERROR("Failed to load dictionary");
             throw std::runtime_error("Failed to load dictionary");
+        }
         dictionary_.reset(NewDictionary(fd.release()));
 
         auto& uiManager = instance_->userInterfaceManager();
@@ -336,13 +339,15 @@ namespace fcitx {
             instance_->inputContextManager().setPreeditEnabledByDefault(true);
 
         std::string appName = getProgramName(ic);
-        LotusMode   targetMode;
+        LOTUS_INFO("App name: " + appName);
+        LotusMode targetMode;
 
         if (!appRules_.empty() && appRules_.count(appName)) {
             targetMode = appRules_[appName];
         } else {
             targetMode = globalMode_;
         }
+        LOTUS_INFO("Target mode: " + modeEnumToString(targetMode));
         reloadConfig();
         updateModeAction(event.inputContext());
         updateInputMethodAction(event.inputContext());
@@ -359,6 +364,7 @@ namespace fcitx {
                 for (const auto& ackApp : ack_apps) {
                     if (appName.find(ackApp) != std::string::npos) {
                         state->waitAck_ = true;
+                        LOTUS_INFO(ackApp + " detected, waiting for ack");
                         break;
                     }
                 }
@@ -500,6 +506,7 @@ namespace fcitx {
             }
 
             if (selectedMode != LotusMode::NoMode) {
+                LOTUS_INFO("Selected mode: " + modeEnumToString(selectedMode));
                 if (selectedMode != LotusMode::Emoji) {
                     appRules_[currentConfigureApp_] = selectedMode;
                     saveAppRules();
@@ -520,6 +527,7 @@ namespace fcitx {
         }
 
         if (!keyEvent.isRelease() && !config_.modeMenuKey->empty() && keyEvent.key().checkKeyList(*config_.modeMenuKey)) {
+            LOTUS_INFO("Mode menu key pressed");
             currentConfigureApp_ = getProgramName(ic);
             g_mouse_clicked.store(false, std::memory_order_relaxed);
             showAppModeMenu(ic);
@@ -537,6 +545,7 @@ namespace fcitx {
     }
 
     void LotusEngine::reset(const InputMethodEntry& entry, InputContextEvent& event) {
+        LOTUS_INFO("Reset engine");
         FCITX_UNUSED(entry);
         auto state = event.inputContext()->propertyFor(&factory_);
         if (!state->isEmptyHistory() && event.type() != EventType::InputContextFocusOut) {

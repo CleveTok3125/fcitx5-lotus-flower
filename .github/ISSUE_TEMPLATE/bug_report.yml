@@ -65,7 +65,7 @@ body:
         - AUR (fcitx5-lotus)
         - AUR (fcitx5-lotus-bin)
         - AUR (fcitx5-lotus-git)
-        - Cloudflare Pages
+        - Cloudflare Pages (Debian/Ubuntu/Fedora/OpenSUSE)
         - NixOS
         - Tự build từ source
         - Khác
@@ -104,6 +104,22 @@ body:
       description: |
         Nếu có lỗi, vui lòng cung cấp diagnose từ fcitx5.
         Bạn có thể lấy diagnose bằng lệnh: `fcitx5-diagnose`.
+      render: shell
+
+  - type: textarea
+    id: diagnose
+    attributes:
+      label: Diagnose
+      description: |
+        Log của uinput server (Lấy ở `/tmp/fcitx5-lotus-server.log`)
+      render: shell
+
+  - type: textarea
+    id: diagnose
+    attributes:
+      label: Diagnose
+      description: |
+        Log của fcitx5 (Chạy lệnh `fcitx5 --verbose lotus=4` ở terminal trong quá trình tái hiện lỗi)
       render: shell
 
   - type: textarea

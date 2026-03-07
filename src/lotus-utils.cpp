@@ -31,12 +31,14 @@ std::atomic<bool>       needFallbackCommit{false};
 std::mutex              monitor_mutex;
 std::condition_variable monitor_cv;
 
+FCITX_DEFINE_LOG_CATEGORY(lotus, "lotus", fcitx::LogLevel::NoLog);
+
 std::string             buildSocketPath(const char* base_path_suffix) {
     const char* username_c = std::getenv("USER");
     std::string path;
     path.reserve(32);
     path += "lotussocket-";
-    path += (username_c ? username_c : "default");
+    path += (username_c ? username_c : "unknown");
     path += '-';
     path += base_path_suffix;
     const size_t max_socket_path_length = UNIX_PATH_MAX - 1;
