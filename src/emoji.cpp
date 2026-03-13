@@ -16,9 +16,9 @@ EmojiLoader::EmojiLoader(fcitx::AddonManager* addonManager) {
         emojiAddon_ = addonManager->addon("emoji", true);
     }
 #if LOTUS_USE_MODERN_FCITX_API
-    historyPath_ = (fcitx::StandardPaths::global().userDirectory(fcitx::StandardPathsType::Config) / "fcitx5" / "lotus-emoji-history.conf").string();
+    historyPath_ = (fcitx::StandardPaths::global().userDirectory(fcitx::StandardPathsType::Config) / "fcitx5" / "conf" / "lotus-emoji-history.conf").string();
 #else
-    historyPath_ = fcitx::StandardPath::global().userDirectory(fcitx::StandardPath::Type::Config) + "/fcitx5/lotus-emoji-history.conf";
+    historyPath_ = fcitx::StandardPath::global().userDirectory(fcitx::StandardPath::Type::Config) + "/fcitx5/conf/lotus-emoji-history.conf";
 #endif
     loadFromFcitx5("en");
     loadHistory();
@@ -74,6 +74,7 @@ void EmojiLoader::loadHistory() {
             historyList.push_back(entry);
         }
     }
+    file.close();
 }
 
 void EmojiLoader::saveHistory() {
@@ -85,6 +86,7 @@ void EmojiLoader::saveHistory() {
     for (const auto& entry : historyList) {
         file << entry.trigger << "=" << entry.output << "\n";
     }
+    file.close();
 }
 
 std::vector<EmojiEntry> EmojiLoader::search(const std::string& prefix) {
