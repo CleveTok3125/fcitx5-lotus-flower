@@ -17,8 +17,7 @@
 
 #include <sys/stat.h>
 
-LotusLogger::LotusLogger(std::string log_file, size_t max_size, LogLevel level, size_t max_files) :
-    log_file_(std::move(log_file)), max_size_(max_size), max_files_(max_files) {
+LotusLogger::LotusLogger(std::string log_file, size_t max_size, LogLevel level, size_t max_files) : log_file_(std::move(log_file)), max_size_(max_size), max_files_(max_files) {
     level_.store(level);
 
     std::filesystem::path path(log_file_);

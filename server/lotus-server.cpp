@@ -165,7 +165,8 @@ int main(int argc, char* argv[]) {
     if (udev == nullptr) {
         LotusLogger::instance().error("Failed to create udev context");
         return 1;
-    }    if (!li) {
+    }
+    if (!li) {
         LotusLogger::instance().error("Failed to create libinput context");
         udev_unref(udev);
         return 1;
@@ -174,7 +175,7 @@ int main(int argc, char* argv[]) {
     int                        li_fd = libinput_get_fd(li);
 
     std::vector<struct pollfd> fds;
-    const int KB_CLIENT_INDEX = 3;
+    const int                  KB_CLIENT_INDEX = 3;
     fds.push_back({server_fd, POLLIN, 0});
     fds.push_back({li_fd, POLLIN, 0});
     fds.push_back({mouse_server_fd, POLLIN, 0});
@@ -243,8 +244,8 @@ int main(int argc, char* argv[]) {
 
         // handle connect from addon
         if (fds[KB_CLIENT_INDEX].fd >= 0 && (fds[KB_CLIENT_INDEX].revents & (POLLIN | POLLHUP | POLLERR)) != 0) {
-            int count = 0;
-            ssize_t n = recv(fds[KB_CLIENT_INDEX].fd, &count, sizeof(count), 0);
+            int     count = 0;
+            ssize_t n     = recv(fds[KB_CLIENT_INDEX].fd, &count, sizeof(count), 0);
             if (n <= 0) {
                 LotusLogger::instance().warn("Keyboard client disconnected or connection error");
                 close(fds[KB_CLIENT_INDEX].fd);
