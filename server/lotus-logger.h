@@ -19,6 +19,7 @@
 #ifndef _LOTUS_LOGGER_H_
 #define _LOTUS_LOGGER_H_
 
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <fstream>
