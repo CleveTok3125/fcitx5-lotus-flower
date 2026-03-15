@@ -3,7 +3,7 @@
 %global optflags %(echo "%{optflags}" | sed 's/-g[^ ]*//g')
 
 Name:           fcitx5-lotus
-Version:        1.4.1
+Version:        1.4.2
 Release:        1
 Summary:        Vietnamese input method for fcitx5
 License:        GPL-3.0-or-later
@@ -154,8 +154,5 @@ fi
 %systemd_postun_with_restart fcitx5-lotus-server@.service
 
 %changelog
-* Sat Mar 14 2026 Nguyen Hoang Ky <nhktmdzhg@gmail.com> - 1.4.1-1
-- Add post script
-- Use fcitx5 emoji addon
-- Fix some bugs
-- Add emoji history
+* Sun Mar 15 2026 Nguyen Hoang Ky <nhktmdzhg@gmail.com> - 1.4.2-1
+- Fix bug
