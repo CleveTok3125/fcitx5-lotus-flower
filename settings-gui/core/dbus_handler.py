@@ -55,7 +55,8 @@ class LotusDBusHandler:
             array_dict = clean_values.get(root_key, {})
             if isinstance(array_dict, dict):
                 sorted_keys = sorted(
-                    array_dict.keys(), key=lambda x: int(x) if str(x).isdigit() else x
+                    array_dict.keys(),
+                    key=lambda k: (0, int(k)) if str(k).isdigit() else (1, str(k)),
                 )
                 return [array_dict[k] for k in sorted_keys]
             elif isinstance(array_dict, list):
