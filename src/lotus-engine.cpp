@@ -556,11 +556,10 @@ namespace fcitx {
                 ic->inputPanel().reset();
                 ic->updateUserInterface(UserInterfaceComponent::InputPanel);
                 auto* state = ic->propertyFor(&factory_);
+
                 if (selectedMode != LotusMode::NoMode) {
                     state->commitBuffer();
-                }
-                state->reset();
-                if (selectedMode != LotusMode::NoMode) {
+                    state->reset();
                     setMode(selectedMode, ic);
                     if (selectedMode == LotusMode::Emoji) {
                         state->updateEmojiPreedit();
