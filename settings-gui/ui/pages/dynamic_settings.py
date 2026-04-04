@@ -38,6 +38,16 @@ SETTINGS_MAP = {
     SettingsCategory.GENERAL: {
         "HOTKEYS": ["ModeMenuKey"],
         "INPUT METHOD": ["InputMethod", "Mode", "OutputCharset"],
+        "LOADABLE MODES": [
+            "ShowModeSmooth",
+            "ShowModeUinput",
+            "ShowModeMinecraft",
+            "ShowModeSurroundingText",
+            "ShowModePreedit",
+            "ShowModeEmoji",
+            "ShowModeOff",
+            "ShowModeDefault",
+        ],
     },
     SettingsCategory.APPEARANCE: {
         "THEME & ICONS": ["UseLotusIcons", "UseBlackDefaultIcons"],
