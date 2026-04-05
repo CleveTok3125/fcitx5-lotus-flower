@@ -1,5 +1,5 @@
 Name:           fcitx5-lotus
-Version:        2.0.0
+Version:        2.0.1
 Release:        1
 Summary:        Vietnamese input method for fcitx5
 License:        GPL-3.0-or-later
@@ -165,6 +165,5 @@ fi
 %systemd_postun_with_restart fcitx5-lotus-server@.service
 
 %changelog
-* Sun Apr 5 2026 Nguyen Hoang Ky <nhktmdzhg@gmail.com> - 2.0.0-1
-- Use qtpy UI for configuration
-- Add option to disable mode in mode menu
+* Sun Apr 5 2026 Nguyen Hoang Ky <nhktmdzhg@gmail.com> - 2.0.1-1
+- Use flexible Qt backend deps
