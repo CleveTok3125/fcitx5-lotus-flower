@@ -42,21 +42,23 @@ stdenv.mkDerivation rec {
     fcitx5
     libinput
     libx11
-    (python3.withPackages (ps: with ps; [
-      pyside6
-      dbus-python
-      qtpy
-    ]))
+    (python3.withPackages (ps:
+      with ps; [
+        pyqt6
+        dbus-python
+        qtpy
+      ]))
     qt6.qtbase
     udev
   ];
 
-  vendorDir = (buildGoModule {
-    pname = "fcitx5-lotus-go-modules";
-    inherit version src;
-    modRoot = "bamboo";
-    vendorHash = "sha256-i/1p4V6DTXUVj2NYvNytpESW0chfcdTjt/UpRXjqaAk=";
-  }).goModules;
+  vendorDir =
+    (buildGoModule {
+      pname = "fcitx5-lotus-go-modules";
+      inherit version src;
+      modRoot = "bamboo";
+      vendorHash = "sha256-i/1p4V6DTXUVj2NYvNytpESW0chfcdTjt/UpRXjqaAk=";
+    }).goModules;
 
   preConfigure = ''
     export GOCACHE=$TMPDIR/go-cache
