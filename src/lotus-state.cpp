@@ -792,7 +792,7 @@ namespace fcitx {
             std::string deletedPart;
             std::string addedPart;
             compareAndSplitStrings(oldWord, newWord, commonPrefix, deletedPart, addedPart);
-            if (deletedPart.empty() && addedPart == keyEvent.key().toString()) {
+            if ((deletedPart.empty() || deletedPart == oldWord) && addedPart == keyEvent.key().toString()) {
                 ResetEngine(lotusEngine_.handle());
                 keyEvent.forward();
                 return;
