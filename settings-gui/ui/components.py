@@ -129,10 +129,10 @@ def pretty_format_hotkey_parts(hotkey_str):
         base_key_label = ""
 
     # Build the final ordered list of labels
-    if "Control" in raw_mods: pretty_parts.append(_("Ctrl"))
-    if "Alt" in raw_mods: pretty_parts.append(_("Alt"))
-    if "Super" in raw_mods: pretty_parts.append(_("Super"))
-    if explicit_shift_needed: pretty_parts.append(_("Shift"))
+    if "Control" in raw_mods: pretty_parts.append("Ctrl")
+    if "Alt" in raw_mods: pretty_parts.append("Alt")
+    if "Super" in raw_mods: pretty_parts.append("Super")
+    if explicit_shift_needed: pretty_parts.append("Shift")
     
     if base_key_label:
         pretty_parts.append(base_key_label)
