@@ -13,6 +13,8 @@
 #include <pwd.h>
 #include <unistd.h>
 
+#include <algorithm>
+
 // Global variables
 std::atomic<fcitx::LotusMode> realMode{fcitx::LotusMode::Smooth};
 std::atomic<bool>             needEngineReset{false};
@@ -68,29 +70,17 @@ bool isBackspace(uint32_t sym) {
 }
 
 int compareAndSplitStrings(const std::string& A, const std::string& B, std::string& commonPrefix, std::string& deletedPart, std::string& addedPart) {
-    size_t i = 0;
-    size_t j = 0;
+    auto [itA, itB] = std::mismatch(A.begin(), A.end(), B.begin(), B.end());
+    size_t i        = std::distance(A.begin(), itA);
 
-    while (i < A.size() && j < B.size()) {
-        unsigned int lenA = fcitx_utf8_char_len(&A[i]);
-        unsigned int lenB = fcitx_utf8_char_len(&B[j]);
-        if (lenA == 0 || lenB == 0) {
-            break;
-        }
-        if (i + lenA > A.size() || j + lenB > B.size()) {
-            break;
-        }
-        if (lenA == lenB && std::strncmp(&A[i], &B[j], lenA) == 0) {
-            i += lenA;
-            j += lenB;
-        } else {
-            break;
-        }
+    while (i > 0 && (static_cast<unsigned char>(A[i]) & 0xC0) == 0x80) {
+        --i;
     }
 
     commonPrefix.assign(A, 0, i);
     deletedPart.assign(A, i);
-    addedPart.assign(B, j);
+    addedPart.assign(B, i);
+
     return (deletedPart.empty() && addedPart.empty()) ? 1 : 2;
 }
 
