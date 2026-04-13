@@ -69,17 +69,29 @@ bool isBackspace(uint32_t sym) {
     return sym == 65288 || sym == 8 || sym == FcitxKey_BackSpace;
 }
 
-int compareAndSplitStrings(const std::string& A, const std::string& B, std::string& commonPrefix, std::string& deletedPart, std::string& addedPart) {
-    auto [itA, itB] = std::mismatch(A.begin(), A.end(), B.begin(), B.end());
-    size_t i        = std::distance(A.begin(), itA);
+int compareAndSplitStrings(const std::string& A, const std::string& B, std::string& deletedPart, std::string& addedPart) {
+    size_t minLen   = std::min(A.size(), B.size());
+    size_t startPos = (minLen > 20) ? (minLen - 20) : 0;
 
-    while (i > 0 && (static_cast<unsigned char>(A[i]) & 0xC0) == 0x80) {
-        --i;
+    while (startPos > 0 && (static_cast<unsigned char>(A[startPos]) & 0xC0) == 0x80) {
+        --startPos;
     }
 
-    commonPrefix.assign(A, 0, i);
-    deletedPart.assign(A, i);
-    addedPart.assign(B, i);
+    auto [itA, itB] = std::mismatch(A.begin() + static_cast<std::ptrdiff_t>(startPos), A.end(), B.begin() + static_cast<std::ptrdiff_t>(startPos), B.end());
+
+    size_t splitPoint = 0;
+    if (itA == A.end()) {
+        splitPoint = minLen;
+    } else {
+        size_t pos = std::distance(A.begin(), itA);
+        splitPoint = startPos + pos;
+        while (splitPoint > 0 && (static_cast<unsigned char>(A[splitPoint]) & 0xC0) == 0x80) {
+            --splitPoint;
+        }
+    }
+
+    deletedPart.assign(A, splitPoint);
+    addedPart.assign(B, splitPoint);
 
     return (deletedPart.empty() && addedPart.empty()) ? 1 : 2;
 }
