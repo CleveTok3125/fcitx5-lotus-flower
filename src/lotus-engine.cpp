@@ -478,7 +478,7 @@ namespace fcitx {
 
             keyEvent.filterAndAccept();
 
-            LotusMode selectedMode  = LotusMode::NoMode;
+            LotusMode selectedMode  = static_cast<LotusMode>(-1);
             bool      selectionMade = false;
 
             switch (keySym) {
@@ -518,7 +518,7 @@ namespace fcitx {
                         selectedMode = it->second;
                     }
 
-                    if (selectedMode == LotusMode::NoMode) {
+                    if (selectedMode == static_cast<LotusMode>(-1)) {
                         const auto& kl = *config_.modeMenuKey;
                         if (kl.size() == 1 && !kl[0].hasModifier()) {
                             std::string charStr = Key::keySymToUTF8(kl[0].sym());
@@ -540,7 +540,7 @@ namespace fcitx {
                 }
             }
 
-            if (selectedMode != LotusMode::NoMode) {
+            if (selectedMode != static_cast<LotusMode>(-1)) {
                 LOTUS_INFO("Selected mode: " + LotusModeI18NAnnotation::toString(selectedMode));
                 if (selectedMode != LotusMode::Emoji) {
                     if (keySym == FcitxKey_r) { // Default Typing key (R)
@@ -566,7 +566,7 @@ namespace fcitx {
                 ic->updateUserInterface(UserInterfaceComponent::InputPanel);
                 auto* state = ic->propertyFor(&factory_);
 
-                if (selectedMode != LotusMode::NoMode) {
+                if (selectedMode != static_cast<LotusMode>(-1)) {
                     state->commitBuffer();
                     state->reset();
                     setMode(selectedMode, ic);

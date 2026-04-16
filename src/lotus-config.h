@@ -33,12 +33,10 @@ namespace fcitx {
         SurroundingText = 4,
         Preedit         = 5,
         Emoji           = 6,
-        NoMode          = 7,
         Minecraft       = 8,
     };
 
-    FCITX_CONFIG_ENUM_NAME_WITH_I18N(LotusMode, N_("OFF"), N_("Uinput (Smooth)"), N_("Uinput (Slow)"), N_("Surrounding Text"), N_("Preedit"), N_("Emoji Picker"), N_("No mode"),
-                                     N_("Minecraft"));
+    FCITX_CONFIG_ENUM_NAME_WITH_I18N(LotusMode, N_("OFF"), N_("Uinput (Smooth)"), N_("Uinput (Slow)"), N_("Surrounding Text"), N_("Preedit"), N_("Emoji Picker"), N_("Minecraft"));
 
     /**
      * @brief W2U mode for w to ư conversion.
