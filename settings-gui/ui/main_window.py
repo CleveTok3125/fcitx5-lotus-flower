@@ -221,7 +221,7 @@ class LotusSettingsWindow(QMainWindow):
         reply = QMessageBox.question(
             self,
             _("Confirm Reset"),
-            _("Are you sure you want to restore all settings to their default values?"),
+            _("Restore all settings to defaults?"),
             QMessageBox.Yes | QMessageBox.No,
         )
         if reply == QMessageBox.Yes:
@@ -257,7 +257,7 @@ class LotusSettingsWindow(QMainWindow):
             from qtpy.QtWidgets import QMessageBox
 
             QMessageBox.information(
-                self, _("Success"), _("All settings applied successfully.")
+                self, _("Success"), _("Settings saved.")
             )
 
     def on_ok(self):
@@ -296,7 +296,7 @@ class LotusSettingsWindow(QMainWindow):
     def _setup_window_size(self):
         screen = QApplication.primaryScreen().availableGeometry()
         w = int(screen.width() * 0.45)
-        h = int(screen.height() * 0.55)
+        h = int(screen.height() * 0.60)
         self.setMinimumSize(750, 500)
         self.resize(w, h)
         self.move((screen.width() - w) // 2, (screen.height() - h) // 2)
