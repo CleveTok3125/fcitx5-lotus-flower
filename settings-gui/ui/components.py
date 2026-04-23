@@ -9,7 +9,7 @@ convert keysyms to Unicode, and mathematically handle Shift modifiers.
 
 import ctypes
 import ctypes.util
-from qtpy.QtWidgets import QPushButton, QLabel, QHBoxLayout
+from qtpy.QtWidgets import QPushButton, QLabel, QHBoxLayout, QWidget
 from qtpy.QtGui import QKeySequence, QIcon
 from qtpy.QtCore import Qt, Signal, QEvent
 from i18n import _
@@ -163,6 +163,41 @@ class HelpIcon(QLabel):
         if text:
             self.setToolTip(text)
         self.setFixedSize(16, 16)
+
+
+class HotkeyEditorWidget(QWidget):
+    """A widget containing HotkeyCaptureWidget with a clear button."""
+
+    textChanged = Signal(str)
+
+    def __init__(self, current_key="", parent=None):
+        super().__init__(parent)
+        self._setup_ui(current_key)
+
+    def _setup_ui(self, current_key):
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(4)
+
+        self.hotkey_capture = HotkeyCaptureWidget(current_key)
+        self.hotkey_capture.textChanged.connect(self._on_hotkey_changed)
+
+        self.btn_clear = QPushButton(QIcon.fromTheme("delete"), "")
+        self.btn_clear.setFixedWidth(30)
+        self.btn_clear.setToolTip(_("Clear hotkey"))
+        self.btn_clear.clicked.connect(self._on_clear)
+
+        layout.addWidget(self.hotkey_capture)
+        layout.addWidget(self.btn_clear)
+
+    def _on_hotkey_changed(self, text):
+        self.textChanged.emit(text)
+
+    def _on_clear(self):
+        self.hotkey_capture.current_key = ""
+        self.hotkey_capture.setChecked(False)
+        self.hotkey_capture._update_display()
+        self.textChanged.emit("")
 
 
 class HotkeyCaptureWidget(QPushButton):

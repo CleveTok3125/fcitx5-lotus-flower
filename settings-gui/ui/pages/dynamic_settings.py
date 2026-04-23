@@ -15,7 +15,7 @@ from qtpy.QtWidgets import (
     QFrame,
     QComboBox,
 )
-from ui.components import HotkeyCaptureWidget, HelpIcon
+from ui.components import HotkeyEditorWidget, HelpIcon
 from ui.helpers import HELPERS, add_help_icon
 from core.dbus_handler import LotusDBusHandler
 from enum import Enum
@@ -205,8 +205,8 @@ class DynamicSettingsPage(QWidget):
         row_layout.addWidget(QLabel(_(label)))
         row_layout.addStretch()
 
-        hk_btn = HotkeyCaptureWidget(hotkey_str)
-        hk_btn.setFixedWidth(200)
+        hk_btn = HotkeyEditorWidget(hotkey_str)
+        hk_btn.setFixedWidth(235)
         hk_btn.textChanged.connect(
             lambda text, k=key: self.update_config(k, {"0": text})
         )
