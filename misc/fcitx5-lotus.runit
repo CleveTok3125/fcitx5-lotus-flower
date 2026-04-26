@@ -11,4 +11,12 @@ if [ "$user" = "$svc" ]; then
 fi
 
 exec 2>&1
-exec chpst -u uinput_proxy:input /usr/bin/fcitx5-lotus-server -u "$user"
+exec setpriv \
+    --reuid=uinput_proxy \
+    --regid=input \
+    --init-groups \
+    --bounding-set -all,+cap_sys_nice,+cap_sys_ptrace \
+    --inh-caps +cap_sys_nice,+cap_sys_ptrace \
+    --securebits +no_setuid_fixup,+no_setuid_fixup_locked \
+    --ambient-caps +cap_sys_nice,+cap_sys_ptrace \
+    -- /usr/bin/fcitx5-lotus-server -u "$user"
