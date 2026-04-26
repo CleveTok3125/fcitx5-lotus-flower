@@ -1,4 +1,6 @@
-option(INSTALL_OPENRC "Install OpenRC script" On)
+option(INSTALL_OPENRC "Install OpenRC script" ON)
+option(INSTALL_RUNIT "Install Runit script" OFF)
+
 install(FILES fcitx5-lotus-server@.service
     DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/systemd/system)
 
@@ -18,3 +20,9 @@ if(INSTALL_OPENRC)
         DESTINATION /etc/init.d
         RENAME fcitx5-lotus)
 endif(INSTALL_OPENRC)
+
+if(INSTALL_RUNIT)
+    install(PROGRAMS fcitx5-lotus.runit
+        DESTINATION /etc/runit/sv/fcitx5-lotus
+        RENAME run)
+endif(INSTALL_RUNIT)
