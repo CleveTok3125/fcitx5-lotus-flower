@@ -258,6 +258,9 @@ jobs:
               -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS" \
               -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS" \
               -DCMAKE_MODULE_LINKER_FLAGS="$LDFLAGS" \
+              -DINSTALL_OPENRC=ON \
+              -DINSTALL_RUNIT=ON \
+              -DRUNIT_SV_DIR=/etc/runit/sv \
               -B build .
             cmake --build build
             DESTDIR=/work/arch-dist cmake --install build

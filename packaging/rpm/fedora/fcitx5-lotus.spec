@@ -36,7 +36,7 @@ Vietnamese input method for fcitx5
 %setup -q
 
 %build
-%cmake -DINSTALL_OPENRC=OFF
+%cmake
 %cmake_build
 
 %install

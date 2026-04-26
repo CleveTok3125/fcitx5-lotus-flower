@@ -35,7 +35,7 @@ Vietnamese input method for fcitx5
 %setup -q
 
 %build
-%cmake -DINSTALL_OPENRC=OFF
+%cmake
 %cmake_build
 %sysusers_generate_pre %{_prefix}/lib/sysusers.d/lotus.conf lotus
 
