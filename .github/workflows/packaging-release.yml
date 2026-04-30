@@ -356,7 +356,7 @@ jobs:
         env:
           GNUPGHOME: /home/runner/.gnupg
         run: |
-          for codename in bookworm trixie testing sid jammy noble plucky questing; do
+          for codename in bookworm trixie testing sid jammy noble plucky questing resolute; do
             case "$codename" in
               sid)      suite="unstable" ;;
               testing)  suite="testing"  ;;
@@ -384,7 +384,7 @@ jobs:
 
       - name: Create Fedora RPM repos
         run: |
-          for releasever in 42 43 rawhide; do
+          for releasever in 42 43 44 rawhide; do
             dir="repo/rpm/fedora/${releasever}/x86_64"
             mkdir -p "$dir"
             for rpm in artifacts/rpm-fedora-${releasever}/*.rpm; do

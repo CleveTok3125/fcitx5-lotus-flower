@@ -1,5 +1,5 @@
-fcitx5-lotus (3.0.0-1) unstable; urgency=medium
+fcitx5-lotus (3.0.1-1) unstable; urgency=medium
 
-  * Using 3 option for w2ư
+  * Small fix
 
- -- Nguyen Hoang Ky <nhktmdzhg@gmail.com>  Thu, 16 Apr 2026 16:20:00 +0700
+ -- Nguyen Hoang Ky <nhktmdzhg@gmail.com>  Thu, 30 Apr 2026 10:15:00 +0700
