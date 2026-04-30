@@ -70,7 +70,6 @@ stdenv.mkDerivation rec {
 
   cmakeFlags = [
     "-DGO_FLAGS=-mod=vendor"
-    "-DINSTALL_OPENRC=OFF"
   ];
 
   # change checking exe_path logic to make it work on NixOS since executable files on NixOS are not located in /usr/bin

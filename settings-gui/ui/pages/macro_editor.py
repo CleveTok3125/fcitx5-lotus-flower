@@ -28,6 +28,7 @@ from i18n import _
 from core.dbus_handler import LotusDBusHandler
 from ui.pages.base_editor import BaseEditorPage
 from ui.pages.dynamic_settings import CardWidget
+from ui.helpers import HELPERS, add_help_icon
 
 
 class MacroEditorPage(BaseEditorPage):
@@ -60,17 +61,13 @@ class MacroEditorPage(BaseEditorPage):
         self.cb_capitalize = QCheckBox(_("Capitalize Macro"))
         self.cb_enable.toggled.connect(self._on_item_changed)
         self.cb_capitalize.toggled.connect(self._on_item_changed)
+        toggles_layout.addWidget(self.cb_enable)
         
         cap_layout = QHBoxLayout()
         cap_layout.setSpacing(5)
         cap_layout.addWidget(self.cb_capitalize)
+        add_help_icon(cap_layout, "CapitalizeMacro")
         
-        help_icon = QLabel()
-        help_icon.setPixmap(QIcon.fromTheme("help-about").pixmap(16, 16))
-        help_icon.setToolTip(_("Automatically match expansion case to trigger key case:<br>- 'kg' → 'khô gà' (all lowercase)<br>- 'KG' → 'KHÔ GÀ' (all uppercase)<br>- 'Kg' → 'khô gà' (original macro case)"))
-        cap_layout.addWidget(help_icon)
-        
-        toggles_layout.addWidget(self.cb_enable)
         toggles_layout.addLayout(cap_layout)
         toggles_layout.addStretch()
 
@@ -96,7 +93,7 @@ class MacroEditorPage(BaseEditorPage):
         dynamic_layout = QVBoxLayout()
         
         # Hint text
-        hint_label = QLabel(_("Macros can use dynamic placeholders: $TIME (current time) and $DATE (current date)."))
+        hint_label = QLabel(_("Macros support dynamic placeholders: $TIME and $DATE."))
         hint_label.setWordWrap(True)
         hint_label.setStyleSheet("color: gray; font-size: 13px;")
         dynamic_layout.addWidget(hint_label)
@@ -118,7 +115,7 @@ class MacroEditorPage(BaseEditorPage):
             ("%H:%M:%S", "15:04:05 (24h)"),
             ("%I:%M %p", "03:04 PM"),
             ("%I:%M:%S %p", "03:04:05 PM"),
-            ("", _("None (Do not replace $TIME)")),
+            ("", _("None")),
         ]
         for fmt, desc in time_presets:
             self.input_time_format.addItem(fmt, fmt)
@@ -139,7 +136,7 @@ class MacroEditorPage(BaseEditorPage):
             ("%m/%d/%Y", "MM/dd/yyyy"),
             ("%Y-%m-%d", "yyyy-MM-dd"),
             ("%y-%m-%d", "yy-MM-dd"),
-            ("", _("None (Do not replace $DATE)")),
+            ("", _("None")),
         ]
         for fmt, desc in date_presets:
             self.input_date_format.addItem(fmt, fmt)
@@ -228,6 +225,7 @@ class MacroEditorPage(BaseEditorPage):
                 self.cb_capitalize.setChecked(
                     str(values.get("CapitalizeMacro", "True")).lower() == "true"
                 )
+
                 # Set time format (default %H:%M)
                 time_fmt = values.get("TimeFormat", "%H:%M")
                 index = self.input_time_format.findData(time_fmt)
@@ -372,7 +370,7 @@ class MacroEditorPage(BaseEditorPage):
             bg_color = QColor(Qt.red)
             bg_color.setAlpha(60)
             icon = QIcon.fromTheme("dialog-warning")
-            tooltip = _("Warning: Macro key should not contain spaces or special characters.")
+            tooltip = _("Macro keys cannot contain spaces or special characters.")
 
         for col in range(self.table.columnCount()):
             item = self.table.item(row, col)
@@ -417,7 +415,7 @@ class MacroEditorPage(BaseEditorPage):
         # Validation feedback for input field
         if is_invalid:
             self.input_key.setStyleSheet("color: red;")
-            self.input_key.setToolTip(_("Warning: Macro key should not contain spaces or special characters."))
+            self.input_key.setToolTip(_("Macro keys cannot contain spaces or special characters."))
         else:
             self.input_key.setStyleSheet("")
             self.input_key.setToolTip("")

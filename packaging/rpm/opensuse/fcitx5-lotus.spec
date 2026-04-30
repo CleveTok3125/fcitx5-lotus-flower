@@ -1,5 +1,5 @@
 Name:           fcitx5-lotus
-Version:        3.0.0
+Version:        3.0.1
 Release:        1
 Summary:        Vietnamese input method for fcitx5
 License:        GPL-3.0-or-later
@@ -35,7 +35,7 @@ Vietnamese input method for fcitx5
 %setup -q
 
 %build
-%cmake -DINSTALL_OPENRC=OFF
+%cmake
 %cmake_build
 %sysusers_generate_pre %{_prefix}/lib/sysusers.d/lotus.conf lotus
 
@@ -168,5 +168,5 @@ fi
 %systemd_postun_with_restart fcitx5-lotus-server@.service
 
 %changelog
-* Thu Apr 16 2026 Nguyen Hoang Ky <nhktmdzhg@gmail.com> - 3.0.0-1
-- Using 3 option for w2ư
+* Thu Apr 30 2026 Nguyen Hoang Ky <nhktmdzhg@gmail.com> - 3.0.1-1
+- Small fix

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-16 16:50+0700\n"
+"POT-Creation-Date: 2026-04-26 19:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:840
+#: src/lotus-state.cpp:234
+msgid "Page "
+msgstr ""
+
+#: src/lotus-config.h:39 src/lotus-engine.cpp:841
 msgid "OFF"
 msgstr ""
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:834
+#: src/lotus-config.h:39 src/lotus-engine.cpp:835
 msgid "Uinput (Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:835
+#: src/lotus-config.h:39 src/lotus-engine.cpp:836
 msgid "Uinput (Slow)"
 msgstr ""
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:837
+#: src/lotus-config.h:39 src/lotus-engine.cpp:838
 msgid "Surrounding Text"
 msgstr ""
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:838
+#: src/lotus-config.h:39 src/lotus-engine.cpp:839
 msgid "Preedit"
 msgstr ""
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:839
+#: src/lotus-config.h:39 src/lotus-engine.cpp:840
 msgid "Emoji Picker"
 msgstr ""
 
-#: src/lotus-config.h:39 src/lotus-engine.cpp:836
+#: src/lotus-config.h:39 src/lotus-engine.cpp:837
 msgid "Minecraft"
 msgstr ""
 
@@ -77,8 +81,8 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
-#: src/lotus-config.h:172 src/lotus-config.h:221 src/lotus-engine.cpp:170
-#: src/lotus-engine.cpp:319
+#: src/lotus-config.h:172 src/lotus-config.h:221 src/lotus-engine.cpp:171
+#: src/lotus-engine.cpp:320
 msgid "Macro"
 msgstr ""
 
@@ -118,15 +122,15 @@ msgstr ""
 msgid "Type w to Produce ư"
 msgstr ""
 
-#: src/lotus-config.h:198 src/lotus-engine.cpp:169
+#: src/lotus-config.h:198 src/lotus-engine.cpp:170
 msgid "Enable Spell Check"
 msgstr ""
 
-#: src/lotus-config.h:198 src/lotus-engine.cpp:170
+#: src/lotus-config.h:198 src/lotus-engine.cpp:171
 msgid "Enable Macro"
 msgstr ""
 
-#: src/lotus-config.h:199 src/lotus-engine.cpp:171 src/lotus-engine.cpp:320
+#: src/lotus-config.h:199 src/lotus-engine.cpp:172 src/lotus-engine.cpp:321
 msgid "Capitalize Macro"
 msgstr ""
 
@@ -140,8 +144,8 @@ msgstr ""
 msgid "Double Space to Period (experimental)"
 msgstr ""
 
-#: src/lotus-config.h:202 src/lotus-engine.cpp:173
-msgid "Auto Restore Keys With Invalid Words"
+#: src/lotus-config.h:202 src/lotus-engine.cpp:174
+msgid "Auto Restore Invalid Words"
 msgstr ""
 
 #: src/lotus-config.h:203
@@ -153,7 +157,7 @@ msgid "Allow Type With More Freedom"
 msgstr ""
 
 #: src/lotus-config.h:205
-msgid "Allow dd To Produce đ When Auto Restore Keys With Invalid Words Is On"
+msgid "Allow dd To Produce đ When Auto Restore Invalid Words Is On"
 msgstr ""
 
 #: src/lotus-config.h:206
@@ -164,7 +168,7 @@ msgstr ""
 msgid "Use Lotus Status Icons"
 msgstr ""
 
-#: src/lotus-config.h:209 src/lotus-engine.cpp:175
+#: src/lotus-config.h:209 src/lotus-engine.cpp:176
 msgid "Enable Custom Dictionary"
 msgstr ""
 
@@ -216,44 +220,40 @@ msgstr ""
 msgid "Icon Color"
 msgstr ""
 
-#: src/lotus-engine.cpp:142
+#: src/lotus-engine.cpp:143
 msgid "Charset"
 msgstr ""
 
-#: src/lotus-engine.cpp:169 src/lotus-engine.cpp:318
+#: src/lotus-engine.cpp:170 src/lotus-engine.cpp:319
 msgid "Spell Check"
 msgstr ""
 
-#: src/lotus-engine.cpp:174 src/lotus-engine.cpp:321
+#: src/lotus-engine.cpp:174 src/lotus-engine.cpp:322
 msgid "Auto Non-VN Restore"
 msgstr ""
 
-#: src/lotus-engine.cpp:175 src/lotus-engine.cpp:322
+#: src/lotus-engine.cpp:176 src/lotus-engine.cpp:323
 msgid "Custom Dictionary"
 msgstr ""
 
-#: src/lotus-engine.cpp:179
+#: src/lotus-engine.cpp:180
 msgid "Settings"
 msgstr ""
 
-#: src/lotus-engine.cpp:844 src/lotus-engine.cpp:862
+#: src/lotus-engine.cpp:845 src/lotus-engine.cpp:863
 msgid "Default Typing"
 msgstr ""
 
-#: src/lotus-engine.cpp:846
+#: src/lotus-engine.cpp:847
 msgid "App: "
 msgstr ""
 
-#: src/lotus-engine.cpp:884
+#: src/lotus-engine.cpp:885
 msgid "Type"
 msgstr ""
 
-#: src/lotus-engine.cpp:936
+#: src/lotus-engine.cpp:937
 msgid "Lotus - Off"
-msgstr ""
-
-#: src/lotus-state.cpp:234
-msgid "Page "
 msgstr ""
 
 #: org.fcitx.Fcitx5.Addon.Lotus.metainfo.xml.in.in:7
@@ -273,15 +273,90 @@ msgstr ""
 msgid "Lotus Wrapper For Fcitx"
 msgstr ""
 
+#: settings-gui/ui/pages/keymap_editor.py:242
+#: settings-gui/ui/main_window.py:193
+msgid "Keymap"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:258
+msgid "Search keys..."
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:262
+#: settings-gui/ui/pages/dict_editor.py:89
+#: settings-gui/ui/pages/macro_editor.py:79
+msgid "Search:"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:268
+msgid "Original Input Method:"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:274
+msgid "Apply Preset"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:293
+msgid "Key (Example: s)"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:301
+#: settings-gui/ui/pages/keymap_editor.py:474
+#: settings-gui/ui/pages/dict_editor.py:108
+#: settings-gui/ui/pages/dict_editor.py:318
+#: settings-gui/ui/pages/macro_editor.py:167
+#: settings-gui/ui/pages/macro_editor.py:432
+msgid "Add"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:302
+#: settings-gui/ui/pages/keymap_editor.py:475
+msgid "Add Keymap"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:313
+msgid "Action"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:329
+#: settings-gui/ui/pages/dict_editor.py:134
+#: settings-gui/ui/pages/macro_editor.py:197
+#: settings-gui/ui/pages/mode_manager.py:375
+msgid "Remove"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:330
+msgid "Remove selected row"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:470
+#: settings-gui/ui/pages/macro_editor.py:429
+msgid "Update"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:471
+msgid "Update Keymap"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:482
+msgid "Confirm"
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:483
+msgid "This operation will replace all existing keys with "
+msgstr ""
+
+#: settings-gui/ui/pages/keymap_editor.py:485
+msgid ". Are you sure?"
+msgstr ""
+
 #: settings-gui/ui/pages/about.py:64
 #, python-brace-format
 msgid "Version {}"
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:79
-msgid ""
-"A state-of-the-art Vietnamese input method engine for Linux, designed for "
-"speed, stability, and a premium user experience."
+msgid "Modern, fast, and stable Vietnamese input method for Linux."
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:96
@@ -297,7 +372,7 @@ msgid "Export Debug Logs"
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:123
-msgid "DEVELOPED BY"
+msgid "Developed by"
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:157
@@ -314,7 +389,7 @@ msgid "Success"
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:206
-msgid "Debug logs exported successfully to:\n"
+msgid "Debug logs exported to:\n"
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:208 settings-gui/ui/pages/backup.py:188
@@ -337,8 +412,7 @@ msgstr ""
 
 #: settings-gui/ui/pages/backup.py:61
 msgid ""
-"Save or restore your configurations via JSON files. Select the components "
-"you wish to include:"
+"Save or restore configuration via JSON files. Select components to include:"
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:70 settings-gui/ui/pages/backup.py:216
@@ -346,7 +420,7 @@ msgid "Main Settings"
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:71 settings-gui/ui/pages/backup.py:217
-#: settings-gui/ui/pages/macro_editor.py:52 settings-gui/ui/main_window.py:183
+#: settings-gui/ui/pages/macro_editor.py:53 settings-gui/ui/main_window.py:183
 msgid "Macros"
 msgstr ""
 
@@ -379,7 +453,7 @@ msgid "Warning"
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:132
-msgid "Please select at least one item to export."
+msgid "Select at least one item to export."
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:141
@@ -391,7 +465,7 @@ msgid "JSON Backup (*.json);;All Files (*)"
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:183
-msgid "Backup exported successfully to:\n"
+msgid "Backup exported to:\n"
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:188
@@ -411,7 +485,7 @@ msgid "Failed to open backup file:\n"
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:255
-msgid "Please select at least one item to restore."
+msgid "Select at least one item to restore."
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:261
@@ -420,14 +494,14 @@ msgstr ""
 
 #: settings-gui/ui/pages/backup.py:263
 msgid ""
-"Are you sure you want to restore the selected components? This will "
-"overwrite your current configuration."
+"Are you sure you want to restore selected components? This will overwrite "
+"current configuration."
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:298
 msgid ""
-"Selected components restored successfully. Some changes may require "
-"restarting Fcitx5."
+"Selected components restored. Fcitx5 restart may be required for some "
+"changes."
 msgstr ""
 
 #: settings-gui/ui/pages/backup.py:314
@@ -436,42 +510,21 @@ msgstr ""
 
 #: settings-gui/ui/pages/dict_editor.py:71
 msgid ""
-"Words in the custom dictionary will be protected from 'Auto Restore'. Use "
-"this for names, technical terms, or words not yet in the standard dictionary."
+"Words in the custom dictionary will be excluded from 'Auto Restore Invalid "
+"Words'. Use this for names, technical terms, or words not yet in the built-"
+"in dictionary."
 msgstr ""
 
 #: settings-gui/ui/pages/dict_editor.py:85
 msgid "Search words..."
 msgstr ""
 
-#: settings-gui/ui/pages/dict_editor.py:89
-#: settings-gui/ui/pages/keymap_editor.py:262
-#: settings-gui/ui/pages/macro_editor.py:82
-msgid "Search:"
-msgstr ""
-
 #: settings-gui/ui/pages/dict_editor.py:104
 msgid "Word (e.g. khongdau)"
 msgstr ""
 
-#: settings-gui/ui/pages/dict_editor.py:108
-#: settings-gui/ui/pages/dict_editor.py:318
-#: settings-gui/ui/pages/keymap_editor.py:301
-#: settings-gui/ui/pages/keymap_editor.py:474
-#: settings-gui/ui/pages/macro_editor.py:170
-#: settings-gui/ui/pages/macro_editor.py:434
-msgid "Add"
-msgstr ""
-
 #: settings-gui/ui/pages/dict_editor.py:112
 msgid "Word:"
-msgstr ""
-
-#: settings-gui/ui/pages/dict_editor.py:134
-#: settings-gui/ui/pages/keymap_editor.py:329
-#: settings-gui/ui/pages/macro_editor.py:200
-#: settings-gui/ui/pages/mode_manager.py:375
-msgid "Remove"
 msgstr ""
 
 #: settings-gui/ui/pages/dict_editor.py:246
@@ -488,129 +541,70 @@ msgstr ""
 msgid "Exists"
 msgstr ""
 
-#: settings-gui/ui/pages/keymap_editor.py:242
-#: settings-gui/ui/main_window.py:193
-msgid "Keymap"
+#: settings-gui/ui/pages/dynamic_settings.py:124
+msgid "Failed to load configuration."
 msgstr ""
 
-#: settings-gui/ui/pages/keymap_editor.py:258
-msgid "Search keys..."
+#: settings-gui/ui/pages/dynamic_settings.py:172
+msgid "No interface settings available yet."
 msgstr ""
 
-#: settings-gui/ui/pages/keymap_editor.py:268
-msgid "Original Input Method:"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:274
-msgid "Apply Preset"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:293
-msgid "Key (Example: s)"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:302
-#: settings-gui/ui/pages/keymap_editor.py:475
-msgid "Add Keymap"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:313
-msgid "Action"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:330
-msgid "Remove selected row"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:470
-#: settings-gui/ui/pages/macro_editor.py:431
-msgid "Update"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:471
-msgid "Update Keymap"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:482
-msgid "Confirm"
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:483
-msgid "This operation will replace all existing keys with "
-msgstr ""
-
-#: settings-gui/ui/pages/keymap_editor.py:485
-msgid ". Are you sure?"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:70
-msgid ""
-"Automatically match expansion case to trigger key case:<br>- 'kg' → 'khô gà' "
-"(all lowercase)<br>- 'KG' → 'KHÔ GÀ' (all uppercase)<br>- 'Kg' → 'khô gà' "
-"(original macro case)"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:78
+#: settings-gui/ui/pages/macro_editor.py:75
 msgid "Search macros..."
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:99
-msgid ""
-"Macros can use dynamic placeholders: $TIME (current time) and $DATE (current "
-"date)."
+#: settings-gui/ui/pages/macro_editor.py:96
+msgid "Macros support dynamic placeholders: $TIME and $DATE."
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:121
-msgid "None (Do not replace $TIME)"
+#: settings-gui/ui/pages/macro_editor.py:118
+#: settings-gui/ui/pages/macro_editor.py:139 settings-gui/ui/components.py:274
+msgid "None"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:127
+#: settings-gui/ui/pages/macro_editor.py:124
 msgid "Time Format:"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:142
-msgid "None (Do not replace $DATE)"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:148
+#: settings-gui/ui/pages/macro_editor.py:145
 msgid "Date Format:"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:162
+#: settings-gui/ui/pages/macro_editor.py:159
 msgid "Abbreviation (e.g. kg)"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:166
+#: settings-gui/ui/pages/macro_editor.py:163
 msgid "Full text (e.g. khô gà)"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:175
+#: settings-gui/ui/pages/macro_editor.py:172
 msgid "Key:"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:177
+#: settings-gui/ui/pages/macro_editor.py:174
 msgid "Value:"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:184
+#: settings-gui/ui/pages/macro_editor.py:181
 msgid "Abbreviation"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:184
+#: settings-gui/ui/pages/macro_editor.py:181
 msgid "Expanded Text"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:202
+#: settings-gui/ui/pages/macro_editor.py:199
 msgid "Move Up"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:204
+#: settings-gui/ui/pages/macro_editor.py:201
 msgid "Move Down"
 msgstr ""
 
-#: settings-gui/ui/pages/macro_editor.py:375
-#: settings-gui/ui/pages/macro_editor.py:420
-msgid "Warning: Macro key should not contain spaces or special characters."
+#: settings-gui/ui/pages/macro_editor.py:373
+#: settings-gui/ui/pages/macro_editor.py:418
+msgid "Macro keys cannot contain spaces or special characters."
 msgstr ""
 
 #: settings-gui/ui/pages/mode_manager.py:118
@@ -620,7 +614,7 @@ msgid "Add Application"
 msgstr ""
 
 #: settings-gui/ui/pages/mode_manager.py:133
-msgid "Assign a specific input mode to an application"
+msgid "Assign an input mode to a specific application."
 msgstr ""
 
 #: settings-gui/ui/pages/mode_manager.py:148
@@ -680,23 +674,43 @@ msgid "Confirm Remove"
 msgstr ""
 
 #: settings-gui/ui/pages/mode_manager.py:657
-msgid "Are you sure you want to remove rules for this application?"
+msgid "Remove rules for this application?"
 msgstr ""
 
-#: settings-gui/ui/pages/dynamic_settings.py:126
-msgid "Failed to load configuration."
+#: settings-gui/ui/components.py:187
+msgid "Clear hotkey"
 msgstr ""
 
-#: settings-gui/ui/pages/dynamic_settings.py:174
-msgid "No interface settings available yet."
-msgstr ""
-
-#: settings-gui/ui/components.py:208
+#: settings-gui/ui/components.py:260
 msgid "[ Recording... ]"
 msgstr ""
 
-#: settings-gui/ui/components.py:222
-msgid "None"
+#: settings-gui/ui/helpers.py:15
+msgid "You can type tone marks at the end of the word or anywhere inside."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:18
+msgid ""
+"Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
+"Edge."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:21
+msgid ""
+"Automatically match expansion case to trigger key case.\n"
+"\n"
+"Example if 'kg' is 'khô gà':\n"
+"- kg -> khô gà\n"
+"- Kg -> Khô gà\n"
+"- KG -> KHÔ GÀ"
+msgstr ""
+
+#: settings-gui/ui/helpers.py:28
+msgid ""
+"Automatically revert the typed sequence if the resulting word is not in the "
+"dictionary.\n"
+"This helps prevent accidental Vietnamese transformations on English words or "
+"mixed text."
 msgstr ""
 
 #: settings-gui/ui/main_window.py:40
@@ -744,11 +758,11 @@ msgid "Confirm Reset"
 msgstr ""
 
 #: settings-gui/ui/main_window.py:224
-msgid "Are you sure you want to restore all settings to their default values?"
+msgid "Restore all settings to defaults?"
 msgstr ""
 
 #: settings-gui/ui/main_window.py:260
-msgid "All settings applied successfully."
+msgid "Settings saved."
 msgstr ""
 
 #: settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop.in:2

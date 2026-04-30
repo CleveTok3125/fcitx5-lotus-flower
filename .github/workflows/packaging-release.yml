@@ -258,6 +258,9 @@ jobs:
               -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS" \
               -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS" \
               -DCMAKE_MODULE_LINKER_FLAGS="$LDFLAGS" \
+              -DINSTALL_OPENRC=ON \
+              -DINSTALL_RUNIT=ON \
+              -DRUNIT_SV_DIR=/etc/runit/sv \
               -B build .
             cmake --build build
             DESTDIR=/work/arch-dist cmake --install build
@@ -353,7 +356,7 @@ jobs:
         env:
           GNUPGHOME: /home/runner/.gnupg
         run: |
-          for codename in bookworm trixie testing sid jammy noble plucky questing; do
+          for codename in bookworm trixie testing sid jammy noble plucky questing resolute; do
             case "$codename" in
               sid)      suite="unstable" ;;
               testing)  suite="testing"  ;;
@@ -381,7 +384,7 @@ jobs:
 
       - name: Create Fedora RPM repos
         run: |
-          for releasever in 42 43 rawhide; do
+          for releasever in 42 43 44 rawhide; do
             dir="repo/rpm/fedora/${releasever}/x86_64"
             mkdir -p "$dir"
             for rpm in artifacts/rpm-fedora-${releasever}/*.rpm; do
