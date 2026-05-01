@@ -865,8 +865,8 @@ namespace fcitx {
     }
 
     void LotusState::handleDoubleHyphenReplacement() {
-        // Unicode U+2014 (em-dash) encoded in UTF-8: 0xE2 0x80 0x94
-        const char* emDash = "—"; // UTF-8 literal (same as "\xe2\x80\x94")
+        // Em-dash (U+2014)
+        const char* emDash = "—";
         switch (realMode) {
             case LotusMode::SurroundingText: {
                 ic_->deleteSurroundingText(-1, 1);
