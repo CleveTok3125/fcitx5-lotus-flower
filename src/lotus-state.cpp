@@ -985,7 +985,8 @@ namespace fcitx {
         }
 
         if (*engine_->config().doubleSpaceToPeriod && realMode != LotusMode::Off) {
-            if (currentSym == FcitxKey_space) {
+            bool isSpaceKey = (currentSym == FcitxKey_space || currentSym == FcitxKey_KP_Space);
+            if (isSpaceKey && !keyEvent.key().hasModifier()) {
                 if (isPrevSpace_) {
                     keyEvent.filterAndAccept();
                     handleDoubleSpaceReplacement();
