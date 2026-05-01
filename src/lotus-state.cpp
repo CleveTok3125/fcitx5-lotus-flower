@@ -999,7 +999,8 @@ namespace fcitx {
         }
 
         if (*engine_->config().doubleHyphenToEmDash && realMode != LotusMode::Off) {
-            if (currentSym == FcitxKey_minus) {
+            bool isHyphenKey = (currentSym == FcitxKey_minus || currentSym == FcitxKey_KP_Subtract);
+            if (isHyphenKey && !keyEvent.key().hasModifier()) {
                 if (isPrevHyphen_) {
                     keyEvent.filterAndAccept();
                     handleDoubleHyphenReplacement();
