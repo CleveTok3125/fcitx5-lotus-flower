@@ -31,24 +31,34 @@
 #include <sstream>
 
 namespace fcitx {
-    constexpr const char*              CharsetActionPrefix = "lotus-charset-";
-    const std::string                  CustomKeymapFile    = "conf/lotus-custom-keymap.conf";
-    const std::string                  MacroTableFile      = "conf/lotus-macro-table.conf";
-    std::unordered_map<LotusMode, int> modeMap             = {
-        {LotusMode::Off, 0},     {LotusMode::Smooth, 1}, {LotusMode::Uinput, 2},    {LotusMode::SurroundingText, 4},
-        {LotusMode::Preedit, 5}, {LotusMode::Emoji, 6},  {LotusMode::Minecraft, 8},
-    };
-    std::unordered_map<int, LotusMode> modeMapInv = {
-        {0, LotusMode::Off},     {1, LotusMode::Smooth}, {2, LotusMode::Uinput},    {4, LotusMode::SurroundingText},
-        {5, LotusMode::Preedit}, {6, LotusMode::Emoji},  {8, LotusMode::Minecraft},
-    };
+    constexpr const char* CharsetActionPrefix = "lotus-charset-";
+    const std::string     CustomKeymapFile    = "conf/lotus-custom-keymap.conf";
+    const std::string     MacroTableFile      = "conf/lotus-macro-table.conf";
 
-    int modeToInt(LotusMode mode) {
-        return modeMap.at(mode);
+    int                   modeToInt(LotusMode mode) {
+        switch (mode) {
+            case LotusMode::Off: return 0;
+            case LotusMode::Smooth: return 1;
+            case LotusMode::Uinput: return 2;
+            case LotusMode::SurroundingText: return 4;
+            case LotusMode::Preedit: return 5;
+            case LotusMode::Emoji: return 6;
+            case LotusMode::Minecraft: return 8;
+            default: return 0;
+        }
     }
 
     LotusMode intToMode(int mode) {
-        return modeMapInv.at(mode);
+        switch (mode) {
+            case 0: return LotusMode::Off;
+            case 1: return LotusMode::Smooth;
+            case 2: return LotusMode::Uinput;
+            case 4: return LotusMode::SurroundingText;
+            case 5: return LotusMode::Preedit;
+            case 6: return LotusMode::Emoji;
+            case 8: return LotusMode::Minecraft;
+            default: return LotusMode::Off;
+        }
     }
 
     // Returns the KeySym that triggers the "Type hotkey char" action in the mode
