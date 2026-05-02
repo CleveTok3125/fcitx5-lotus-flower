@@ -31,9 +31,25 @@
 #include <sstream>
 
 namespace fcitx {
-    constexpr const char* CharsetActionPrefix = "lotus-charset-";
-    const std::string     CustomKeymapFile    = "conf/lotus-custom-keymap.conf";
-    const std::string     MacroTableFile      = "conf/lotus-macro-table.conf";
+    constexpr const char*              CharsetActionPrefix = "lotus-charset-";
+    const std::string                  CustomKeymapFile    = "conf/lotus-custom-keymap.conf";
+    const std::string                  MacroTableFile      = "conf/lotus-macro-table.conf";
+    std::unordered_map<LotusMode, int> modeMap             = {
+        {LotusMode::Off, 0},     {LotusMode::Smooth, 1}, {LotusMode::Uinput, 2},    {LotusMode::SurroundingText, 4},
+        {LotusMode::Preedit, 5}, {LotusMode::Emoji, 6},  {LotusMode::Minecraft, 8},
+    };
+    std::unordered_map<int, LotusMode> modeMapInv = {
+        {0, LotusMode::Off},     {1, LotusMode::Smooth}, {2, LotusMode::Uinput},    {4, LotusMode::SurroundingText},
+        {5, LotusMode::Preedit}, {6, LotusMode::Emoji},  {8, LotusMode::Minecraft},
+    };
+
+    int modeToInt(LotusMode mode) {
+        return modeMap.at(mode);
+    }
+
+    LotusMode intToMode(int mode) {
+        return modeMapInv.at(mode);
+    }
 
     // Returns the KeySym that triggers the "Type hotkey char" action in the mode
     // menu.  If the hotkey itself conflicts with a reserved menu key, falls back
@@ -345,7 +361,7 @@ namespace fcitx {
                     }
                 }
                 for (const auto& rule : *appRulesTables_.rules) {
-                    appRules_[*rule.app] = static_cast<LotusMode>(*rule.mode);
+                    appRules_[*rule.app] = intToMode(*rule.mode);
                 }
             }
             saveAppRules();
@@ -698,7 +714,7 @@ namespace fcitx {
                     std::string app  = line.substr(0, delimiterPos);
                     std::string mode = line.substr(delimiterPos + 1);
                     try {
-                        tempRules[app] = static_cast<LotusMode>(std::stoi(mode));
+                        tempRules[app] = intToMode(std::stoi(mode));
                     } catch (const std::exception&) { LOTUS_WARN("Invalid mode value for app: " + app); }
                 }
             }
@@ -718,7 +734,7 @@ namespace fcitx {
                 continue;
             lotusAppRule rule;
             rule.app.setValue(pair.first);
-            rule.mode.setValue(static_cast<int>(pair.second));
+            rule.mode.setValue(modeToInt(pair.second));
             rules.push_back(std::move(rule));
         }
         appRulesTables_.rules.setValue(std::move(rules));
@@ -736,7 +752,7 @@ namespace fcitx {
         for (const auto& pair : appRules_) {
             bool currentIsCtx = isStartsWith(pair.first, "ctx_");
             if (!currentIsCtx) {
-                file << pair.first << "=" << static_cast<int>(pair.second) << "\n";
+                file << pair.first << "=" << modeToInt(pair.second) << "\n";
             }
         }
         file.close();
@@ -757,7 +773,7 @@ namespace fcitx {
         bool found = false;
         for (auto& rule : rules) {
             if (*rule.app == appName) {
-                rule.mode.setValue(static_cast<int>(mode));
+                rule.mode.setValue(modeToInt(mode));
                 found = true;
                 break;
             }
@@ -766,7 +782,7 @@ namespace fcitx {
         if (!found) {
             lotusAppRule newRule;
             newRule.app.setValue(appName);
-            newRule.mode.setValue(static_cast<int>(mode));
+            newRule.mode.setValue(modeToInt(mode));
             rules.push_back(std::move(newRule));
         }
 

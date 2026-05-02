@@ -27,16 +27,22 @@ namespace fcitx {
      * @brief Operating modes for the Lotus input method.
      */
     enum class LotusMode : std::uint8_t {
-        Off             = 0,
-        Smooth          = 1,
-        Uinput          = 2,
-        SurroundingText = 4,
-        Preedit         = 5,
-        Emoji           = 6,
-        Minecraft       = 8,
+        Off,
+        Smooth,
+        Uinput,
+        SurroundingText,
+        Preedit,
+        Emoji,
+        Minecraft,
     };
 
     FCITX_CONFIG_ENUM_NAME_WITH_I18N(LotusMode, N_("OFF"), N_("Uinput (Smooth)"), N_("Uinput (Slow)"), N_("Surrounding Text"), N_("Preedit"), N_("Emoji Picker"), N_("Minecraft"));
+
+    /**
+     * @brief Converts LotusMode to int and vice versa.
+     */
+    int       modeToInt(LotusMode mode);
+    LotusMode intToMode(int mode);
 
     /**
      * @brief W2U mode for w to ư conversion.
