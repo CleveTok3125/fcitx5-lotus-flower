@@ -866,7 +866,7 @@ namespace fcitx {
 
     void LotusState::handleDoubleHyphenReplacement() {
         // Em-dash (U+2014)
-        const char* emDash = "—";
+        std::string emDash = "—";
         switch (realMode) {
             case LotusMode::SurroundingText: {
                 ic_->deleteSurroundingText(-1, 1);
