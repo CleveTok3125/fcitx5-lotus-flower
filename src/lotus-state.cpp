@@ -864,6 +864,24 @@ namespace fcitx {
         }
     }
 
+    void LotusState::handleDoubleHyphenReplacement() {
+        // Em-dash (U+2014)
+        std::string emDash = "—";
+        switch (realMode) {
+            case LotusMode::SurroundingText: {
+                ic_->deleteSurroundingText(-1, 1);
+                ic_->commitString(emDash);
+                LOTUS_INFO("Commit: — (em-dash)");
+                break;
+            }
+            default: { // Uinput, Smooth, Preedit, etc.
+                performReplacement("-", emDash);
+                LOTUS_INFO("Commit: — (em-dash)");
+                break;
+            }
+        }
+    }
+
     void LotusState::keyEvent(KeyEvent& keyEvent) {
         if (!lotusEngine_ || keyEvent.isRelease())
             return;
@@ -968,7 +986,8 @@ namespace fcitx {
         }
 
         if (*engine_->config().doubleSpaceToPeriod && realMode != LotusMode::Off) {
-            if (currentSym == FcitxKey_space) {
+            bool isSpaceKey = (currentSym == FcitxKey_space || currentSym == FcitxKey_KP_Space);
+            if (isSpaceKey && !keyEvent.key().hasModifier()) {
                 if (isPrevSpace_) {
                     keyEvent.filterAndAccept();
                     handleDoubleSpaceReplacement();
@@ -978,6 +997,21 @@ namespace fcitx {
                 isPrevSpace_ = true;
             } else {
                 isPrevSpace_ = false;
+            }
+        }
+
+        if (*engine_->config().doubleHyphenToEmDash && realMode != LotusMode::Off) {
+            bool isHyphenKey = (currentSym == FcitxKey_minus || currentSym == FcitxKey_KP_Subtract);
+            if (isHyphenKey && !keyEvent.key().hasModifier()) {
+                if (isPrevHyphen_) {
+                    keyEvent.filterAndAccept();
+                    handleDoubleHyphenReplacement();
+                    isPrevHyphen_ = false;
+                    return;
+                }
+                isPrevHyphen_ = true;
+            } else {
+                isPrevHyphen_ = false;
             }
         }
 
@@ -1017,6 +1051,7 @@ namespace fcitx {
 
         if (lotusEngine_) {
             isPrevSpace_       = false;
+            isPrevHyphen_      = false;
             shouldCapitalize_  = false;
             isPrevPunctuation_ = false;
             if (realMode == LotusMode::Preedit && isFocusOut) {
@@ -1104,6 +1139,8 @@ namespace fcitx {
         emojiCandidates_.clear();
         buffered_keys_.clear();
         shouldCapitalize_  = false;
+        isPrevSpace_       = false;
+        isPrevHyphen_      = false;
         isPrevPunctuation_ = false;
         if (lotusEngine_)
             ResetEngine(lotusEngine_.handle());
