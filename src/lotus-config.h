@@ -56,6 +56,17 @@ namespace fcitx {
     FCITX_CONFIG_ENUM_NAME_WITH_I18N(W2UMode, N_("Disabled"), N_("Non-Start"), N_("Everywhere"));
 
     /**
+     * @brief Bracket transform mode for [ -> ơ, ] -> ư conversion.
+     */
+    enum class BracketTransformMode : std::uint8_t {
+        Disabled   = 0,
+        NonStart   = 1,
+        Everywhere = 2,
+    };
+
+    FCITX_CONFIG_ENUM_NAME_WITH_I18N(BracketTransformMode, N_("Disabled"), N_("Non-Start"), N_("Everywhere"));
+
+    /**
      * @brief Icon theme options.
      */
     enum class IconTheme : std::uint8_t {
@@ -198,8 +209,10 @@ namespace fcitx {
         OptionWithAnnotation<std::string, StringListAnnotation> outputCharset{this, "OutputCharset", _("Output Charset"), "Unicode", {}, {}, StringListAnnotation()};
         KeyListOption                                           modeMenuKey{
             this, "ModeMenuKey", _("Mode Menu Hotkey"), {Key("grave")}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
-        SubConfigOption                                      appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
-        OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation> w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
+        SubConfigOption                                                                appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
+        OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation>                           w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
+        OptionWithAnnotation<BracketTransformMode, BracketTransformModeI18NAnnotation> bracketTransform{this, "BracketTransform", _("Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"),
+                                                                                                        BracketTransformMode::Disabled};
 
         Option<bool> spellCheck{this, "SpellCheck", _("Enable Spell Check"), true}; Option<bool> enableMacro{this, "EnableMacro", _("Enable Macro"), true};
         Option<bool> capitalizeMacro{this, "CapitalizeMacro", _("Capitalize Macro"), true}; Option<bool> autoCapitalizeAfterPunctuation{
@@ -213,8 +226,8 @@ namespace fcitx {
         Option<bool> fixUinputWithAck{this, "FixUinputWithAck", _("Fix Uinput Mode With Ack"), false};
         Option<bool> useLotusIcons{this, "UseLotusIcons", _("Use Lotus Status Icons"), false};
 
-        Option<bool> enableDictionary{this, "EnableDictionary", _("Enable Custom Dictionary"), false};
-        Option<bool> enableCustomKeymap{this, "EnableCustomKeymap", _("Enable Custom Keymap"), false};
+        Option<bool> enableDictionary{this, "EnableDictionary", _("Custom Dictionary"), false};
+        Option<bool> enableCustomKeymap{this, "EnableCustomKeymap", _("Custom Keymap"), false};
 
         Option<bool> showModeSmooth{this, "ShowModeSmooth", _("Show Uinput (Smooth)"), true}; Option<bool> showModeUinput{this, "ShowModeUinput", _("Show Uinput (Slow)"), true};
         Option<bool>                                                                                       showModeMinecraft{this, "ShowModeMinecraft", _("Show Minecraft"), true};
