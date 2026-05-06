@@ -50,7 +50,6 @@ extern std::atomic<unsigned int>     realtextLen;            ///< Current text l
 extern std::atomic<int>              mouse_socket_fd;        ///< Mouse socket file descriptor
 extern std::atomic<int64_t>          replacement_start_ms_;  ///< Timestamp for replacement
 extern std::atomic<int>              replacement_thread_id_; ///< Thread ID for replacement
-extern std::atomic<bool>             needFallbackCommit;     ///< Fallback commit flag
 extern std::mutex                    monitor_mutex;          ///< Mutex for monitor synchronization
 extern std::condition_variable       monitor_cv;             ///< Condition variable for monitor
 

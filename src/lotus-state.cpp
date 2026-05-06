@@ -912,21 +912,6 @@ namespace fcitx {
             g_mouse_clicked.store(false, std::memory_order_release);
             clearAllBuffers();
         }
-
-        if (needFallbackCommit.load(std::memory_order_acquire)) {
-            LOTUS_INFO("Need fallback commit");
-            needFallbackCommit.store(false, std::memory_order_release);
-            if (current_thread_id_.load(std::memory_order_acquire) == replacement_thread_id_.load(std::memory_order_acquire)) {
-                if (!pending_commit_string_.empty()) {
-                    ic_->commitString(pending_commit_string_);
-                    pending_commit_string_.clear();
-                }
-            }
-            replacement_thread_id_.store(0, std::memory_order_release);
-            replacement_start_ms_.store(0, std::memory_order_release);
-            if (getFrontendName(ic_) == "dbus" && !ic_->surroundingText().isValid())
-                replayBufferedKeys(); // Does we need drop this?
-        }
         KeySym currentSym = keyEvent.rawKey().sym();
         if (*engine_->config().autoCapitalizeAfterPunctuation && realMode != LotusMode::Off) {
             // Ignore auto-capitalize side-effects if we're processing automated replacement backspaces
