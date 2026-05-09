@@ -451,9 +451,6 @@ namespace fcitx {
             if (current_backspace_count_ < expected_backspaces_) {
                 return false; // Allow intermediate backspaces to reach the app to clear autofill/old text.
             }
-            is_deleting_.store(false);
-            replacement_start_ms_.store(0, std::memory_order_release);
-            replacement_thread_id_.store(0, std::memory_order_release);
             std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
             // Validate surr cursor pos should match realtextLen after all BS applied
             const auto& surr = ic_->surroundingText();
@@ -473,9 +470,10 @@ namespace fcitx {
             LOTUS_INFO("Commit: " + pending_commit_string_);
             expected_backspaces_     = 0;
             current_backspace_count_ = 0;
-            pending_commit_string_   = "";
+            pending_commit_string_.clear();
 
             event.filterAndAccept(); // Filter out the final trigger backspace.
+            is_deleting_.store(false);
             if (getFrontendName(ic_) == "dbus" && !ic_->surroundingText().isValid())
                 replayBufferedKeys(); // Does we need drop this?
             return true;
@@ -485,7 +483,6 @@ namespace fcitx {
 
     void LotusState::performReplacement(const std::string& deletedPart, const std::string& addedPart) {
         LOTUS_INFO("Perform replacement: " + deletedPart + " -> " + addedPart); //NOLINT
-        int my_id                = ++current_thread_id_;
         current_backspace_count_ = 0;
         pending_commit_string_   = addedPart;
         const auto& surrounding  = ic_->surroundingText();
@@ -498,10 +495,7 @@ namespace fcitx {
         if (realMode == LotusMode::Minecraft) {
             --expected_backspaces_;
         }
-        replacement_thread_id_.store(my_id, std::memory_order_release);
-        replacement_start_ms_.store(now_ms(), std::memory_order_release);
         is_deleting_.store(true, std::memory_order_release);
-        monitor_cv.notify_one();
         send_backspace_uinput(expected_backspaces_);
         LOTUS_INFO("Send " + std::to_string(expected_backspaces_) + " backspaces");
     }

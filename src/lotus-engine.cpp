@@ -253,7 +253,6 @@ namespace fcitx {
 
     LotusEngine::~LotusEngine() {
         stop_flag_monitor.store(true, std::memory_order_release);
-        monitor_cv.notify_all();
         int fd = mouse_socket_fd.load(std::memory_order_acquire);
         if (fd >= 0) {
             shutdown(fd, SHUT_RDWR);
