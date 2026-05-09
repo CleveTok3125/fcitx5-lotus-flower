@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include <algorithm>
+#include <chrono>
 
 // Global variables
 std::atomic<fcitx::LotusMode> realMode{fcitx::LotusMode::Smooth};
