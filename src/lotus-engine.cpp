@@ -482,15 +482,15 @@ namespace fcitx {
                 }
 
                 int cursorIndex = menuList->globalCursorIndex();
-                if (cursorIndex < 1 || cursorIndex >= totalSize) {
-                    cursorIndex = 1;
+                if (cursorIndex < 0 || cursorIndex >= totalSize) {
+                    cursorIndex = 0;
                 }
 
                 int nextIndex = cursorIndex + delta;
-                if (nextIndex < 1) {
+                if (nextIndex < 0) {
                     nextIndex = totalSize - 1;
                 } else if (nextIndex >= totalSize) {
-                    nextIndex = 1;
+                    nextIndex = 0;
                 }
 
                 menuList->setGlobalCursorIndex(nextIndex);
@@ -522,8 +522,8 @@ namespace fcitx {
                 case FcitxKey_Return: {
                     if (menuList && !menuList->empty()) {
                         int selectedIndex = menuList->globalCursorIndex();
-                        if (selectedIndex < 1 || selectedIndex >= menuList->totalSize()) {
-                            selectedIndex = 1;
+                        if (selectedIndex < 0 || selectedIndex >= menuList->totalSize()) {
+                            selectedIndex = 0;
                         }
                         menuList->candidateFromAll(selectedIndex).select(ic);
                         return;
@@ -865,10 +865,8 @@ namespace fcitx {
         const LotusMode defaultMode = config_.mode.value();
         allModes.push_back({defaultMode, _("Default Typing"), FcitxKey_r, *config_.showModeDefault}); // Add reset option
 
-        candidateList->append(std::make_unique<DisplayOnlyCandidateWord>(Text(_("App: ") + currentConfigureApp_)));
-
         int activeSelectionIdx  = -1;
-        int currentCandidateIdx = 1;
+        int currentCandidateIdx = 0;
 
         modeMenuMapping_.clear();
 
@@ -914,12 +912,13 @@ namespace fcitx {
 
         if (activeSelectionIdx != -1) {
             candidateList->setGlobalCursorIndex(activeSelectionIdx);
-        } else if (candidateList->totalSize() > 1) {
-            candidateList->setGlobalCursorIndex(1);
+        } else if (candidateList->totalSize() > 0) {
+            candidateList->setGlobalCursorIndex(0);
         }
 
         ic->inputPanel().reset();
         ic->inputPanel().setCandidateList(std::move(candidateList));
+        ic->inputPanel().setAuxDown(Text(_("App: ") + currentConfigureApp_));
         ic->updateUserInterface(UserInterfaceComponent::InputPanel);
     }
 
