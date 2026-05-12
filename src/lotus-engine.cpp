@@ -444,7 +444,8 @@ namespace fcitx {
         } else {
             ic->inputPanel().reset();
             ic->updateUserInterface(UserInterfaceComponent::InputPanel);
-            ic->updatePreedit();
+            if (realMode == LotusMode::Preedit || realMode == LotusMode::SurroundingText)
+                ic->updatePreedit();
         }
         for (const auto& action : toggleActions_) {
             statusArea.addAction(StatusGroup::InputMethod, action);
@@ -652,7 +653,8 @@ namespace fcitx {
             needEngineReset.store(false);
             ic->inputPanel().reset();
             ic->updateUserInterface(UserInterfaceComponent::InputPanel);
-            ic->updatePreedit();
+            if (realMode == LotusMode::Preedit || realMode == LotusMode::Emoji || realMode == LotusMode::SurroundingText)
+                ic->updatePreedit();
         }
     }
 
