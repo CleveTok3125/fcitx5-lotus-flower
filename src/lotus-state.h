@@ -23,8 +23,6 @@
 #include <fcitx-utils/misc.h>
 #include <fcitx/inputcontext.h>
 
-#include <atomic>
-
 struct EmojiEntry;
 
 namespace fcitx {
@@ -97,12 +95,12 @@ namespace fcitx {
         int                     expected_backspaces_     = 0;
         int                     current_backspace_count_ = 0;
         std::string             pending_commit_string_;
-        std::atomic<int>        current_thread_id_{0};
         std::string             emojiBuffer_;
         std::vector<EmojiEntry> emojiCandidates_;
         bool                    waitAck_ = false;
         std::vector<KeyEntry>   buffered_keys_; ///< Keystrokes buffered during replacement
         bool                    isPrevSpace_        = false;
+        bool                    isPrevHyphen_       = false;
         bool                    shouldCapitalize_   = false;
         bool                    isPrevPunctuation_  = false;
         int64_t                 lastDeactivateTime_ = 0;
@@ -177,6 +175,11 @@ namespace fcitx {
          * @brief Handles the double space to period replacement.
          */
         void handleDoubleSpaceReplacement();
+
+        /**
+         * @brief Handles the double hyphen to em-dash replacement.
+         */
+        void handleDoubleHyphenReplacement();
 
         /**
          * @brief Checks and forwards special keys.

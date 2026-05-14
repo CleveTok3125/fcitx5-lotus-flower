@@ -72,6 +72,7 @@ namespace fcitx {
             .modernStyle         = *engine_->config().modernStyle,
             .freeMarking         = *engine_->config().freeMarking,
             .w2u                 = static_cast<int>(*engine_->config().w2u),
+            .bracketTransform    = static_cast<int>(*engine_->config().bracketTransform),
             .timeFormat          = engine_->config().timeFormat->data(),
             .dateFormat          = engine_->config().dateFormat->data(),
         };
@@ -269,14 +270,10 @@ namespace fcitx {
             switch (currentSym) {
                 case FcitxKey_Tab:
                 case FcitxKey_Down: {
-                    if (globalCursorIndex == totalSize - 1) {
-                        commonList->setGlobalCursorIndex(globalCursorIndex);
-                    } else if (localCursorIndex < pageSize - 1) {
+                    if (localCursorIndex < pageSize - 1 && globalCursorIndex < totalSize - 1) {
                         commonList->setGlobalCursorIndex(globalCursorIndex + 1);
                     } else {
-                        commonList->next();
-                        int newPage = commonList->currentPage();
-                        commonList->setGlobalCursorIndex(newPage * pageSize);
+                        commonList->setGlobalCursorIndex(currentPage * pageSize);
                     }
                     handled = true;
                     break;
@@ -284,15 +281,11 @@ namespace fcitx {
 
                 case FcitxKey_ISO_Left_Tab:
                 case FcitxKey_Up: {
-                    if (globalCursorIndex == 0) {
-                        commonList->setGlobalCursorIndex(globalCursorIndex);
-                    } else if (localCursorIndex > 0) {
+                    if (localCursorIndex > 0) {
                         commonList->setGlobalCursorIndex(globalCursorIndex - 1);
                     } else {
-                        commonList->prev();
-                        int newPage  = commonList->currentPage();
-                        int newIndex = (newPage * pageSize) + pageSize - 1;
-                        commonList->setGlobalCursorIndex(newIndex);
+                        int lastIndex = std::min((currentPage * pageSize) + pageSize - 1, totalSize - 1);
+                        commonList->setGlobalCursorIndex(lastIndex);
                     }
                     handled = true;
                     break;
@@ -450,9 +443,6 @@ namespace fcitx {
             if (current_backspace_count_ < expected_backspaces_) {
                 return false; // Allow intermediate backspaces to reach the app to clear autofill/old text.
             }
-            is_deleting_.store(false);
-            replacement_start_ms_.store(0, std::memory_order_release);
-            replacement_thread_id_.store(0, std::memory_order_release);
             std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
             // Validate surr cursor pos should match realtextLen after all BS applied
             const auto& surr = ic_->surroundingText();
@@ -472,9 +462,10 @@ namespace fcitx {
             LOTUS_INFO("Commit: " + pending_commit_string_);
             expected_backspaces_     = 0;
             current_backspace_count_ = 0;
-            pending_commit_string_   = "";
+            pending_commit_string_.clear();
 
             event.filterAndAccept(); // Filter out the final trigger backspace.
+            is_deleting_.store(false);
             if (getFrontendName(ic_) == "dbus" && !ic_->surroundingText().isValid())
                 replayBufferedKeys(); // Does we need drop this?
             return true;
@@ -484,7 +475,6 @@ namespace fcitx {
 
     void LotusState::performReplacement(const std::string& deletedPart, const std::string& addedPart) {
         LOTUS_INFO("Perform replacement: " + deletedPart + " -> " + addedPart); //NOLINT
-        int my_id                = ++current_thread_id_;
         current_backspace_count_ = 0;
         pending_commit_string_   = addedPart;
         const auto& surrounding  = ic_->surroundingText();
@@ -497,10 +487,7 @@ namespace fcitx {
         if (realMode == LotusMode::Minecraft) {
             --expected_backspaces_;
         }
-        replacement_thread_id_.store(my_id, std::memory_order_release);
-        replacement_start_ms_.store(now_ms(), std::memory_order_release);
         is_deleting_.store(true, std::memory_order_release);
-        monitor_cv.notify_one();
         send_backspace_uinput(expected_backspaces_);
         LOTUS_INFO("Send " + std::to_string(expected_backspaces_) + " backspaces");
     }
@@ -864,6 +851,24 @@ namespace fcitx {
         }
     }
 
+    void LotusState::handleDoubleHyphenReplacement() {
+        // Em-dash (U+2014)
+        std::string emDash = "—";
+        switch (realMode) {
+            case LotusMode::SurroundingText: {
+                ic_->deleteSurroundingText(-1, 1);
+                ic_->commitString(emDash);
+                LOTUS_INFO("Commit: — (em-dash)");
+                break;
+            }
+            default: { // Uinput, Smooth, Preedit, etc.
+                performReplacement("-", emDash);
+                LOTUS_INFO("Commit: — (em-dash)");
+                break;
+            }
+        }
+    }
+
     void LotusState::keyEvent(KeyEvent& keyEvent) {
         if (!lotusEngine_ || keyEvent.isRelease())
             return;
@@ -892,21 +897,6 @@ namespace fcitx {
         if (g_mouse_clicked.load(std::memory_order_acquire) && !is_deleting_.load(std::memory_order_acquire)) {
             g_mouse_clicked.store(false, std::memory_order_release);
             clearAllBuffers();
-        }
-
-        if (needFallbackCommit.load(std::memory_order_acquire)) {
-            LOTUS_INFO("Need fallback commit");
-            needFallbackCommit.store(false, std::memory_order_release);
-            if (current_thread_id_.load(std::memory_order_acquire) == replacement_thread_id_.load(std::memory_order_acquire)) {
-                if (!pending_commit_string_.empty()) {
-                    ic_->commitString(pending_commit_string_);
-                    pending_commit_string_.clear();
-                }
-            }
-            replacement_thread_id_.store(0, std::memory_order_release);
-            replacement_start_ms_.store(0, std::memory_order_release);
-            if (getFrontendName(ic_) == "dbus" && !ic_->surroundingText().isValid())
-                replayBufferedKeys(); // Does we need drop this?
         }
         KeySym currentSym = keyEvent.rawKey().sym();
         if (*engine_->config().autoCapitalizeAfterPunctuation && realMode != LotusMode::Off) {
@@ -968,7 +958,8 @@ namespace fcitx {
         }
 
         if (*engine_->config().doubleSpaceToPeriod && realMode != LotusMode::Off) {
-            if (currentSym == FcitxKey_space) {
+            bool isSpaceKey = (currentSym == FcitxKey_space || currentSym == FcitxKey_KP_Space);
+            if (isSpaceKey && !keyEvent.key().hasModifier()) {
                 if (isPrevSpace_) {
                     keyEvent.filterAndAccept();
                     handleDoubleSpaceReplacement();
@@ -978,6 +969,21 @@ namespace fcitx {
                 isPrevSpace_ = true;
             } else {
                 isPrevSpace_ = false;
+            }
+        }
+
+        if (*engine_->config().doubleHyphenToEmDash && realMode != LotusMode::Off) {
+            bool isHyphenKey = (currentSym == FcitxKey_minus || currentSym == FcitxKey_KP_Subtract);
+            if (isHyphenKey && !keyEvent.key().hasModifier()) {
+                if (isPrevHyphen_) {
+                    keyEvent.filterAndAccept();
+                    handleDoubleHyphenReplacement();
+                    isPrevHyphen_ = false;
+                    return;
+                }
+                isPrevHyphen_ = true;
+            } else {
+                isPrevHyphen_ = false;
             }
         }
 
@@ -1017,6 +1023,7 @@ namespace fcitx {
 
         if (lotusEngine_) {
             isPrevSpace_       = false;
+            isPrevHyphen_      = false;
             shouldCapitalize_  = false;
             isPrevPunctuation_ = false;
             if (realMode == LotusMode::Preedit && isFocusOut) {
@@ -1104,6 +1111,8 @@ namespace fcitx {
         emojiCandidates_.clear();
         buffered_keys_.clear();
         shouldCapitalize_  = false;
+        isPrevSpace_       = false;
+        isPrevHyphen_      = false;
         isPrevPunctuation_ = false;
         if (lotusEngine_)
             ResetEngine(lotusEngine_.handle());

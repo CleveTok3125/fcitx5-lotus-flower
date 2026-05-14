@@ -154,7 +154,6 @@ namespace fcitx {
         const char* desktop = std::getenv("XDG_CURRENT_DESKTOP");
         isGnome_            = (desktop != nullptr) && std::string(desktop).find("GNOME") != std::string::npos;
         // emptyCustomKeymap_.customKeymap is implicitly initialized to empty by fcitx::Option default value macro.
-        startMonitoring();
         Init();
         {
             auto imNames = convertToStringList(GetInputMethodNames());
@@ -193,13 +192,13 @@ namespace fcitx {
         }
         config_.outputCharset.annotation().setList(charsets);
 
-        initToggleAction(spellCheckAction_, config_.spellCheck, "lotus-spellcheck", "tools-check-spelling", _("Enable Spell Check"), _("Spell Check"), uiManager);
-        initToggleAction(macroAction_, config_.enableMacro, "lotus-macro", "document-edit", _("Enable Macro"), _("Macro"), uiManager);
+        initToggleAction(spellCheckAction_, config_.spellCheck, "lotus-spellcheck", "tools-check-spelling", _("Spell Check"), _("Spell Check"), uiManager);
+        initToggleAction(macroAction_, config_.enableMacro, "lotus-macro", "document-edit", _("Macro"), _("Macro"), uiManager);
         initToggleAction(capitalizeMacroAction_, config_.capitalizeMacro, "lotus-capitalizemacro", "format-text-uppercase", _("Capitalize Macro"), _("Capitalize Macro"),
                          uiManager);
         initToggleAction(autoNonVnRestoreAction_, config_.autoNonVnRestore, "lotus-autonvnrestore", "edit-undo", _("Auto Restore Invalid Words"), _("Auto Non-VN Restore"),
                          uiManager);
-        initToggleAction(enableDictionaryAction_, config_.enableDictionary, "lotus-dictionary", "accessories-dictionary", _("Enable Custom Dictionary"), _("Custom Dictionary"),
+        initToggleAction(enableDictionaryAction_, config_.enableDictionary, "lotus-dictionary", "accessories-dictionary", _("Custom Dictionary"), _("Custom Dictionary"),
                          uiManager);
 
         settingsAction_ = std::make_unique<SimpleAction>();
@@ -254,16 +253,12 @@ namespace fcitx {
 
     LotusEngine::~LotusEngine() {
         stop_flag_monitor.store(true, std::memory_order_release);
-        monitor_cv.notify_all();
         int fd = mouse_socket_fd.load(std::memory_order_acquire);
         if (fd >= 0) {
             shutdown(fd, SHUT_RDWR);
         }
         if (mouse_thread.joinable()) {
             mouse_thread.join();
-        }
-        if (monitor_thread.joinable()) {
-            monitor_thread.join();
         }
         int old_fd = uinput_client_fd_.exchange(-1);
         if (old_fd != -1) {
@@ -449,7 +444,8 @@ namespace fcitx {
         } else {
             ic->inputPanel().reset();
             ic->updateUserInterface(UserInterfaceComponent::InputPanel);
-            ic->updatePreedit();
+            if (realMode == LotusMode::Preedit || realMode == LotusMode::SurroundingText)
+                ic->updatePreedit();
         }
         for (const auto& action : toggleActions_) {
             statusArea.addAction(StatusGroup::InputMethod, action);
@@ -487,15 +483,15 @@ namespace fcitx {
                 }
 
                 int cursorIndex = menuList->globalCursorIndex();
-                if (cursorIndex < 1 || cursorIndex >= totalSize) {
-                    cursorIndex = 1;
+                if (cursorIndex < 0 || cursorIndex >= totalSize) {
+                    cursorIndex = 0;
                 }
 
                 int nextIndex = cursorIndex + delta;
-                if (nextIndex < 1) {
+                if (nextIndex < 0) {
                     nextIndex = totalSize - 1;
                 } else if (nextIndex >= totalSize) {
-                    nextIndex = 1;
+                    nextIndex = 0;
                 }
 
                 menuList->setGlobalCursorIndex(nextIndex);
@@ -527,8 +523,8 @@ namespace fcitx {
                 case FcitxKey_Return: {
                     if (menuList && !menuList->empty()) {
                         int selectedIndex = menuList->globalCursorIndex();
-                        if (selectedIndex < 1 || selectedIndex >= menuList->totalSize()) {
-                            selectedIndex = 1;
+                        if (selectedIndex < 0 || selectedIndex >= menuList->totalSize()) {
+                            selectedIndex = 0;
                         }
                         menuList->candidateFromAll(selectedIndex).select(ic);
                         return;
@@ -657,7 +653,8 @@ namespace fcitx {
             needEngineReset.store(false);
             ic->inputPanel().reset();
             ic->updateUserInterface(UserInterfaceComponent::InputPanel);
-            ic->updatePreedit();
+            if (realMode == LotusMode::Preedit || realMode == LotusMode::Emoji || realMode == LotusMode::SurroundingText)
+                ic->updatePreedit();
         }
     }
 
@@ -870,10 +867,8 @@ namespace fcitx {
         const LotusMode defaultMode = config_.mode.value();
         allModes.push_back({defaultMode, _("Default Typing"), FcitxKey_r, *config_.showModeDefault}); // Add reset option
 
-        candidateList->append(std::make_unique<DisplayOnlyCandidateWord>(Text(_("App: ") + currentConfigureApp_)));
-
         int activeSelectionIdx  = -1;
-        int currentCandidateIdx = 1;
+        int currentCandidateIdx = 0;
 
         modeMenuMapping_.clear();
 
@@ -919,12 +914,13 @@ namespace fcitx {
 
         if (activeSelectionIdx != -1) {
             candidateList->setGlobalCursorIndex(activeSelectionIdx);
-        } else if (candidateList->totalSize() > 1) {
-            candidateList->setGlobalCursorIndex(1);
+        } else if (candidateList->totalSize() > 0) {
+            candidateList->setGlobalCursorIndex(0);
         }
 
         ic->inputPanel().reset();
         ic->inputPanel().setCandidateList(std::move(candidateList));
+        ic->inputPanel().setAuxDown(Text(_("App: ") + currentConfigureApp_));
         ic->updateUserInterface(UserInterfaceComponent::InputPanel);
     }
 

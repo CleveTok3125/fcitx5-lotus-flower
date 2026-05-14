@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include <algorithm>
+#include <chrono>
 
 // Global variables
 std::atomic<fcitx::LotusMode> realMode{fcitx::LotusMode::Smooth};
@@ -21,17 +22,9 @@ std::atomic<bool>             needEngineReset{false};
 std::atomic<bool>             g_mouse_clicked{false};
 std::atomic<bool>             is_deleting_{false};
 std::atomic<bool>             stop_flag_monitor{false};
-std::atomic<bool>             monitor_running{false};
 std::atomic<int>              uinput_client_fd_{-1};
 std::atomic<unsigned int>     realtextLen{0};
 std::atomic<int>              mouse_socket_fd{-1};
-
-std::atomic<int64_t>          replacement_start_ms_{0};
-std::atomic<int>              replacement_thread_id_{0};
-std::atomic<bool>             needFallbackCommit{false};
-
-std::mutex                    monitor_mutex;
-std::condition_variable       monitor_cv;
 
 FCITX_DEFINE_LOG_CATEGORY(lotus, "lotus", fcitx::LogLevel::NoLog);
 
