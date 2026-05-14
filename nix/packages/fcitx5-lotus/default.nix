@@ -42,12 +42,13 @@ stdenv.mkDerivation rec {
     fcitx5
     libinput
     libx11
-    (python3.withPackages (ps:
-      with ps; [
+    (python3.withPackages (
+      ps: with ps; [
         pyqt6
         dbus-python
         qtpy
-      ]))
+      ]
+    ))
     qt6.qtbase
     udev
   ];
