@@ -53,6 +53,12 @@
 
 This project is an optimized fork of [VMK input method](https://github.com/thanhpy2009/VMK). Sincere thanks to the author Thanh for laying the foundation for this input method.
 
+## Fork Notes
+
+- Changes the typing mode menu from a candidate list to Fcitx-style enumeration.
+- Avoid the default `` ` `` mode hotkey because it conflicts with code, Markdown, and shell typing.
+- Prefer another `Mode Menu Hotkey`, for example `Alt+Z`.
+
 ## Installation & Usage Guide
 
 To have the best experience and get the most out of insallation, configuration, and support for each Linux distribution (Arch, Debian, Ubuntu, Fedora, NixOS...), please visit the project website:

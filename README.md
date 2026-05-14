@@ -53,6 +53,12 @@
 
 Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https://github.com/thanhpy2009/VMK). Chân thành cảm ơn tác giả Thành đã đặt nền móng cho bộ gõ này.
 
+## Ghi chú về bản fork
+
+- Thay đổi menu chế độ gõ từ candidate list sang enumerate kiểu Fcitx.
+- Không nên dùng phím tắt mặc định `` ` `` để chuyển chế độ vì dễ xung đột khi gõ code, Markdown hoặc shell.
+- Nên đổi `Mode Menu Hotkey` / `Phím tắt menu chế độ gõ` sang tổ hợp khác, ví dụ `Alt+Z`.
+
 ## Cài đặt & Hướng dẫn sử dụng
 
 Để có trải nghiệm tốt nhất và nhận được các hướng dẫn cài đặt, cấu hình chi tiết, chính xác cho từng bản phân phối Linux (Arch, Debian, Ubuntu, Fedora, NixOS...), vui lòng truy cập trang chủ của dự án:
