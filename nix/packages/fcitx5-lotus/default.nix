@@ -3,12 +3,12 @@
   stdenv,
   buildGoModule,
   cmake,
-  extra-cmake-modules,
   fcitx5,
   fetchFromGitHub,
   gettext,
   go,
   hicolor-icon-theme,
+  kdePackages,
   libinput,
   libx11,
   pkg-config,
@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
-    extra-cmake-modules
+    kdePackages.extra-cmake-modules
     gettext
     go
     hicolor-icon-theme
