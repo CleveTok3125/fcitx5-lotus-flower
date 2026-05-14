@@ -284,7 +284,7 @@ namespace fcitx {
                     if (localCursorIndex > 0) {
                         commonList->setGlobalCursorIndex(globalCursorIndex - 1);
                     } else {
-                        int lastIndex = std::min(currentPage * pageSize + pageSize - 1, totalSize - 1);
+                        int lastIndex = std::min((currentPage * pageSize) + pageSize - 1, totalSize - 1);
                         commonList->setGlobalCursorIndex(lastIndex);
                     }
                     handled = true;
