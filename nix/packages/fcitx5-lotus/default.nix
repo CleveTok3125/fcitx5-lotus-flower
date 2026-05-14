@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     repo = "fcitx5-lotus";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-m46KUTDk3DFPYzfuRomJ0xZ8/va4aIOz1vHGefcbnVI=";
+    hash = "sha256-RYMz5nd9CYWICA4Ns8eT80bVK2kjBKAoqX0VAdAnK2M=";
   };
 
   nativeBuildInputs = [
