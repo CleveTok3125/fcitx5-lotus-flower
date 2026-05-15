@@ -3,12 +3,13 @@
   stdenv,
   buildGoModule,
   cmake,
+  extra-cmake-modules ? null,
   fcitx5,
   fetchFromGitHub,
   gettext,
   go,
   hicolor-icon-theme,
-  kdePackages,
+  kdePackages ? null,
   libinput,
   libx11,
   pkg-config,
@@ -16,6 +17,15 @@
   qt6,
   udev,
 }:
+let
+  ecm =
+    if extra-cmake-modules != null then
+      extra-cmake-modules
+    else if kdePackages != null then
+      kdePackages.extra-cmake-modules
+    else
+      throw "Cannot find extra-cmake-modules";
+in
 stdenv.mkDerivation rec {
   pname = "fcitx5-lotus";
   version = "3.1.0";
@@ -30,7 +40,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     cmake
-    kdePackages.extra-cmake-modules
+    ecm
     gettext
     go
     hicolor-icon-theme
