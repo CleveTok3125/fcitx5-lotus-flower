@@ -60,6 +60,20 @@ This project is an optimized fork of [VMK input method](https://github.com/thanh
 - Avoid the default `` ` `` mode hotkey because it conflicts with code, Markdown, and shell typing.
 - Prefer another `Mode Menu Hotkey`, for example `Alt+Z`.
 
+### Install
+
+#### Arch
+
+```bash
+git clone https://github.com/CleveTok3125/fcitx5-lotus-flower
+cd fcitx5-lotus-flower
+makepkg -si
+```
+
+#### Other distros
+
+reference [Compilation from source](#compilation-from-source-for-developers)
+
 ## Installation & Usage Guide
 
 To have the best experience and get the most out of insallation, configuration, and support for each Linux distribution (Arch, Debian, Ubuntu, Fedora, NixOS...), please visit the project website:

@@ -60,6 +60,20 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 - Không nên dùng phím tắt mặc định `` ` `` để chuyển chế độ vì dễ xung đột khi gõ code, Markdown hoặc shell.
 - Nên đổi `Mode Menu Hotkey` / `Phím tắt menu chế độ gõ` sang tổ hợp khác, ví dụ `Alt+Z`.
 
+### Cài đặt
+
+#### Arch
+
+```bash
+git clone https://github.com/CleveTok3125/fcitx5-lotus-flower
+cd fcitx5-lotus-flower
+makepkg -si
+```
+
+#### Các bản phân phối khác
+
+tham khảo [Biên dịch từ mã nguồn](#biên-dịch-từ-mã-nguồn-dành-cho-nhà-phát-triển)
+
 ## Cài đặt & Hướng dẫn sử dụng
 
 Để có trải nghiệm tốt nhất và nhận được các hướng dẫn cài đặt, cấu hình chi tiết, chính xác cho từng bản phân phối Linux (Arch, Debian, Ubuntu, Fedora, NixOS...), vui lòng truy cập trang chủ của dự án:
