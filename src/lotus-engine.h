@@ -216,10 +216,13 @@ namespace fcitx {
         CGoObject                                  dictionary_;
         std::unordered_map<std::string, LotusMode> appRules_;
         std::string                                appRulesPath_;
+        bool                                       isSelectingAppMode_ = false;
+        std::string                                currentConfigureApp_;
         FCITX_ADDON_DEPENDENCY_LOADER(emoji, instance_->addonManager());
-        std::unique_ptr<EmojiLoader> emojiLoader_;
-        bool                         isGnome_ = false;
-        mutable std::mutex           appRulesMutex_;
+        std::unique_ptr<EmojiLoader>          emojiLoader_;
+        bool                                  isGnome_ = false;
+        mutable std::mutex                    appRulesMutex_;
+        std::unordered_map<KeySym, LotusMode> modeMenuMapping_;
 
         /**
          * @brief Refreshes the bamboo engine with current settings.
@@ -301,6 +304,17 @@ namespace fcitx {
          * @param ic Current input context.
          */
         void enumerateMode(InputContext* ic);
+
+        /**
+         * @brief Shows the application mode selection menu.
+         * @param ic Current input context.
+         */
+        void showAppModeMenu(InputContext* ic);
+
+        /**
+         * @brief Closes the application mode selection menu.
+         */
+        void closeAppModeMenu();
 
         /**
          * @brief Sets the current input mode.

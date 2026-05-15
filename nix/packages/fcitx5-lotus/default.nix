@@ -3,12 +3,13 @@
   stdenv,
   buildGoModule,
   cmake,
-  extra-cmake-modules,
+  extra-cmake-modules ? null,
   fcitx5,
   fetchFromGitHub,
   gettext,
   go,
   hicolor-icon-theme,
+  kdePackages ? null,
   libinput,
   libx11,
   pkg-config,
@@ -16,21 +17,30 @@
   qt6,
   udev,
 }:
+let
+  ecm =
+    if extra-cmake-modules != null then
+      extra-cmake-modules
+    else if kdePackages != null then
+      kdePackages.extra-cmake-modules
+    else
+      throw "Cannot find extra-cmake-modules";
+in
 stdenv.mkDerivation rec {
   pname = "fcitx5-lotus";
-  version = "3.0.2";
+  version = "3.1.0";
 
   src = fetchFromGitHub {
     owner = "LotusInputMethod";
     repo = "fcitx5-lotus";
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-38egL1/jUs5G8fwl7PM2i/YhlVKqQbsdkEIV/3p2fjw=";
+    hash = "sha256-RYMz5nd9CYWICA4Ns8eT80bVK2kjBKAoqX0VAdAnK2M=";
   };
 
   nativeBuildInputs = [
     cmake
-    extra-cmake-modules
+    ecm
     gettext
     go
     hicolor-icon-theme
@@ -42,12 +52,13 @@ stdenv.mkDerivation rec {
     fcitx5
     libinput
     libx11
-    (python3.withPackages (ps:
-      with ps; [
+    (python3.withPackages (
+      ps: with ps; [
         pyqt6
         dbus-python
         qtpy
-      ]))
+      ]
+    ))
     qt6.qtbase
     udev
   ];
@@ -57,7 +68,7 @@ stdenv.mkDerivation rec {
       pname = "fcitx5-lotus-go-modules";
       inherit version src;
       modRoot = "bamboo";
-      vendorHash = "sha256-w2Mm6y6XX8x2JjZoEnnQLo3vmA+P2IFi3XqhmNrC2Xo=";
+      vendorHash = "sha256-HjVMGil4bNMTFifxFYtHELdkeKhrumHGrde4msbxvJc=";
     }).goModules;
 
   preConfigure = ''

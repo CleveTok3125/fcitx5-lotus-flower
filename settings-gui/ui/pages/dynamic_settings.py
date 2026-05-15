@@ -33,7 +33,7 @@ class SettingsCategory(Enum):
 # Mapping of settings keys to categories and groups
 SETTINGS_MAP = {
     SettingsCategory.GENERAL: {
-        "HOTKEYS": ["ModeMenuKey"],
+        "HOTKEYS": ["ModeMenuKey", "ModeMenuStyle"],
         "INPUT METHOD": ["InputMethod", "Mode", "OutputCharset"],
         "LOADABLE MODES": [
             "ShowModeSmooth",
@@ -51,10 +51,10 @@ SETTINGS_MAP = {
     },
     SettingsCategory.TYPING: {
         "SPELLING & CORRECTIONS": ["SpellCheck", "AutoNonVnRestore", "DdFreeStyle"],
-        "TYPING OPTIONS": ["W2U", "ModernStyle", "FreeMarking", "FixUinputWithAck", "DoubleSpaceToPeriod", "AutoCapitalizeAfterPunctuation"],
+        "TYPING OPTIONS": ["W2U", "BracketTransform", "ModernStyle", "FreeMarking", "FixUinputWithAck", "DoubleSpaceToPeriod", "DoubleHyphenToEmDash", "AutoCapitalizeAfterPunctuation"],
     },
     SettingsCategory.SHORTCUTS: {
-        "SHORTCUTS": ["ModeMenuKey"],
+        "SHORTCUTS": ["ModeMenuKey", "ModeMenuStyle"],
     }
 }
 

@@ -55,7 +55,8 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 
 ## Ghi chú về bản fork
 
-- Thay đổi menu chế độ gõ từ candidate list sang enumerate kiểu Fcitx.
+- Thay đổi menu chế độ gõ từ candidate list sang enumerate kiểu Fcitx. \
+  Input Method Settings -> Addons -> Bộ gõ Lotus cho Fcitx
 - Không nên dùng phím tắt mặc định `` ` `` để chuyển chế độ vì dễ xung đột khi gõ code, Markdown hoặc shell.
 - Nên đổi `Mode Menu Hotkey` / `Phím tắt menu chế độ gõ` sang tổ hợp khác, ví dụ `Alt+Z`.
 
@@ -121,6 +122,9 @@ Cảm ơn những con người tuyệt vời ([chú thích emoji](https://allcon
       <td align="center" valign="top" width="25%"><a href="https://github.com/ductrantrong"><img src="https://avatars.githubusercontent.com/u/96020037?v=4?s=100" width="100px;" alt="ductrantrong"/><br /><sub><b>ductrantrong</b></sub></a><br /><a href="https://github.com/LotusInputMethod/fcitx5-lotus/commits?author=ductrantrong" title="Code">💻</a></td>
       <td align="center" valign="top" width="25%"><a href="https://github.com/hien-ngo29"><img src="https://avatars.githubusercontent.com/u/98635550?v=4?s=100" width="100px;" alt="Ngo Phu Hien"/><br /><sub><b>Ngo Phu Hien</b></sub></a><br /><a href="https://github.com/LotusInputMethod/fcitx5-lotus/commits?author=hien-ngo29" title="Code">💻</a></td>
       <td align="center" valign="top" width="25%"><a href="https://github.com/minhtrancccp"><img src="https://avatars.githubusercontent.com/u/33189614?v=4?s=100" width="100px;" alt="Minh Tran"/><br /><sub><b>Minh Tran</b></sub></a><br /><a href="#platform-minhtrancccp" title="Packaging/porting to new platform">📦</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="25%"><a href="https://github.com/hieutran21198"><img src="https://avatars.githubusercontent.com/u/87953912?v=4?s=100" width="100px;" alt="Trần Minh Hiếu (Cirius)"/><br /><sub><b>Trần Minh Hiếu (Cirius)</b></sub></a><br /><a href="#platform-hieutran21198" title="Packaging/porting to new platform">📦</a></td>
     </tr>
   </tbody>
   <tfoot>
