@@ -67,7 +67,7 @@ This project is an optimized fork of [VMK input method](https://github.com/thanh
 ```bash
 git clone https://github.com/CleveTok3125/fcitx5-lotus-flower
 cd fcitx5-lotus-flower
-makepkg -si
+makepkg -si -f
 ```
 
 #### Other distros

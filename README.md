@@ -67,7 +67,7 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 ```bash
 git clone https://github.com/CleveTok3125/fcitx5-lotus-flower
 cd fcitx5-lotus-flower
-makepkg -si
+makepkg -si -f
 ```
 
 #### Các bản phân phối khác
