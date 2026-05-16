@@ -5,21 +5,22 @@
 Dynamic Settings Page with Card-based Layout matching modern guidelines.
 """
 
+from enum import Enum
+
+from core.dbus_handler import LotusDBusHandler
+from i18n import _
 from qtpy.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
     QCheckBox,
+    QComboBox,
+    QFrame,
+    QHBoxLayout,
     QLabel,
     QScrollArea,
-    QFrame,
-    QComboBox,
+    QVBoxLayout,
+    QWidget,
 )
-from ui.components import HotkeyEditorWidget, HelpIcon
+from ui.components import HelpIcon, HotkeyEditorWidget
 from ui.helpers import HELPERS, add_help_icon
-from core.dbus_handler import LotusDBusHandler
-from enum import Enum
-from i18n import _
 
 
 class SettingsCategory(Enum):
@@ -33,8 +34,8 @@ class SettingsCategory(Enum):
 # Mapping of settings keys to categories and groups
 SETTINGS_MAP = {
     SettingsCategory.GENERAL: {
-        "HOTKEYS": ["ModeMenuKey", "ModeMenuStyle"],
-        "INPUT METHOD": ["InputMethod", "Mode", "OutputCharset"],
+        "HOTKEYS": ["ModeMenuKey"],
+        "INPUT METHOD": ["InputMethod", "Mode", "ModeMenuStyle", "OutputCharset"],
         "LOADABLE MODES": [
             "ShowModeSmooth",
             "ShowModeUinput",
@@ -51,11 +52,20 @@ SETTINGS_MAP = {
     },
     SettingsCategory.TYPING: {
         "SPELLING & CORRECTIONS": ["SpellCheck", "AutoNonVnRestore", "DdFreeStyle"],
-        "TYPING OPTIONS": ["W2U", "BracketTransform", "ModernStyle", "FreeMarking", "FixUinputWithAck", "DoubleSpaceToPeriod", "DoubleHyphenToEmDash", "AutoCapitalizeAfterPunctuation"],
+        "TYPING OPTIONS": [
+            "W2U",
+            "BracketTransform",
+            "ModernStyle",
+            "FreeMarking",
+            "FixUinputWithAck",
+            "DoubleSpaceToPeriod",
+            "DoubleHyphenToEmDash",
+            "AutoCapitalizeAfterPunctuation",
+        ],
     },
     SettingsCategory.SHORTCUTS: {
-        "SHORTCUTS": ["ModeMenuKey", "ModeMenuStyle"],
-    }
+        "SHORTCUTS": ["ModeMenuKey"],
+    },
 }
 
 
@@ -81,7 +91,12 @@ class CardWidget(QFrame):
 
 
 class DynamicSettingsPage(QWidget):
-    def __init__(self, dbus_handler: LotusDBusHandler, category: SettingsCategory = SettingsCategory.GENERAL, parent=None):
+    def __init__(
+        self,
+        dbus_handler: LotusDBusHandler,
+        category: SettingsCategory = SettingsCategory.GENERAL,
+        parent=None,
+    ):
         super().__init__(parent)
         self.dbus = dbus_handler
         self.category = category
@@ -121,7 +136,9 @@ class DynamicSettingsPage(QWidget):
 
             config_data = self.dbus.get_config()
             if not config_data:
-                self.container_layout.addWidget(QLabel(_("Failed to load configuration.")))
+                self.container_layout.addWidget(
+                    QLabel(_("Failed to load configuration."))
+                )
                 return
 
             self.current_values = config_data.get("values", {})
@@ -148,14 +165,14 @@ class DynamicSettingsPage(QWidget):
                 header = QLabel(_(header_text))
                 header.setObjectName("GroupHeader")
                 self.container_layout.addWidget(header)
-                
+
                 card = CardWidget("")
                 found_any = False
                 for k in keys:
                     item = self.all_metadata.get(k)
                     if not item:
                         continue
-                    
+
                     found_any = True
                     type_str = item[1]
                     if k == "ModeMenuKey" or type_str == "Hotkey":
@@ -164,12 +181,14 @@ class DynamicSettingsPage(QWidget):
                         self._render_combobox(item, card.content_layout)
                     elif type_str == "Boolean":
                         self._render_checkbox(item, card.content_layout)
-                
+
                 if found_any:
                     self.container_layout.addWidget(card)
 
             if self.category == SettingsCategory.INTERFACE and not category_groups:
-                self.container_layout.addWidget(QLabel(_("No interface settings available yet.")))
+                self.container_layout.addWidget(
+                    QLabel(_("No interface settings available yet."))
+                )
 
             self.initial_values = self.current_values.copy()
             self.container_layout.addStretch()
