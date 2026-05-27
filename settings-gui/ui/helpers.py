@@ -43,7 +43,7 @@ HELPERS = {
         "When enabled, you can toggle multiple options in one session.\n"
         "When disabled, the menu closes immediately after each toggle."
     ),
-    "FixStickyShiftMaxChars": _(
+    "FixStickyShiftMaxChars": N_(
         "Maximum consecutive uppercase letters to fix (after the first letter).\n\n"
         "Controls how many uppercase letters after the first one are lowered.\n"
         "0 = unlimited (any number of uppercase letters will be fixed)\n"
