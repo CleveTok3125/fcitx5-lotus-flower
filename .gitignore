@@ -30,6 +30,16 @@ compile_commands.json
 !.all-contributorsrc
 refresh-contributor
 
+# CMake generated GUI artifacts
+settings-gui/fcitx5-lotus-settings
+settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop
+settings-gui/version.py
+
+# build staging (CMake / makepkg style)
+pkg/
+pkgdir/
+staging/
+
 # Qt AUTOMOC generated files
 *_autogen/
 
