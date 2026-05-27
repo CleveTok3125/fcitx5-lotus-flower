@@ -300,6 +300,12 @@ namespace fcitx {
         void setAppRule(const std::string& appName, LotusMode mode);
 
         /**
+         * @brief Enumerates to the next configured input mode.
+         * @param ic Current input context.
+         */
+        void enumerateMode(InputContext* ic);
+
+        /**
          * @brief Shows the application mode selection menu.
          * @param ic Current input context.
          */
