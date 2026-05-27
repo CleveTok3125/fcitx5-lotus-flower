@@ -5,7 +5,13 @@
 Main window assembling all configuration tabs with a modern layout.
 """
 
+import os
+import pwd
+import shutil
+import subprocess
+
 from qtpy.QtWidgets import (
+    QCheckBox,
     QMainWindow,
     QWidget,
     QHBoxLayout,
@@ -150,6 +156,15 @@ class LotusSettingsWindow(QMainWindow):
 
         bar_layout.addStretch()
 
+        self.chk_restart_service = QCheckBox(_("Restart server after saving"))
+        self.chk_restart_service.setToolTip(
+            _(
+                "When checked, saving settings will try to run: "
+                "systemctl restart fcitx5-lotus-server@$(whoami).service"
+            )
+        )
+        bar_layout.addWidget(self.chk_restart_service)
+
         self.btn_cancel = QPushButton(QIcon.fromTheme("dialog-cancel"), _("&Cancel"))
         self.btn_cancel.setEnabled(False)
         self.btn_cancel.clicked.connect(self.on_cancel)
@@ -290,6 +305,9 @@ class LotusSettingsWindow(QMainWindow):
                 if page.save_data() is False:
                     return False
 
+        if self.chk_restart_service.isChecked():
+            self._restart_lotus_server_service()
+
         self.btn_apply.setEnabled(False)
         self.btn_cancel.setEnabled(False)
         self.update_reset_button_state()
@@ -300,6 +318,27 @@ class LotusSettingsWindow(QMainWindow):
                 self, _("Success"), _("Settings saved.")
             )
         return True
+
+    def _restart_lotus_server_service(self):
+        """Try to restart the systemd service after settings are saved."""
+        if not shutil.which("systemctl") or not os.path.isdir("/run/systemd/system"):
+            return
+
+        username = pwd.getpwuid(os.geteuid()).pw_name
+        unit_name = f"fcitx5-lotus-server@{username}.service"
+        try:
+            result = subprocess.run(
+                ["systemctl", "restart", unit_name],
+                check=False,
+                capture_output=True,
+                text=True,
+                timeout=10,
+            )
+            if result.returncode != 0:
+                message = result.stderr.strip() or result.stdout.strip()
+                print(f"Failed to restart {unit_name}: {message}")
+        except Exception as e:
+            print(f"Failed to restart {unit_name}: {e}")
 
     def on_ok(self):
         if self.on_save_all(quiet=True):
