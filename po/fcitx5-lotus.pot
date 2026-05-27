@@ -29,12 +29,132 @@ msgstr ""
 msgid "Spell Check"
 msgstr ""
 
-#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:344 src/lotus-config.h:191
-#: src/lotus-config.h:244
+#: src/lotus-config.h:39 src/lotus-engine.cpp:861
+msgid "Surrounding Text"
+msgstr ""
+
+#: src/lotus-config.h:39 src/lotus-engine.cpp:862
+msgid "Preedit"
+msgstr ""
+
+#: src/lotus-config.h:39 src/lotus-engine.cpp:863
+msgid "Emoji Picker"
+msgstr ""
+
+#: src/lotus-config.h:39 src/lotus-engine.cpp:860
+msgid "Minecraft"
+msgstr ""
+
+#: src/lotus-config.h:56 src/lotus-config.h:67
+msgid "Disabled"
+msgstr ""
+
+#: src/lotus-config.h:56 src/lotus-config.h:67
+msgid "Non-Start"
+msgstr ""
+
+#: src/lotus-config.h:56 src/lotus-config.h:67
+msgid "Everywhere"
+msgstr ""
+
+#: src/lotus-config.h:78
+msgid "Auto"
+msgstr ""
+
+#: src/lotus-config.h:78
+msgid "Light"
+msgstr ""
+
+#: src/lotus-config.h:78
+msgid "Dark"
+msgstr ""
+
+#: src/lotus-config.h:85
+msgid "Enumerate"
+msgstr ""
+
+#: src/lotus-config.h:85
+msgid "Candidate List"
+msgstr ""
+
+#: src/lotus-config.h:185
+msgid "Key"
+msgstr ""
+
+#: src/lotus-config.h:185
+msgid "Value"
+msgstr ""
+
+#: src/lotus-config.h:189 src/lotus-config.h:241 src/lotus-engine.cpp:196
+#: src/lotus-engine.cpp:341
 msgid "Macro"
 msgstr ""
 
-#: src/lotus-engine.cpp:200 src/lotus-engine.cpp:345 src/lotus-config.h:220
+#: src/lotus-config.h:193 src/lotus-config.h:230 src/lotus-config.h:242
+msgid "Custom Keymap"
+msgstr ""
+
+#: src/lotus-config.h:195
+msgid "App"
+msgstr ""
+
+#: src/lotus-config.h:195 src/lotus-config.h:206
+msgid "Mode"
+msgstr ""
+
+#: src/lotus-config.h:198
+msgid "Rules"
+msgstr ""
+
+#: src/lotus-config.h:208
+msgid "Input Method"
+msgstr ""
+
+#: src/lotus-config.h:209
+msgid "Output Charset"
+msgstr ""
+
+#: src/lotus-config.h:211
+msgid "Mode Menu Hotkey"
+msgstr ""
+
+#: src/lotus-config.h:213
+msgid "Auto Restore Invalid Words Hotkey"
+msgstr ""
+
+#: src/lotus-engine.cpp:626
+msgid "Auto Restore Invalid Words: ON"
+msgstr ""
+
+#: src/lotus-engine.cpp:626
+msgid "Auto Restore Invalid Words: OFF"
+msgstr ""
+
+#: src/lotus-config.h:219
+msgid "Mode Menu Style"
+msgstr ""
+
+#: src/lotus-config.h:212
+msgid "App Rules"
+msgstr ""
+
+#: src/lotus-config.h:213
+msgid "Type w to Produce ư"
+msgstr ""
+
+#: src/lotus-config.h:214
+msgid "Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"
+msgstr ""
+
+#: src/lotus-config.h:217
+msgid "Enable Spell Check"
+msgstr ""
+
+#: src/lotus-config.h:217
+msgid "Enable Macro"
+msgstr ""
+
+#: src/lotus-config.h:218 src/lotus-engine.cpp:197 src/lotus-engine.cpp:342
 msgid "Capitalize Macro"
 msgstr ""
 
@@ -771,6 +891,16 @@ msgstr ""
 
 #: settings-gui/ui/components.py:261
 msgid "[ Recording... ]"
+msgstr ""
+
+#: settings-gui/ui/main_window.py:153
+msgid "Restart server after saving"
+msgstr ""
+
+#: settings-gui/ui/main_window.py:156
+msgid ""
+"When checked, saving settings will try to run: systemctl restart "
+"fcitx5-lotus-server@$(whoami).service"
 msgstr ""
 
 #: settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop.in:2
