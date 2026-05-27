@@ -1,0 +1,463 @@
+#!/usr/bin/env sh
+set -eu
+
+UPSTREAM_REMOTE="${UPSTREAM_REMOTE:-upstream}"
+UPSTREAM_BRANCH="${UPSTREAM_BRANCH:-main}"
+UPSTREAM_REF="${UPSTREAM_REF:-$UPSTREAM_REMOTE/$UPSTREAM_BRANCH}"
+MAIN_BRANCH="${MAIN_BRANCH:-main}"
+WORK_BRANCH="${WORK_BRANCH:-lotus-flower-reapply}"
+EXPORT_DIR="${EXPORT_DIR:-.patches/fcitx5-lotus-flower}"
+TOUCH_CACHE_DIR=""
+CHECK_WORKTREE=""
+LOCK_DIR=""
+
+usage() {
+    cat <<EOF
+Usage: scripts/patch-stack <command> [options]
+
+Commands:
+  status      Show the current patch stack and local branch state.
+  check       Dry-run replay and test reorder risk.
+  reapply     Create/reset $WORK_BRANCH from $UPSTREAM_REF and cherry-pick the stack.
+  finish      Move $MAIN_BRANCH to $WORK_BRANCH and export local patch files.
+  export      Export $UPSTREAM_REF..HEAD to local patch files.
+
+Options:
+  -v, --verbose  With check, also report files touched by multiple patches.
+  --strict       With check, exit non-zero when reorder hazards are found.
+
+Environment:
+  UPSTREAM_REMOTE=$UPSTREAM_REMOTE
+  UPSTREAM_BRANCH=$UPSTREAM_BRANCH
+  UPSTREAM_REF=$UPSTREAM_REF
+  MAIN_BRANCH=$MAIN_BRANCH
+  WORK_BRANCH=$WORK_BRANCH
+  EXPORT_DIR=$EXPORT_DIR
+EOF
+}
+
+require_clean_tree() {
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        echo "error: worktree has uncommitted tracked changes" >&2
+        git status --short >&2
+        exit 1
+    fi
+}
+
+acquire_lock() {
+    git_dir="$(git rev-parse --git-dir)"
+    LOCK_DIR="$git_dir/patch-stack.lock"
+    if ! mkdir "$LOCK_DIR" 2>/dev/null; then
+        echo "error: another patch-stack operation is already running" >&2
+        echo "       remove $LOCK_DIR only if you are sure it is stale" >&2
+        exit 1
+    fi
+    trap 'cleanup_patch_stack' EXIT HUP INT TERM
+}
+
+export_patches() {
+    case "$EXPORT_DIR" in
+        ""|"."|"./"|"/")
+            echo "error: unsafe EXPORT_DIR: $EXPORT_DIR" >&2
+            exit 1
+            ;;
+    esac
+
+    repo_root="$(git rev-parse --show-toplevel)"
+    parent_dir="$(dirname "$EXPORT_DIR")"
+    mkdir -p "$parent_dir"
+    parent_real="$(cd "$parent_dir" && pwd -P)"
+    export_base="$(basename "$EXPORT_DIR")"
+    export_real="$parent_real/$export_base"
+    repo_real="$(cd "$repo_root" && pwd -P)"
+
+    if [ "$export_real" = "$repo_real" ]; then
+        echo "error: refusing to export patches into repository root" >&2
+        exit 1
+    fi
+
+    case "$export_real" in
+        "$repo_real"/.patches/*|"$repo_real"/patches/*|/tmp/patch-stack-*|/tmp/*patch*)
+            ;;
+        *)
+            echo "error: unsafe EXPORT_DIR: $EXPORT_DIR" >&2
+            echo "       use .patches/<name>, patches/<name>, or a patch-specific /tmp path" >&2
+            exit 1
+            ;;
+    esac
+
+    mkdir -p "$EXPORT_DIR"
+    find "$EXPORT_DIR" -maxdepth 1 -type f -name '*.patch' -delete
+    git format-patch --base="$UPSTREAM_REF" -o "$EXPORT_DIR" "$UPSTREAM_REF..HEAD"
+}
+
+stack_commits() {
+    git rev-list --reverse "$UPSTREAM_REF..$MAIN_BRANCH"
+}
+
+create_check_worktree() {
+    worktree="$(mktemp -d "${TMPDIR:-/tmp}/patch-stack-worktree.XXXXXX")"
+    rmdir "$worktree"
+    git worktree add --detach "$worktree" "$UPSTREAM_REF" >/dev/null 2>&1
+    printf '%s\n' "$worktree"
+}
+
+remove_check_worktree() {
+    worktree="$1"
+    if [ -n "$worktree" ]; then
+        git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+        git worktree remove --force "$worktree" >/dev/null 2>&1 || rm -rf "$worktree"
+    fi
+}
+
+cleanup_patch_stack() {
+    if [ -n "${CHECK_WORKTREE:-}" ]; then
+        remove_check_worktree "$CHECK_WORKTREE"
+        CHECK_WORKTREE=""
+    fi
+    if [ -n "${TOUCH_CACHE_DIR:-}" ]; then
+        rm -rf "$TOUCH_CACHE_DIR"
+        TOUCH_CACHE_DIR=""
+    fi
+    if [ -n "${LOCK_DIR:-}" ]; then
+        rm -rf "$LOCK_DIR"
+        LOCK_DIR=""
+    fi
+}
+
+reset_check_worktree() {
+    worktree="$1"
+    git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+    git -C "$worktree" reset --hard "$UPSTREAM_REF" >/dev/null
+    git -C "$worktree" clean -fd >/dev/null
+}
+
+create_touch_cache() {
+    commits_file="$1"
+    cache_dir="$(mktemp -d "${TMPDIR:-/tmp}/patch-stack-touch-cache.XXXXXX")"
+    while IFS= read -r commit; do
+        [ -n "$commit" ] || continue
+        git diff-tree --no-commit-id --name-only -r "$commit" | sort >"$cache_dir/$commit"
+    done <"$commits_file"
+    printf '%s\n' "$cache_dir"
+}
+
+commit_files() {
+    commit="$1"
+    if [ -n "${TOUCH_CACHE_DIR:-}" ] && [ -f "$TOUCH_CACHE_DIR/$commit" ]; then
+        cat "$TOUCH_CACHE_DIR/$commit"
+    else
+        git diff-tree --no-commit-id --name-only -r "$commit" | sort
+    fi
+}
+
+report_repeated_files() {
+    commits="$(stack_commits)"
+    tmp="$(mktemp "${TMPDIR:-/tmp}/patch-stack-files.XXXXXX")"
+    files_tmp="$(mktemp "${TMPDIR:-/tmp}/patch-stack-commit-files.XXXXXX")"
+
+    repeated=0
+    for commit in $commits; do
+        subject="$(git log -1 --format='%h %s' "$commit")"
+        commit_files "$commit" >"$files_tmp"
+        while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            if grep -Fqx "$file" "$tmp"; then
+                echo "warning: $file is touched again by $subject"
+                repeated=1
+            else
+                printf '%s\n' "$file" >>"$tmp"
+            fi
+        done <"$files_tmp"
+    done
+
+    if git log --reverse --format='%s' "$UPSTREAM_REF..$MAIN_BRANCH" | grep -Ei '^style([(: ]|$)' >/dev/null 2>&1; then
+        echo "warning: style-only commits exist in the patch stack"
+        echo "         keep them after dependent feature patches, or avoid them when possible"
+        repeated=1
+    fi
+
+    rm -f "$tmp" "$files_tmp"
+    return "$repeated"
+}
+
+common_files() {
+    first="$1"
+    second="$2"
+    first_files="$(mktemp "${TMPDIR:-/tmp}/patch-stack-first-files.XXXXXX")"
+    second_files="$(mktemp "${TMPDIR:-/tmp}/patch-stack-second-files.XXXXXX")"
+
+    commit_files "$first" >"$first_files"
+    commit_files "$second" >"$second_files"
+    comm -12 "$first_files" "$second_files"
+    rm -f "$first_files" "$second_files"
+}
+
+commits_touch_common_files() {
+    first="$1"
+    second="$2"
+    if common_files "$first" "$second" | grep . >/dev/null 2>&1; then
+        return 0
+    fi
+
+    return 1
+}
+
+cherry_pick_reordered_pair() {
+    worktree="$1"
+    mode="$2"
+    first_index="$3"
+    second_index="$4"
+    first="$5"
+    second="$6"
+    commits_file="$7"
+    commit_count="$8"
+
+    index=1
+    while [ "$index" -le "$commit_count" ]; do
+        if [ "$mode" = "later-before-earlier" ]; then
+            if [ "$index" -eq "$first_index" ]; then
+                for commit in "$second" "$first"; do
+                    if ! git -C "$worktree" cherry-pick "$commit" >/dev/null 2>&1; then
+                        git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+                        return 1
+                    fi
+                done
+            elif [ "$index" -ne "$second_index" ]; then
+                commit="$(sed -n "${index}p" "$commits_file")"
+                if ! git -C "$worktree" cherry-pick "$commit" >/dev/null 2>&1; then
+                    git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+                    return 1
+                fi
+            fi
+        else
+            if [ "$index" -eq "$first_index" ]; then
+                :
+            elif [ "$index" -eq "$second_index" ]; then
+                for commit in "$second" "$first"; do
+                    if ! git -C "$worktree" cherry-pick "$commit" >/dev/null 2>&1; then
+                        git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+                        return 1
+                    fi
+                done
+            else
+                commit="$(sed -n "${index}p" "$commits_file")"
+                if ! git -C "$worktree" cherry-pick "$commit" >/dev/null 2>&1; then
+                    git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+                    return 1
+                fi
+            fi
+        fi
+        index=$((index + 1))
+    done
+
+    return 0
+}
+
+report_reorder_issue() {
+    kind="$1"
+    mode="$2"
+    first="$3"
+    second="$4"
+    first_subject="$5"
+    second_subject="$6"
+    distance="$7"
+
+    if [ "$kind" = "fail" ]; then
+        echo "ORDER-DEPENDENT PATCHES"
+        echo "  Reordering these patches fails:"
+    else
+        echo "ORDER-SENSITIVE PATCHES"
+        echo "  Reordering these patches changes the final tree:"
+    fi
+    echo "    1. $first_subject"
+    echo "    2. $second_subject"
+    if [ "$distance" -eq 1 ]; then
+        echo "  Distance: adjacent"
+    else
+        echo "  Distance: $distance patches apart"
+    fi
+    case "$mode" in
+        later-before-earlier)
+            echo "  Tested move: later patch before earlier patch"
+            ;;
+        earlier-after-later)
+            echo "  Tested move: earlier patch after later patch"
+            ;;
+    esac
+    echo
+    echo "  Shared files:"
+    common_files "$first" "$second" | sed 's/^/    /'
+    echo
+    echo "  Inspect with:"
+    echo "    git diff ${first}^! -- \$(git diff-tree --no-commit-id --name-only -r $first)"
+    echo "    git diff ${second}^! -- \$(git diff-tree --no-commit-id --name-only -r $second)"
+    echo
+}
+
+verify_replay() {
+    worktree="$1"
+    commits="$(stack_commits)"
+    if [ -z "$commits" ]; then
+        echo "No local patch commits found on $MAIN_BRANCH."
+        return 0
+    fi
+
+    reset_check_worktree "$worktree"
+
+    replay_status=0
+    for commit in $commits; do
+        if ! git -C "$worktree" cherry-pick "$commit" >/dev/null; then
+            echo "error: failed to replay $(git log -1 --format='%h %s' "$commit")" >&2
+            git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+            replay_status=1
+            break
+        fi
+    done
+
+    if [ "$replay_status" -ne 0 ]; then
+        git -C "$worktree" cherry-pick --abort >/dev/null 2>&1 || true
+    elif ! git -C "$worktree" diff --quiet "$MAIN_BRANCH..HEAD"; then
+        echo "error: replayed stack produces a different tree than $MAIN_BRANCH" >&2
+        replay_status=1
+    fi
+
+    return "$replay_status"
+}
+
+verify_shared_file_reorders() {
+    worktree="$1"
+    commits_file="$(mktemp "${TMPDIR:-/tmp}/patch-stack-commits.XXXXXX")"
+    stack_commits >"$commits_file"
+    TOUCH_CACHE_DIR="$(create_touch_cache "$commits_file")"
+
+    commit_count="$(wc -l <"$commits_file" | tr -d ' ')"
+    if [ "$commit_count" -le 1 ]; then
+        rm -rf "$commits_file" "$TOUCH_CACHE_DIR"
+        TOUCH_CACHE_DIR=""
+        return 0
+    fi
+
+    status=0
+    first_index=1
+    while [ "$first_index" -lt "$commit_count" ]; do
+        second_index=$((first_index + 1))
+        while [ "$second_index" -le "$commit_count" ]; do
+            first="$(sed -n "${first_index}p" "$commits_file")"
+            second="$(sed -n "${second_index}p" "$commits_file")"
+            first_subject="$(git log -1 --format='%h %s' "$first")"
+            second_subject="$(git log -1 --format='%h %s' "$second")"
+            distance=$((second_index - first_index))
+
+            if ! commits_touch_common_files "$first" "$second"; then
+                second_index=$((second_index + 1))
+                continue
+            fi
+
+            modes="later-before-earlier earlier-after-later"
+            if [ "$distance" -eq 1 ]; then
+                modes="later-before-earlier"
+            fi
+
+            for mode in $modes; do
+                reset_check_worktree "$worktree"
+
+                if ! cherry_pick_reordered_pair "$worktree" "$mode" "$first_index" "$second_index" "$first" "$second" "$commits_file" "$commit_count"; then
+                    report_reorder_issue fail "$mode" "$first" "$second" "$first_subject" "$second_subject" "$distance"
+                    status=1
+                elif ! git -C "$worktree" diff --quiet "$MAIN_BRANCH..HEAD"; then
+                    report_reorder_issue tree "$mode" "$first" "$second" "$first_subject" "$second_subject" "$distance"
+                    status=1
+                else
+                    :
+                fi
+            done
+
+            second_index=$((second_index + 1))
+        done
+        first_index=$((first_index + 1))
+    done
+
+    rm -rf "$commits_file" "$TOUCH_CACHE_DIR"
+    TOUCH_CACHE_DIR=""
+    return "$status"
+}
+
+cmd="${1:-}"
+verbose=0
+strict=0
+while [ $# -gt 1 ]; do
+    case "$2" in
+        -v|--verbose)
+            verbose=1
+            ;;
+        --strict)
+            strict=1
+            ;;
+        *)
+            echo "error: unknown option for $cmd: $2" >&2
+            exit 1
+            ;;
+    esac
+    shift
+done
+
+case "$cmd" in
+    status)
+        git status --short --branch
+        echo
+        git log --oneline --reverse "$UPSTREAM_REF..HEAD"
+        ;;
+    check)
+        acquire_lock
+        require_clean_tree
+        git diff --check "$UPSTREAM_REF..$MAIN_BRANCH"
+        CHECK_WORKTREE="$(create_check_worktree)"
+        check_status=0
+        verify_replay "$CHECK_WORKTREE" || check_status=1
+        verify_shared_file_reorders "$CHECK_WORKTREE" || check_status=1
+        if [ "$verbose" -eq 1 ]; then
+            report_repeated_files || true
+        fi
+        remove_check_worktree "$CHECK_WORKTREE"
+        CHECK_WORKTREE=""
+        if [ "$strict" -eq 1 ] && [ "$check_status" -ne 0 ]; then
+            exit "$check_status"
+        fi
+        ;;
+    reapply)
+        acquire_lock
+        require_clean_tree
+        git fetch "$UPSTREAM_REMOTE" "$UPSTREAM_BRANCH"
+        commits="$(stack_commits)"
+        if [ -z "$commits" ]; then
+            echo "No local patch commits found on $MAIN_BRANCH."
+            exit 0
+        fi
+        git switch -C "$WORK_BRANCH" "$UPSTREAM_REF"
+        for commit in $commits; do
+            git cherry-pick "$commit"
+        done
+        ;;
+    finish)
+        acquire_lock
+        require_clean_tree
+        git rev-parse --verify "$WORK_BRANCH" >/dev/null
+        git switch "$MAIN_BRANCH"
+        git reset --hard "$WORK_BRANCH"
+        git branch -D "$WORK_BRANCH"
+        export_patches
+        ;;
+    export)
+        require_clean_tree
+        export_patches
+        ;;
+    -h|--help|help|"")
+        usage
+        ;;
+    *)
+        echo "error: unknown command: $cmd" >&2
+        usage >&2
+        exit 1
+        ;;
+esac
