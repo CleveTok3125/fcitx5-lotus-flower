@@ -53,6 +53,35 @@
 
 Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https://github.com/thanhpy2009/VMK). Chân thành cảm ơn tác giả Thành đã đặt nền móng cho bộ gõ này.
 
+## Ghi chú về bản fork
+
+- Thay đổi menu chế độ gõ từ candidate list sang enumerate kiểu Fcitx. \
+  Input Method Settings -> Addons -> Bộ gõ Lotus cho Fcitx
+  - Không nên dùng phím tắt mặc định `` ` `` để chuyển chế độ vì dễ xung đột khi gõ code, Markdown hoặc shell.
+  - Nên đổi `Mode Menu Hotkey` / `Phím tắt menu chế độ gõ` sang tổ hợp khác, ví dụ `Alt+Z`.
+
+- Thêm checkbox tự khởi động lại máy chủ Lotus khi lưu cài đặt
+  - Cần có Polkit agent để hoạt động
+  - Không cần/không hoạt động với hệ thống không sử dụng systemd
+
+- Thêm cấu hình phím tắt cho `Tự động khôi phục với từ không phải tiếng Việt`.
+
+- Bản fork này được duy trì bằng patch stack trên `upstream/main`; xem [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) nếu muốn sync lại với upstream hoặc kiểm tra các patch riêng của fork.
+
+### Cài đặt
+
+#### Arch
+
+```bash
+git clone https://github.com/CleveTok3125/fcitx5-lotus-flower
+cd fcitx5-lotus-flower
+makepkg -si -f
+```
+
+#### Các bản phân phối khác
+
+tham khảo [Biên dịch từ mã nguồn](#biên-dịch-từ-mã-nguồn-dành-cho-nhà-phát-triển)
+
 ## Cài đặt & Hướng dẫn sử dụng
 
 Để có trải nghiệm tốt nhất và nhận được các hướng dẫn cài đặt, cấu hình chi tiết, chính xác cho từng bản phân phối Linux (Arch, Debian, Ubuntu, Fedora, NixOS...), vui lòng truy cập trang chủ của dự án:
