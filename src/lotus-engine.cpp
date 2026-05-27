@@ -23,6 +23,7 @@
 #include <fcitx/userinterfacemanager.h>
 #include <fcitx-utils/utf8.h>
 
+#include <algorithm>
 #include <atomic>
 #include <cstdlib>
 #include <filesystem>
@@ -65,7 +66,7 @@ namespace fcitx {
     }
 
     // Returns the KeySym that triggers the "Type hotkey char" action in the mode
-    // menu.  If the hotkey itself conflicts with a reserved menu key, falls back
+    // menu. If the hotkey itself conflicts with a reserved menu key, falls back
     // to FcitxKey_f.
     static bool isAppModeMenuReservedKey(KeySym sym) {
         switch (sym) {
@@ -605,12 +606,16 @@ namespace fcitx {
         }
 
         if (!keyEvent.isRelease() && !config_.modeMenuKey->empty() && keyEvent.key().checkKeyList(*config_.modeMenuKey)) {
-            LOTUS_INFO("Mode menu key pressed");
-            currentConfigureApp_ = getProgramName(ic);
-            g_mouse_clicked.store(false, std::memory_order_release);
-            std::string appName = getProgramName(ic);
-            setMode(getAppRule(appName), ic);
-            showAppModeMenu(ic);
+            if (config_.modeMenuStyle.value() == ModeMenuStyle::CandidateList) {
+                LOTUS_INFO("Mode menu key pressed");
+                currentConfigureApp_ = getProgramName(ic);
+                g_mouse_clicked.store(false, std::memory_order_release);
+                setMode(getAppRule(currentConfigureApp_), ic);
+                showAppModeMenu(ic);
+            } else {
+                LOTUS_INFO("Mode enumerate key pressed");
+                enumerateMode(ic);
+            }
             keyEvent.filterAndAccept();
             return;
         }
@@ -803,6 +808,82 @@ namespace fcitx {
         appRulesTables_.rules.setValue(std::move(rules));
     }
 
+    void LotusEngine::enumerateMode(InputContext* ic) {
+        if (ic == nullptr) {
+            return;
+        }
+
+        struct ModeInfo {
+            LotusMode   mode;
+            std::string label;
+            KeySym      key;
+            bool        visible;
+        };
+
+        const std::vector<ModeInfo> allModes = {
+            {LotusMode::Smooth, _("Uinput (Smooth)"), FcitxKey_1, *config_.showModeSmooth},
+            {LotusMode::Uinput, _("Uinput (Slow)"), FcitxKey_2, *config_.showModeUinput},
+            {LotusMode::Minecraft, _("Minecraft"), FcitxKey_3, *config_.showModeMinecraft},
+            {LotusMode::SurroundingText, _("Surrounding Text"), FcitxKey_4, *config_.showModeSurroundingText},
+            {LotusMode::Preedit, _("Preedit"), FcitxKey_q, *config_.showModePreedit},
+            {LotusMode::Emoji, _("Emoji Picker"), FcitxKey_w, *config_.showModeEmoji},
+            {LotusMode::Off, _("OFF"), FcitxKey_e, *config_.showModeOff},
+            {LotusMode::SuperSmooth, _("Uinput (Super Smooth)"), FcitxKey_a, *config_.showModeSuperSmooth},
+        };
+
+        std::vector<ModeInfo> visibleModes;
+        visibleModes.reserve(allModes.size());
+        for (const auto& info : allModes) {
+            if (info.visible) {
+                visibleModes.push_back(info);
+            }
+        }
+        if (visibleModes.empty()) {
+            return;
+        }
+
+        const auto  currentMode = realMode.load(std::memory_order_acquire);
+        std::size_t nextIndex   = 0;
+        for (std::size_t i = 0; i < visibleModes.size(); ++i) {
+            if (visibleModes[i].mode == currentMode) {
+                nextIndex = (i + 1) % visibleModes.size();
+                break;
+            }
+        }
+
+        const auto& nextMode = visibleModes[nextIndex];
+        std::string appName  = getProgramName(ic);
+        if (nextMode.mode == config_.mode.value()) {
+            {
+                std::lock_guard<std::mutex> lock(appRulesMutex_);
+                appRules_.erase(appName);
+            }
+            auto rules = *appRulesTables_.rules;
+            rules.erase(std::remove_if(rules.begin(), rules.end(), [&appName](const auto& rule) { return *rule.app == appName; }), rules.end());
+            appRulesTables_.rules.setValue(std::move(rules));
+        } else {
+            setAppRule(appName, nextMode.mode);
+        }
+        if (!isStartsWith(appName, "ctx_")) {
+            saveAppRules();
+        }
+
+        auto* state = ic->propertyFor(&factory_);
+        state->commitBuffer();
+        state->reset();
+        setMode(nextMode.mode, ic);
+
+        ic->inputPanel().reset();
+        if (nextMode.mode == LotusMode::Emoji) {
+            state->updateEmojiPreedit();
+        } else {
+            ic->updateUserInterface(UserInterfaceComponent::InputPanel);
+            ic->updatePreedit();
+        }
+
+        instance_->showCustomInputMethodInformation(ic, nextMode.label);
+    }
+
     void LotusEngine::closeAppModeMenu() {
         isSelectingAppMode_ = false;
         g_mouse_clicked.store(false, std::memory_order_release);
@@ -816,7 +897,7 @@ namespace fcitx {
         candidateList->setLayoutHint(CandidateLayoutHint::Vertical);
         candidateList->setPageSize(10);
 
-        auto getLabel = [&](const LotusMode& modeName, const std::string& modeLabel) {
+        auto getLabel = [](const LotusMode& modeName, const std::string& modeLabel) {
             if (modeName == realMode) {
                 return Text(">> " + modeLabel);
             }
@@ -865,11 +946,10 @@ namespace fcitx {
             {LotusMode::Preedit, _("Preedit"), FcitxKey_q, *config_.showModePreedit},
             {LotusMode::Emoji, _("Emoji Picker"), FcitxKey_w, *config_.showModeEmoji},
             {LotusMode::Off, _("OFF"), FcitxKey_e, *config_.showModeOff},
-            {LotusMode::SuperSmooth, _("Uinput (Super Smooth)"), FcitxKey_a, *config_.showModeSuperSmooth},
         };
 
         const LotusMode defaultMode = config_.mode.value();
-        allModes.push_back({defaultMode, _("Default Typing"), FcitxKey_r, *config_.showModeDefault}); // Add reset option
+        allModes.push_back({defaultMode, _("Default Typing"), FcitxKey_r, *config_.showModeDefault});
 
         int activeSelectionIdx  = -1;
         int currentCandidateIdx = 0;
@@ -886,8 +966,6 @@ namespace fcitx {
                 if (info.mode == realMode) {
                     activeSelectionIdx = currentCandidateIdx;
                 } else if (info.mode == defaultMode && info.label == _("Default Typing") && getAppRule(currentConfigureApp_) == defaultMode) {
-                    // This is technically tricky because getAppRule returns the global default if no rule exists.
-                    // If we are at global default, highlight "Default Typing".
 #if __cplusplus >= 202002L
                     if (!appRules_.contains(currentConfigureApp_)) {
 #else
@@ -900,19 +978,17 @@ namespace fcitx {
             }
         }
 
-        {
-            const auto& kl = *config_.modeMenuKey;
-            if (kl.size() == 1 && !kl[0].hasModifier()) {
-                std::string charStr = Key::keySymToUTF8(kl[0].sym());
-                if (!charStr.empty()) {
-                    KeySym      typeKeySym   = typeKeyForModeMenuHotkey(kl[0].sym());
-                    std::string typeKeyLabel = Key::keySymToUTF8(typeKeySym);
-                    std::string label        = "[" + typeKeyLabel + "] " + _("Type") + " " + charStr;
-                    candidateList->append(std::make_unique<AppModeCandidateWord>(Text(label), [cleanup, charStr](InputContext* ic) {
-                        cleanup(ic);
-                        ic->commitString(charStr);
-                    }));
-                }
+        const auto& kl = *config_.modeMenuKey;
+        if (kl.size() == 1 && !kl[0].hasModifier()) {
+            std::string charStr = Key::keySymToUTF8(kl[0].sym());
+            if (!charStr.empty()) {
+                KeySym      typeKeySym   = typeKeyForModeMenuHotkey(kl[0].sym());
+                std::string typeKeyLabel = Key::keySymToUTF8(typeKeySym);
+                std::string label        = "[" + typeKeyLabel + "] " + _("Type") + " " + charStr;
+                candidateList->append(std::make_unique<AppModeCandidateWord>(Text(label), [cleanup, charStr](InputContext* ic) {
+                    cleanup(ic);
+                    ic->commitString(charStr);
+                }));
             }
         }
 
