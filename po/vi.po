@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-lotus\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-24 09:17+0700\n"
-"PO-Revision-Date: 2026-06-24 20:26+0700\n"
+"POT-Creation-Date: 2026-07-26 18:08+0700\n"
+"PO-Revision-Date: 2026-06-08 15:44+0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: vi\n"
@@ -18,39 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.9\n"
 
-#: src/lotus-state.cpp:235
+#: src/lotus-state.cpp:241
 msgid "Page "
 msgstr "Trang "
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:950 src/lotus-engine.cpp:1059
+#: src/lotus-config.h:40 src/lotus-engine.cpp:1214 src/lotus-engine.cpp:1323
 msgid "OFF"
 msgstr "Tắt"
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:944 src/lotus-engine.cpp:1053
+#: src/lotus-config.h:40 src/lotus-engine.cpp:1208 src/lotus-engine.cpp:1317
 msgid "Uinput (Smooth)"
 msgstr "Uinput (Mượt)"
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:951 src/lotus-engine.cpp:1060
+#: src/lotus-config.h:40 src/lotus-engine.cpp:1215 src/lotus-engine.cpp:1324
 msgid "Uinput (Super Smooth)"
 msgstr "Uinput (Siêu mượt)"
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:945 src/lotus-engine.cpp:1054
+#: src/lotus-config.h:40 src/lotus-engine.cpp:1209 src/lotus-engine.cpp:1318
 msgid "Uinput (Slow)"
 msgstr "Uinput (Chậm)"
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:947 src/lotus-engine.cpp:1056
+#: src/lotus-config.h:40 src/lotus-engine.cpp:1211 src/lotus-engine.cpp:1320
 msgid "Surrounding Text"
 msgstr "Văn bản xung quanh"
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:948 src/lotus-engine.cpp:1057
+#: src/lotus-config.h:40 src/lotus-engine.cpp:1212 src/lotus-engine.cpp:1321
 msgid "Preedit"
 msgstr "Gạch chân"
 
-#: src/lotus-config.h:41 src/lotus-engine.cpp:949 src/lotus-engine.cpp:1058
+#: src/lotus-config.h:41 src/lotus-engine.cpp:1213 src/lotus-engine.cpp:1322
 msgid "Emoji Picker"
 msgstr "Chọn Emoji"
 
-#: src/lotus-config.h:41 src/lotus-engine.cpp:946 src/lotus-engine.cpp:1055
+#: src/lotus-config.h:41 src/lotus-engine.cpp:1210 src/lotus-engine.cpp:1319
 msgid "Minecraft"
 msgstr "Minecraft"
 
@@ -86,12 +86,12 @@ msgstr "Phím"
 msgid "Value"
 msgstr "Giá trị"
 
-#: src/lotus-config.h:191 src/lotus-config.h:257 src/lotus-engine.cpp:200
-#: src/lotus-engine.cpp:345
+#: src/lotus-config.h:191 src/lotus-config.h:284 src/lotus-engine.cpp:200
+#: src/lotus-engine.cpp:347 src/lotus-engine.cpp:1071
 msgid "Macro"
 msgstr "Gõ tắt"
 
-#: src/lotus-config.h:195 src/lotus-config.h:233 src/lotus-config.h:258
+#: src/lotus-config.h:195 src/lotus-config.h:256 src/lotus-config.h:285
 msgid "Custom Keymap"
 msgstr "Keymap tuỳ chỉnh"
 
@@ -123,155 +123,233 @@ msgstr "Phím tắt menu chế độ gõ"
 msgid "Cycle Mode Hotkey"
 msgstr "Phím tắt chuyển nhanh chế độ"
 
-#: src/lotus-config.h:215
+#: src/lotus-config.h:216
+msgid "Quick Toggle Menu Hotkey"
+msgstr "Phím tắt menu bật/tắt nhanh"
+
+#: src/lotus-config.h:217
+msgid "Keep Quick Toggle Menu Open After Toggle"
+msgstr "Giữ menu mở sau khi bật/tắt"
+
+#: src/lotus-config.h:218
+msgid "Quick Toggle: Spell Check"
+msgstr "Kiểm tra chính tả"
+
+#: src/lotus-config.h:219
+msgid "Quick Toggle: Macro"
+msgstr "Gõ tắt"
+
+#: src/lotus-config.h:220
+msgid "Quick Toggle: Auto Restore Invalid Words"
+msgstr "Tự động khôi phục phím với từ sai"
+
+#: src/lotus-config.h:221
+msgid "Quick Toggle: Fix Sticky Shift"
+msgstr "Sửa lỗi dính Shift"
+
+#: src/lotus-config.h:222
+msgid "Quick Toggle: Custom Dictionary"
+msgstr "Từ điển tuỳ chỉnh"
+
+#: src/lotus-config.h:223
+msgid "Quick Toggle: Capitalize Macro"
+msgstr "Gõ tắt chữ hoa"
+
+#: src/lotus-config.h:224
+msgid "Quick Toggle: Modern Style (oà/uý)"
+msgstr "Kiểu hiện đại (oà/uý)"
+
+#: src/lotus-config.h:225
+msgid "Quick Toggle: Free Marking"
+msgstr "Gõ tự do"
+
+#: src/lotus-config.h:226
+msgid "Quick Toggle: Double Space to Period"
+msgstr "Phím cách 2 lần để chấm câu"
+
+#: src/lotus-config.h:227
+msgid "Quick Toggle: Auto Capitalize After Punctuation"
+msgstr "Bật/Tắt: Tự động viết hoa sau dấu câu"
+
+#: src/lotus-config.h:228
+msgid "Quick Toggle: Double Hyphen to Em-Dash"
+msgstr "Bật/Tắt: Gạch đôi thành gạch dài"
+
+#: src/lotus-config.h:229
+msgid "Quick Toggle: Fix Uinput With Ack"
+msgstr "Bật/Tắt: Sửa lỗi Uinput với Ack"
+
+#: src/lotus-config.h:236
 msgid "App Rules"
 msgstr "Quy tắc ứng dụng"
 
-#: src/lotus-config.h:216
+#: src/lotus-config.h:237
 msgid "Type w to Produce ư"
 msgstr "Gõ w thành ư"
 
-#: src/lotus-config.h:217
+#: src/lotus-config.h:238
 msgid "Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"
 msgstr "Gõ [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"
 
-#: src/lotus-config.h:220
+#: src/lotus-config.h:241
 msgid "Enable Spell Check"
 msgstr "Bật kiểm tra chính tả"
 
-#: src/lotus-config.h:220
+#: src/lotus-config.h:241
 msgid "Enable Macro"
 msgstr "Bật gõ tắt"
 
-#: src/lotus-config.h:221 src/lotus-engine.cpp:201 src/lotus-engine.cpp:346
+#: src/lotus-config.h:242 src/lotus-engine.cpp:201 src/lotus-engine.cpp:348
+#: src/lotus-engine.cpp:1079
 msgid "Capitalize Macro"
 msgstr "Gõ tắt chữ hoa"
 
-#: src/lotus-config.h:222
+#: src/lotus-config.h:243
 msgid "Auto capitalize after sentence-ending punctuation (. ! ? Enter)"
 msgstr "Tự động ghi hoa sau dấu câu (. ! ? Enter) (thử nghiệm)"
 
-#: src/lotus-config.h:223
+#: src/lotus-config.h:244
+msgid "Auto fix sticky Shift capitalization for words (3+ letters)"
+msgstr "Tự động sửa lỗi viết hoa dính Shift cho từ (3+ chữ cái)"
+
+#: src/lotus-config.h:245
+msgid ""
+"Maximum consecutive uppercase letters to fix (0 = unlimited, 1-7, negative = "
+"count from end)"
+msgstr ""
+"Số chữ viết hoa liền nhau tối đa được sửa (0 = không giới hạn, 1–7, số âm = "
+"đếm từ cuối)"
+
+#: src/lotus-config.h:246 src/lotus-engine.cpp:1082
 msgid "Double Space to Period"
 msgstr "Phím cách 2 lần để chấm câu (thử nghiệm)"
 
-#: src/lotus-config.h:224
+#: src/lotus-config.h:247
 msgid "Double Hyphen to Em-Dash (--)"
 msgstr "Dấu gạch ngang 2 lần để thành dấu gạch dài"
 
-#: src/lotus-config.h:225 src/lotus-engine.cpp:203
+#: src/lotus-config.h:248 src/lotus-engine.cpp:203 src/lotus-engine.cpp:1073
 msgid "Auto Restore Invalid Words"
 msgstr "Tự động khôi phục phím với từ sai"
 
-#: src/lotus-config.h:226
+#: src/lotus-config.h:249
 msgid "Use oà, uý (Instead Of òa, úy)"
 msgstr "Sử dụng oà, uý (Thay vì òa, úy)"
 
-#: src/lotus-config.h:227
+#: src/lotus-config.h:250
 msgid "Allow Type With More Freedom"
 msgstr "Cho phép gõ dấu tự do"
 
-#: src/lotus-config.h:228
+#: src/lotus-config.h:251
 msgid "Allow dd To Produce đ When Auto Restore Invalid Words Is On"
 msgstr "Cho phép gõ dd thành đ khi bật Tự động khôi phục với từ sai"
 
-#: src/lotus-config.h:229
+#: src/lotus-config.h:252
 msgid "Fix Uinput Mode With Ack"
 msgstr "Sửa lỗi chế độ Uinput với Ack"
 
-#: src/lotus-config.h:230
+#: src/lotus-config.h:253
 msgid "Use Lotus Status Icons"
 msgstr "Sử dụng biểu tượng trạng thái Lotus"
 
-#: src/lotus-config.h:232 src/lotus-engine.cpp:205 src/lotus-engine.cpp:348
+#: src/lotus-config.h:255 src/lotus-engine.cpp:207 src/lotus-engine.cpp:351
+#: src/lotus-engine.cpp:1077
 msgid "Custom Dictionary"
 msgstr "Từ điển tuỳ chỉnh"
 
-#: src/lotus-config.h:235
+#: src/lotus-config.h:258
 msgid "Show Uinput (Smooth)"
 msgstr "Hiển thị chế độ Uinput (Mượt)"
 
-#: src/lotus-config.h:236
+#: src/lotus-config.h:259
 msgid "Shortcut for Uinput (Smooth)"
 msgstr "Phím tắt cho Uinput (Mượt)"
 
-#: src/lotus-config.h:237
+#: src/lotus-config.h:260
 msgid "Show Uinput (Slow)"
 msgstr "Hiển thị chế độ Uinput (Chậm)"
 
-#: src/lotus-config.h:238
+#: src/lotus-config.h:261
 msgid "Shortcut for Uinput (Slow)"
 msgstr "Phím tắt cho Uinput (Chậm)"
 
-#: src/lotus-config.h:239
+#: src/lotus-config.h:262
 msgid "Show Uinput (Super Smooth)"
 msgstr "Hiển thị chế độ Uinput (Siêu mượt)"
 
-#: src/lotus-config.h:240
+#: src/lotus-config.h:263
 msgid "Shortcut for Uinput (Super Smooth)"
 msgstr "Phím tắt cho Uinput (Siêu mượt)"
 
-#: src/lotus-config.h:241
+#: src/lotus-config.h:264
 msgid "Show Minecraft"
 msgstr "Hiển thị chế độ Minecraft"
 
-#: src/lotus-config.h:242
+#: src/lotus-config.h:265
 msgid "Shortcut for Minecraft"
 msgstr "Phím tắt cho Minecraft"
 
-#: src/lotus-config.h:243
+#: src/lotus-config.h:266
 msgid "Show Surrounding Text"
 msgstr "Hiển thị chế độ Văn bản xung quanh"
 
-#: src/lotus-config.h:244
+#: src/lotus-config.h:267
 msgid "Shortcut for Surrounding Text"
 msgstr "Phím tắt cho Văn bản xung quanh"
 
-#: src/lotus-config.h:245
+#: src/lotus-config.h:268
 msgid "Show Preedit"
 msgstr "Hiển thị chế độ Gạch chân"
 
-#: src/lotus-config.h:246
+#: src/lotus-config.h:269
 msgid "Shortcut for Preedit"
 msgstr "Phím tắt cho Gạch chân"
 
-#: src/lotus-config.h:247
+#: src/lotus-config.h:270
 msgid "Show Emoji Picker"
 msgstr "Hiển thị chế độ Chọn Emoji"
 
-#: src/lotus-config.h:248
+#: src/lotus-config.h:271
 msgid "Shortcut for Emoji Picker"
 msgstr "Phím tắt cho Chọn Emoji"
 
-#: src/lotus-config.h:248
+#: src/lotus-config.h:271
 msgid "Show OFF"
 msgstr "Hiển thị chế độ Tắt"
 
-#: src/lotus-config.h:249
+#: src/lotus-config.h:272
 msgid "Shortcut for OFF"
 msgstr "Phím tắt cho Tắt"
 
-#: src/lotus-config.h:249
+#: src/lotus-config.h:272
 msgid "Show Default Typing"
 msgstr "Hiển thị chế độ gõ mặc định"
 
-#: src/lotus-config.h:250
+#: src/lotus-config.h:273
 msgid "Shortcut for Default Typing"
 msgstr "Phím tắt cho Chế độ gõ mặc định"
 
-#: src/lotus-config.h:252
-msgid "Mode Order"
-msgstr ""
+#: src/lotus-config.h:274
+msgid "Allow Macro in Off Mode"
+msgstr "Cho phép gõ tắt ở chế độ TẮT"
 
-#: src/lotus-config.h:254
+#: src/lotus-config.h:276
+msgid "Mode Order"
+msgstr "Thứ tự chế độ"
+
+#: src/lotus-config.h:278
+msgid "Quick Toggle Order"
+msgstr "Thứ tự bật/tắt nhanh"
+
+#: src/lotus-config.h:281
 msgid "Time Format ($TIME in macro)"
 msgstr "Định dạng giờ ($TIME trong gõ tắt)"
 
-#: src/lotus-config.h:255
+#: src/lotus-config.h:282
 msgid "Date Format ($DATE in macro)"
 msgstr "Định dạng ngày ($DATE trong macro)"
 
-#: src/lotus-config.h:259
+#: src/lotus-config.h:286
 msgid "Icon Color"
 msgstr "Màu biểu tượng"
 
@@ -279,35 +357,71 @@ msgstr "Màu biểu tượng"
 msgid "Charset"
 msgstr "Bảng mã"
 
-#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:344
+#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:346 src/lotus-engine.cpp:1070
 msgid "Spell Check"
 msgstr "Kiểm tra chính tả"
 
-#: src/lotus-engine.cpp:203 src/lotus-engine.cpp:347
+#: src/lotus-engine.cpp:203 src/lotus-engine.cpp:349 src/lotus-engine.cpp:1073
 msgid "Auto Non-VN Restore"
 msgstr "Tự động khôi phục với từ không phải tiếng Việt"
 
-#: src/lotus-engine.cpp:209
+#: src/lotus-engine.cpp:205
+msgid "Auto Fix Sticky Shift"
+msgstr "Tự động sửa lỗi dính Shift"
+
+#: src/lotus-engine.cpp:205 src/lotus-engine.cpp:350 src/lotus-engine.cpp:1075
+msgid "Fix Sticky Shift"
+msgstr "Sửa lỗi dính Shift"
+
+#: src/lotus-engine.cpp:211
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: src/lotus-engine.cpp:952 src/lotus-engine.cpp:997
+#: src/lotus-engine.cpp:1080
+msgid "Modern Style (oà/uý)"
+msgstr "Kiểu hiện đại (oà/uý)"
+
+#: src/lotus-engine.cpp:1081
+msgid "Free Marking"
+msgstr "Gõ tự do"
+
+#: src/lotus-engine.cpp:1083
+msgid "Auto Capitalize After Punctuation"
+msgstr "Tự động ghi hoa sau dấu câu (. ! ? Enter) (thử nghiệm)"
+
+#: src/lotus-engine.cpp:1084
+msgid "Double Hyphen to Em-Dash"
+msgstr "Dấu gạch ngang 2 lần để thành dấu gạch dài"
+
+#: src/lotus-engine.cpp:1085
+msgid "Fix Uinput With Ack"
+msgstr "Sửa lỗi chế độ Uinput với Ack"
+
+#: src/lotus-engine.cpp:1151
+msgid "Select to toggle, Esc to close"
+msgstr "Chọn để bật/tắt, Esc để đóng"
+
+#: src/lotus-engine.cpp:1152
+msgid "Up/Down/Tab: Move  Left/Right: Page  Key: Quick Toggle"
+msgstr "Lên/Xuống/Tab: Di chuyển  Trái/Phải: Trang  Phím: Bật/Tắt nhanh"
+
+#: src/lotus-engine.cpp:1216 src/lotus-engine.cpp:1261
 msgid "Default Typing"
 msgstr "Chế độ gõ mặc định"
 
-#: src/lotus-engine.cpp:1019
+#: src/lotus-engine.cpp:1283
 msgid "Type"
 msgstr "Gõ"
 
-#: src/lotus-engine.cpp:1036
+#: src/lotus-engine.cpp:1300
 msgid "App: "
 msgstr "App: "
 
-#: src/lotus-engine.cpp:1061
+#: src/lotus-engine.cpp:1325
 msgid "Unknown Mode"
-msgstr ""
+msgstr "Chế độ không xác định"
 
-#: src/lotus-engine.cpp:1123
+#: src/lotus-engine.cpp:1387
 msgid "Lotus - Off"
 msgstr "Lotus - Tắt"
 
@@ -329,149 +443,199 @@ msgid "Lotus Wrapper For Fcitx"
 msgstr "Bộ gõ Lotus cho Fcitx"
 
 #: settings-gui/ui/pages/about.py:64
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:64
 #, python-brace-format
 msgid "Version {}"
 msgstr "Phiên bản {}"
 
 #: settings-gui/ui/pages/about.py:79
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:79
 msgid "Modern, fast, and stable Vietnamese input method for Linux."
 msgstr "Bộ gõ tiếng việt hiện đại, nhanh và ổn định cho Linux."
 
 #: settings-gui/ui/pages/about.py:96
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:96
 msgid "Report Bug"
 msgstr "Báo cáo lỗi"
 
 #: settings-gui/ui/pages/about.py:101
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:101
 msgid "Request Feature"
 msgstr "Đề xuất tính năng"
 
 #: settings-gui/ui/pages/about.py:111
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:111
 msgid "Export Debug Logs"
 msgstr "Xuất nhật ký gỡ lỗi"
 
 #: settings-gui/ui/pages/about.py:123
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:123
 msgid "Developed by"
 msgstr "Được phát triển bởi"
 
 #: settings-gui/ui/pages/about.py:157
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:157
 msgid "Licensed under the GNU General Public License v3.0"
 msgstr "Được cấp phép dưới Giấy phép Công cộng GNU v3.0"
 
 #: settings-gui/ui/pages/about.py:167
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:167
 msgid "Save Debug Log"
 msgstr "Lưu nhật ký gỡ lỗi"
 
 #: settings-gui/ui/pages/about.py:206 settings-gui/ui/pages/backup.py:183
-#: settings-gui/ui/pages/backup.py:296 settings-gui/ui/main_window.py:299
+#: settings-gui/ui/pages/backup.py:296 settings-gui/ui/main_window.py:317
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:206
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:183
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:296
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:317
 msgid "Success"
 msgstr "Thành công"
 
 #: settings-gui/ui/pages/about.py:206
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:206
 msgid "Debug logs exported to:\n"
 msgstr "Nhật ký gỡ lỗi được xuất thành công vào:\n"
 
 #: settings-gui/ui/pages/about.py:208 settings-gui/ui/pages/backup.py:188
 #: settings-gui/ui/pages/backup.py:242 settings-gui/ui/pages/backup.py:314
 #: settings-gui/ui/pages/dict_editor.py:246
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:208
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:188
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:242
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:314
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:246
 msgid "Error"
 msgstr "Lỗi"
 
 #: settings-gui/ui/pages/about.py:208
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:208
 msgid "Failed to export logs:\n"
 msgstr "Xuất nhật ký gỡ lỗi thất bại\n"
 
 #: settings-gui/ui/pages/backup.py:52
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:52
 msgid "Backup & Restore"
 msgstr "Sao lưu & Khôi phục"
 
 #: settings-gui/ui/pages/backup.py:57
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:57
 msgid "Export/Import Settings"
 msgstr "Xuất/Nhập cài đặt"
 
 #: settings-gui/ui/pages/backup.py:61
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:61
 msgid ""
 "Save or restore configuration via JSON files. Select components to include:"
 msgstr ""
 "Lưu hoặc khôi phục cấu hình của bạn vào một tệp JSON. Chọn cái bạn muốn:"
 
 #: settings-gui/ui/pages/backup.py:70 settings-gui/ui/pages/backup.py:216
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:70
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:216
 msgid "Main Settings"
 msgstr "Cài đặt chính"
 
 #: settings-gui/ui/pages/backup.py:71 settings-gui/ui/pages/backup.py:217
-#: settings-gui/ui/pages/macro_editor.py:53 settings-gui/ui/main_window.py:187
+#: settings-gui/ui/pages/macro_editor.py:53 settings-gui/ui/main_window.py:202
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:71
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:217
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:53
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:202
 msgid "Macros"
 msgstr "Gõ tắt"
 
 #: settings-gui/ui/pages/backup.py:72 settings-gui/ui/pages/backup.py:218
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:72
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:218
 msgid "Custom Keymaps"
 msgstr "Keymap tuỳ chỉnh"
 
 #: settings-gui/ui/pages/backup.py:73 settings-gui/ui/pages/backup.py:219
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:73
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:219
 msgid "Application Rules"
 msgstr "Quy tắc ứng dụng"
 
 #: settings-gui/ui/pages/backup.py:85
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:85
 msgid "Export Backup..."
 msgstr "Xuất sao lưu..."
 
 #: settings-gui/ui/pages/backup.py:91
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:91
 msgid "Import Backup..."
 msgstr "Nhập sao lưu..."
 
 #: settings-gui/ui/pages/backup.py:101
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:101
 msgid "Items found in backup:"
 msgstr "Mục được phát hiện trong sao lưu:"
 
 #: settings-gui/ui/pages/backup.py:107
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:107
 msgid "Restore Selected Now"
 msgstr "Khôi phục đang chọn hiện tại"
 
 #: settings-gui/ui/pages/backup.py:132 settings-gui/ui/pages/backup.py:255
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:132
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:255
 msgid "Warning"
 msgstr "Cảnh báo"
 
 #: settings-gui/ui/pages/backup.py:132
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:132
 msgid "Select at least one item to export."
 msgstr "Hãy chọn ít nhất một mục để xuất."
 
 #: settings-gui/ui/pages/backup.py:141
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:141
 msgid "Export Backup"
 msgstr "Xuất sao lưu"
 
 #: settings-gui/ui/pages/backup.py:143 settings-gui/ui/pages/backup.py:197
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:143
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:197
 msgid "JSON Backup (*.json);;All Files (*)"
 msgstr "Sao lưu JSON(*.json);;Tất cả tệp(*)"
 
 #: settings-gui/ui/pages/backup.py:183
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:183
 msgid "Backup exported to:\n"
 msgstr "Sao lưu được xuất thành công vào:\n"
 
 #: settings-gui/ui/pages/backup.py:188
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:188
 msgid "Failed to export backup:\n"
 msgstr "Xuất sao lưu thất bại\n"
 
 #: settings-gui/ui/pages/backup.py:195
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:195
 msgid "Select Backup File"
 msgstr "Chọn tệp sao lưu"
 
 #: settings-gui/ui/pages/backup.py:234
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:234
 msgid "Invalid backup file: No recognizable components found."
 msgstr "Tệp sao lưu không hợp lệ: không có thành phần được tìm thấy."
 
 #: settings-gui/ui/pages/backup.py:242
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:242
 msgid "Failed to open backup file:\n"
 msgstr "Mở tệp sao lưu thất bại:\n"
 
 #: settings-gui/ui/pages/backup.py:255
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:255
 msgid "Select at least one item to restore."
 msgstr "Chọn ít nhất một mục để khôi phục."
 
 #: settings-gui/ui/pages/backup.py:261
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:261
 msgid "Confirm Restore"
 msgstr "Xác nhận khôi phục"
 
 #: settings-gui/ui/pages/backup.py:263
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:263
 msgid ""
 "Are you sure you want to restore selected components? This will overwrite "
 "current configuration."
@@ -480,6 +644,7 @@ msgstr ""
 "của bạn."
 
 #: settings-gui/ui/pages/backup.py:298
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:298
 msgid ""
 "Selected components restored. Fcitx5 restart may be required for some "
 "changes."
@@ -488,10 +653,12 @@ msgstr ""
 "lại fcitx5."
 
 #: settings-gui/ui/pages/backup.py:314
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/backup.py:314
 msgid "Failed to restore backup:\n"
 msgstr "Khôi phục sao lưu thất bại:\n"
 
 #: settings-gui/ui/pages/dict_editor.py:71
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:71
 msgid ""
 "Words in the custom dictionary will be excluded from 'Auto Restore Invalid "
 "Words'. Use this for names, technical terms, or words not yet in the built-"
@@ -502,16 +669,21 @@ msgstr ""
 "không có trong từ điển cơ bản."
 
 #: settings-gui/ui/pages/dict_editor.py:85
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:85
 msgid "Search words..."
 msgstr "Tìm từ..."
 
 #: settings-gui/ui/pages/dict_editor.py:89
 #: settings-gui/ui/pages/keymap_editor.py:241
-#: settings-gui/ui/pages/macro_editor.py:79
+#: settings-gui/ui/pages/macro_editor.py:88
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:89
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:241
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:88
 msgid "Search:"
 msgstr "Tìm:"
 
 #: settings-gui/ui/pages/dict_editor.py:104
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:104
 msgid "Word (e.g. khongdau)"
 msgstr "Từ (ví dụ: khongdau)"
 
@@ -519,188 +691,344 @@ msgstr "Từ (ví dụ: khongdau)"
 #: settings-gui/ui/pages/dict_editor.py:318
 #: settings-gui/ui/pages/keymap_editor.py:280
 #: settings-gui/ui/pages/keymap_editor.py:453
-#: settings-gui/ui/pages/macro_editor.py:171
-#: settings-gui/ui/pages/macro_editor.py:447
+#: settings-gui/ui/pages/macro_editor.py:180
+#: settings-gui/ui/pages/macro_editor.py:465
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:108
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:318
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:280
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:453
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:180
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:465
 msgid "Add"
 msgstr "Thêm"
 
 #: settings-gui/ui/pages/dict_editor.py:112
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:112
 msgid "Word:"
 msgstr "Từ:"
 
 #: settings-gui/ui/pages/dict_editor.py:134
 #: settings-gui/ui/pages/keymap_editor.py:308
 #: settings-gui/ui/pages/mode_manager.py:377
-#: settings-gui/ui/pages/macro_editor.py:201
+#: settings-gui/ui/pages/macro_editor.py:210
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:134
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:308
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:377
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:210
 msgid "Remove"
 msgstr "Xoá"
 
 #: settings-gui/ui/pages/dict_editor.py:246
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:246
 #, python-brace-format
 msgid "Failed to save dictionary: {}"
 msgstr "Lưu từ điển thất bại: {}"
 
 #: settings-gui/ui/pages/dict_editor.py:273
 #: settings-gui/ui/pages/dict_editor.py:305
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:273
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:305
 msgid "Warning: Dictionary words should not contain spaces."
 msgstr "Cảnh báo: Từ trong từ điển không chứa dấu cách."
 
 #: settings-gui/ui/pages/dict_editor.py:314
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:314
 msgid "Exists"
 msgstr "Đã tồn tại"
 
 #: settings-gui/ui/pages/keymap_editor.py:221
-#: settings-gui/ui/main_window.py:197
+#: settings-gui/ui/main_window.py:212
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:221
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:212
 msgid "Keymap"
 msgstr "Keymap"
 
 #: settings-gui/ui/pages/keymap_editor.py:237
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:237
 msgid "Search keys..."
 msgstr "Tìm phím..."
 
 #: settings-gui/ui/pages/keymap_editor.py:247
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:247
 msgid "Original Input Method:"
 msgstr "Kiểu gõ gốc:"
 
 #: settings-gui/ui/pages/keymap_editor.py:253
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:253
 msgid "Apply Preset"
 msgstr "Áp dụng cài đặt sẵn"
 
 #: settings-gui/ui/pages/keymap_editor.py:272
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:272
 msgid "Key (Example: s)"
 msgstr "Phím (Ví dụ: s)"
 
 #: settings-gui/ui/pages/keymap_editor.py:281
 #: settings-gui/ui/pages/keymap_editor.py:454
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:281
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:454
 msgid "Add Keymap"
 msgstr "Thêm Keymap"
 
 #: settings-gui/ui/pages/keymap_editor.py:292
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:292
 msgid "Action"
 msgstr "Hành động"
 
 #: settings-gui/ui/pages/keymap_editor.py:309
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:309
 msgid "Remove selected row"
 msgstr "Xoá dòng đang chọn"
 
 #: settings-gui/ui/pages/keymap_editor.py:449
-#: settings-gui/ui/pages/macro_editor.py:444
+#: settings-gui/ui/pages/macro_editor.py:462
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:449
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:462
 msgid "Update"
 msgstr "Cập nhật"
 
 #: settings-gui/ui/pages/keymap_editor.py:450
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:450
 msgid "Update Keymap"
 msgstr "Cập Nhật Keymap"
 
 #: settings-gui/ui/pages/keymap_editor.py:461
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:461
 msgid "Confirm"
 msgstr "Xác nhận"
 
 #: settings-gui/ui/pages/keymap_editor.py:462
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:462
 msgid "This operation will replace all existing keys with "
 msgstr "Việc này sẽ thay thế mọi phím sẵn có với "
 
 #: settings-gui/ui/pages/keymap_editor.py:464
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:464
 msgid ". Are you sure?"
 msgstr ". Bạn có chắc chắn?"
 
 #: settings-gui/ui/pages/mode_manager.py:120
 #: settings-gui/ui/pages/mode_manager.py:133
 #: settings-gui/ui/pages/mode_manager.py:376
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:120
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:133
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:376
 msgid "Add Application"
 msgstr "Thêm ứng dụng"
 
 #: settings-gui/ui/pages/mode_manager.py:135
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:135
 msgid "Assign an input mode to a specific application."
 msgstr "Gán một chế độ gõ cụ thể cho một ứng dụng."
 
 #: settings-gui/ui/pages/mode_manager.py:150
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:150
 msgid "Search process name..."
 msgstr "Tìm tên tiến trình..."
 
 #: settings-gui/ui/pages/mode_manager.py:154
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:154
 msgid "Refresh Process List"
 msgstr "Làm mới danh sách tiến trình"
 
 #: settings-gui/ui/pages/mode_manager.py:168
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:168
 msgid "Running"
 msgstr "Đang chạy"
 
 #: settings-gui/ui/pages/mode_manager.py:174
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:174
 msgid "Enter application name or path..."
 msgstr "Nhập tên ứng dụng hoặc đường dẫn..."
 
 #: settings-gui/ui/pages/mode_manager.py:178
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:178
 msgid "Manual input"
 msgstr "Nhập thủ công"
 
 #: settings-gui/ui/pages/mode_manager.py:182
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:182
 msgid "No application selected"
 msgstr "Không có ứng dụng được chọn"
 
-#: settings-gui/ui/pages/mode_manager.py:185 settings-gui/ui/main_window.py:152
+#: settings-gui/ui/pages/mode_manager.py:185 settings-gui/ui/main_window.py:167
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:185
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:167
 msgid "&Cancel"
 msgstr "&Huỷ"
 
 #: settings-gui/ui/pages/mode_manager.py:188
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:188
 msgid "&Add"
 msgstr "&Thêm"
 
 #: settings-gui/ui/pages/mode_manager.py:324
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:324
 msgid "Selected:"
 msgstr "Được chọn:"
 
 #: settings-gui/ui/pages/mode_manager.py:365
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:365
 msgid "Search applications..."
 msgstr "Tìm ứng dụng..."
 
-#: settings-gui/ui/pages/mode_manager.py:398 settings-gui/ui/main_window.py:182
+#: settings-gui/ui/pages/mode_manager.py:398 settings-gui/ui/main_window.py:197
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:398
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:197
 msgid "Applications"
 msgstr "Ứng dụng"
 
 #: settings-gui/ui/pages/mode_manager.py:405
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:405
 msgid "Global Default Mode:"
 msgstr "Chế độ toàn cục mặc định:"
 
 #: settings-gui/ui/pages/mode_manager.py:428
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:428
 msgid "Select an application"
 msgstr "Tìm một ứng dụng"
 
 #: settings-gui/ui/pages/mode_manager.py:658
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:658
 msgid "Confirm Remove"
 msgstr "Xác nhận xoá"
 
 #: settings-gui/ui/pages/mode_manager.py:659
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:659
 msgid "Remove rules for this application?"
 msgstr "Bạn có chắc chắn muốn xoá quy tắc cho ứng dụng này?"
 
-#: settings-gui/ui/pages/dynamic_settings.py:78
+#: settings-gui/ui/pages/macro_editor.py:62
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:62
+msgid "Macro in Off Mode"
+msgstr "Gõ tắt ở chế độ TẮT"
+
+#: settings-gui/ui/pages/macro_editor.py:84
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:84
+msgid "Search macros..."
+msgstr "Tìm từ gõ tắt..."
+
+#: settings-gui/ui/pages/macro_editor.py:105
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:105
+msgid "Macros support dynamic placeholders: $TIME and $DATE."
+msgstr ""
+"Gõ tắt có thể sử dụng giữ chỗ động: $TIME (thời gian hiện tại) và $DATE "
+"(ngày hiện tại)."
+
+#: settings-gui/ui/pages/macro_editor.py:127
+#: settings-gui/ui/pages/macro_editor.py:150 settings-gui/ui/components.py:275
+#: settings-gui/ui/components.py:389
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:127
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:150
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:275
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:389
+msgid "None"
+msgstr "Rỗng"
+
+#: settings-gui/ui/pages/macro_editor.py:135
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:135
+msgid "Time Format:"
+msgstr "Định dạng giờ:"
+
+#: settings-gui/ui/pages/macro_editor.py:158
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:158
+msgid "Date Format:"
+msgstr "Định dạng ngày:"
+
+#: settings-gui/ui/pages/macro_editor.py:172
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:172
+msgid "Abbreviation (e.g. kg)"
+msgstr "Từ viết tắt (ví dụ: kg)"
+
+#: settings-gui/ui/pages/macro_editor.py:176
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:176
+msgid "Full text (e.g. khô gà)"
+msgstr "Từ đầy đủ (ví dụ: khô gà)"
+
+#: settings-gui/ui/pages/macro_editor.py:185
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:185
+msgid "Key:"
+msgstr "Khoá:"
+
+#: settings-gui/ui/pages/macro_editor.py:187
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:187
+msgid "Value:"
+msgstr "Giá trị:"
+
+#: settings-gui/ui/pages/macro_editor.py:194
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:194
+msgid "Abbreviation"
+msgstr "Từ viết tắt"
+
+#: settings-gui/ui/pages/macro_editor.py:194
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:194
+msgid "Expanded Text"
+msgstr "Từ đầy đủ"
+
+#: settings-gui/ui/pages/macro_editor.py:212
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:212
+msgid "Move Up"
+msgstr "Chuyển lên"
+
+#: settings-gui/ui/pages/macro_editor.py:214
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:214
+msgid "Move Down"
+msgstr "Chuyển xuống"
+
+#: settings-gui/ui/pages/macro_editor.py:402
+#: settings-gui/ui/pages/macro_editor.py:450
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:402
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:450
+msgid "Macro keys cannot contain spaces or special characters."
+msgstr "Cảnh báo: từ gõ tắt không được chứa phím cách hoặc ký tự đặc biệt."
+
+#: settings-gui/ui/pages/dynamic_settings.py:96
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:96
 msgid "Configure basic input method settings and behaviors."
 msgstr "Thiết lập các cài đặt và hành vi cơ bản của bộ gõ."
 
-#: settings-gui/ui/pages/dynamic_settings.py:80
+#: settings-gui/ui/pages/dynamic_settings.py:98
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:98
 msgid "Customize the look and feel of the Lotus status icons and theme."
 msgstr "Tùy chỉnh giao diện, biểu tượng trạng thái và chủ đề của Lotus."
 
-#: settings-gui/ui/pages/dynamic_settings.py:83
+#: settings-gui/ui/pages/dynamic_settings.py:101
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:101
 msgid "Fine-tune spelling corrections and advanced typing options."
 msgstr "Tinh chỉnh kiểm tra chính tả và các tùy chọn gõ nâng cao."
 
-#: settings-gui/ui/pages/dynamic_settings.py:86
-msgid "Manage input mode shortcuts, display order, and fast cycling."
-msgstr "Quản lý phím tắt, thứ tự hiển thị và chuyển nhanh các chế độ gõ."
-
-#: settings-gui/ui/pages/dynamic_settings.py:92
+#: settings-gui/ui/pages/dynamic_settings.py:104
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:104
 msgid ""
-"Assign hotkeys to open the mode menu or quickly cycle through enabled modes."
-msgstr ""
-"Gán phím tắt để mở menu chế độ hoặc chuyển nhanh giữa các chế độ đang bật."
+"Manage input mode shortcuts, display order, fast cycling, and quick toggle "
+"options."
+msgstr "Quản lý phím tắt, thứ tự hiển thị, chuyển nhanh và bật/tắt nhanh."
 
-#: settings-gui/ui/pages/dynamic_settings.py:218
+#: settings-gui/ui/pages/dynamic_settings.py:110
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:110
+msgid ""
+"Assign hotkeys to open the mode menu, cycle through enabled modes, or open "
+"the quick toggle menu."
+msgstr ""
+"Gán phím tắt để mở menu chế độ, chuyển nhanh giữa các chế độ đã bật, hoặc mở "
+"menu bật/tắt nhanh."
+
+#: settings-gui/ui/pages/dynamic_settings.py:113
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:113
+msgid ""
+"Customize single-character shortcuts for each option in the quick toggle "
+"menu (shown when the Quick Toggle Menu Hotkey is pressed)."
+msgstr ""
+"Tuỳ chỉnh phím tắt từng ký tự cho mỗi tuỳ chọn trong menu bật/tắt nhanh "
+"(hiện ra khi nhấn phím tắt menu bật/tắt nhanh)."
+
+#: settings-gui/ui/pages/dynamic_settings.py:287
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:287
 msgid "Failed to load configuration."
 msgstr "Tải cấu hình thất bại."
 
-#: settings-gui/ui/pages/dynamic_settings.py:260
+#: settings-gui/ui/pages/dynamic_settings.py:329
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:329
 msgid ""
 "Drag the handle on the left to reorder modes in the menu. Use checkboxes to "
 "toggle visibility, and click the buttons to reassign shortcuts."
@@ -708,81 +1036,128 @@ msgstr ""
 "Kéo thả biểu tượng bên trái để sắp xếp thứ tự chế độ trong menu. Đánh dấu để "
 "bật/tắt hiển thị, và nhấn vào các nút để gán lại phím tắt."
 
-#: settings-gui/ui/pages/dynamic_settings.py:295
+#: settings-gui/ui/pages/dynamic_settings.py:370
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:370
 msgid "No interface settings available yet."
 msgstr "Không có cài đặt nào hiện khả dụng."
 
-#: settings-gui/ui/pages/dynamic_settings.py:581
+#: settings-gui/ui/pages/dynamic_settings.py:807
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:807
 #, python-brace-format
 msgid "Duplicate shortcut '{}' used for multiple enabled modes."
 msgstr "Phím tắt '{}' được sử dụng bởi một chế độ gõ khác đang được bật."
 
-#: settings-gui/ui/pages/macro_editor.py:75
-msgid "Search macros..."
-msgstr "Tìm từ gõ tắt..."
+#: settings-gui/ui/components.py:188
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:188
+msgid "Clear hotkey"
+msgstr "Xoá phím tắt"
 
-#: settings-gui/ui/pages/macro_editor.py:96
-msgid "Macros support dynamic placeholders: $TIME and $DATE."
+#: settings-gui/ui/components.py:261
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:261
+msgid "[ Recording... ]"
+msgstr "[ Đang ghi lại... ]"
+
+#: settings-gui/ui/components.py:385
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:385
+msgid "[ Press Key... ]"
+msgstr "[ Nhấn phím... ]"
+
+#: settings-gui/ui/main_window.py:46
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:46
+msgid "Lotus Settings"
+msgstr "Cài đặt Lotus"
+
+#: settings-gui/ui/main_window.py:152
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:152
+msgid "&Reset"
+msgstr "&Cài đặt lại"
+
+#: settings-gui/ui/main_window.py:158
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:158
+msgid "Restart server after saving"
+msgstr "Khởi động lại máy chủ sau khi lưu"
+
+#: settings-gui/ui/main_window.py:161
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:161
+msgid ""
+"When checked, saving settings will try to run: systemctl restart fcitx5-"
+"lotus-server@$(whoami).service"
 msgstr ""
-"Gõ tắt có thể sử dụng giữ chỗ động: $TIME (thời gian hiện tại) và $DATE "
-"(ngày hiện tại)."
+"Khi được chọn, mỗi lần lưu cài đặt sẽ thử chạy: systemctl restart fcitx5-"
+"lotus-server@$(whoami).service"
 
-#: settings-gui/ui/pages/macro_editor.py:118
-#: settings-gui/ui/pages/macro_editor.py:141 settings-gui/ui/components.py:275
-#: settings-gui/ui/components.py:389
-msgid "None"
-msgstr "Rỗng"
+#: settings-gui/ui/main_window.py:172
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:172
+msgid "&Apply"
+msgstr "&Áp dụng"
 
-#: settings-gui/ui/pages/macro_editor.py:126
-msgid "Time Format:"
-msgstr "Định dạng giờ:"
+#: settings-gui/ui/main_window.py:177
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:177
+msgid "&OK"
+msgstr "&OK"
 
-#: settings-gui/ui/pages/macro_editor.py:149
-msgid "Date Format:"
-msgstr "Định dạng ngày:"
+#: settings-gui/ui/main_window.py:187
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:187
+msgid "General"
+msgstr "Tổng quan"
 
-#: settings-gui/ui/pages/macro_editor.py:163
-msgid "Abbreviation (e.g. kg)"
-msgstr "Từ viết tắt (ví dụ: kg)"
+#: settings-gui/ui/main_window.py:192
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:192
+msgid "Typing"
+msgstr "Nhập liệu"
 
-#: settings-gui/ui/pages/macro_editor.py:167
-msgid "Full text (e.g. khô gà)"
-msgstr "Từ đầy đủ (ví dụ: khô gà)"
+#: settings-gui/ui/main_window.py:207
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:207
+msgid "Dictionary"
+msgstr "Từ điển"
 
-#: settings-gui/ui/pages/macro_editor.py:176
-msgid "Key:"
-msgstr "Khoá:"
+#: settings-gui/ui/main_window.py:217
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:217
+msgid "Shortcuts"
+msgstr "Phím tắt"
 
-#: settings-gui/ui/pages/macro_editor.py:178
-msgid "Value:"
-msgstr "Giá trị:"
+#: settings-gui/ui/main_window.py:222
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:222
+msgid "Appearance"
+msgstr "Giao diện"
 
-#: settings-gui/ui/pages/macro_editor.py:185
-msgid "Abbreviation"
-msgstr "Từ viết tắt"
+#: settings-gui/ui/main_window.py:229
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:229
+msgid "Backup"
+msgstr "Sao lưu"
 
-#: settings-gui/ui/pages/macro_editor.py:185
-msgid "Expanded Text"
-msgstr "Từ đầy đủ"
+#: settings-gui/ui/main_window.py:239
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:239
+msgid "About"
+msgstr "Giới thiệu"
 
-#: settings-gui/ui/pages/macro_editor.py:203
-msgid "Move Up"
-msgstr "Chuyển lên"
+#: settings-gui/ui/main_window.py:247
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:247
+msgid "Confirm Reset"
+msgstr "Xác nhận cài đặt lại"
 
-#: settings-gui/ui/pages/macro_editor.py:205
-msgid "Move Down"
-msgstr "Chuyển xuống"
+#: settings-gui/ui/main_window.py:248
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:248
+msgid "Restore all settings to defaults?"
+msgstr "Bạn có chắc chắn muốn khôi phục tất cả cài đặt về giá trị mặc định?"
 
-#: settings-gui/ui/pages/macro_editor.py:384
-#: settings-gui/ui/pages/macro_editor.py:432
-msgid "Macro keys cannot contain spaces or special characters."
-msgstr "Cảnh báo: từ gõ tắt không được chứa phím cách hoặc ký tự đặc biệt."
+#: settings-gui/ui/main_window.py:296
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:296
+msgid "Cannot Save"
+msgstr "Không thể lưu"
+
+#: settings-gui/ui/main_window.py:317
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:317
+msgid "Settings saved."
+msgstr "Cài đặt đã được lưu."
 
 #: settings-gui/ui/helpers.py:15
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:15
 msgid "You can type tone marks at the end of the word or anywhere inside."
 msgstr "Bạn có thể gõ dấu câu ở cuối từ hoặc bất cứ đâu."
 
 #: settings-gui/ui/helpers.py:18
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:18
 msgid ""
 "Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
 "Edge."
@@ -791,6 +1166,7 @@ msgstr ""
 "hoặc Edge."
 
 #: settings-gui/ui/helpers.py:21
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:21
 msgid ""
 "Automatically match expansion case to trigger key case.\n"
 "\n"
@@ -807,6 +1183,7 @@ msgstr ""
 "- KG -> KHÔ GÀ"
 
 #: settings-gui/ui/helpers.py:28
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:28
 msgid ""
 "Automatically revert the typed sequence if the resulting word is not in the "
 "dictionary.\n"
@@ -817,77 +1194,73 @@ msgstr ""
 "Nó giúp tránh các trường hợp gõ các từ tiếng Anh mà bị chuyển đổi qua Tiếng "
 "việt hoặc gõ song ngữ."
 
-#: settings-gui/ui/components.py:188
-msgid "Clear hotkey"
-msgstr "Xoá phím tắt"
+#: settings-gui/ui/helpers.py:32
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:32
+msgid ""
+"Allow macros to work when the input mode is OFF.\n"
+"When disabled, macros are only available in active typing modes."
+msgstr ""
+"Cho phép gõ tắt hoạt động khi chế độ gõ là TẮT.\n"
+"Khi tắt, gõ tắt chỉ khả dụng ở các chế độ gõ đang hoạt động."
 
-#: settings-gui/ui/components.py:261
-msgid "[ Recording... ]"
-msgstr "[ Đang ghi lại... ]"
+#: settings-gui/ui/helpers.py:36
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:36
+msgid ""
+"Auto fix sticky Shift capitalization for words (3+ letters).\n"
+"\n"
+"When you hold Shift a bit too long while typing the first letter, the second "
+"letter may also be capitalized by accident.\n"
+"For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
+msgstr ""
+"Tự động sửa lỗi viết hoa dính Shift cho từ (3+ chữ cái).\n"
+"\n"
+"Khi bạn giữ Shift hơi lâu khi gõ chữ cái đầu tiên, chữ cái thứ hai\n"
+"có thể vô tình bị viết hoa.\n"
+"Ví dụ: 'GHi' → 'Ghi', 'THái' → 'Thái'."
 
-#: settings-gui/ui/components.py:385
-msgid "[ Press Key... ]"
-msgstr "[ Nhấn phím... ]"
+#: settings-gui/ui/helpers.py:42
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:42
+msgid ""
+"Keep the quick toggle menu open after toggling an option.\n"
+"\n"
+"When enabled, you can toggle multiple options in one session.\n"
+"When disabled, the menu closes immediately after each toggle."
+msgstr ""
+"Giữ menu bật/tắt nhanh mở sau khi bật/tắt một tuỳ chọn.\n"
+"\n"
+"Khi bật, bạn có thể thao tác nhiều tuỳ chọn trong một phiên.\n"
+"Khi tắt, menu sẽ đóng ngay sau mỗi lần bật/tắt."
 
-#: settings-gui/ui/main_window.py:40
-msgid "Lotus Settings"
-msgstr "Cài đặt Lotus"
-
-#: settings-gui/ui/main_window.py:146
-msgid "&Reset"
-msgstr "&Cài đặt lại"
-
-#: settings-gui/ui/main_window.py:157
-msgid "&Apply"
-msgstr "&Áp dụng"
-
-#: settings-gui/ui/main_window.py:162
-msgid "&OK"
-msgstr "&OK"
-
-#: settings-gui/ui/main_window.py:172
-msgid "General"
-msgstr "Tổng quan"
-
-#: settings-gui/ui/main_window.py:177
-msgid "Typing"
-msgstr "Nhập liệu"
-
-#: settings-gui/ui/main_window.py:192
-msgid "Dictionary"
-msgstr "Từ điển"
-
-#: settings-gui/ui/main_window.py:202
-msgid "Shortcuts"
-msgstr "Phím tắt"
-
-#: settings-gui/ui/main_window.py:207
-msgid "Appearance"
-msgstr "Giao diện"
-
-#: settings-gui/ui/main_window.py:214
-msgid "Backup"
-msgstr "Sao lưu"
-
-#: settings-gui/ui/main_window.py:224
-msgid "About"
-msgstr "Giới thiệu"
-
-#: settings-gui/ui/main_window.py:232
-msgid "Confirm Reset"
-msgstr "Xác nhận cài đặt lại"
-
-#: settings-gui/ui/main_window.py:233
-msgid "Restore all settings to defaults?"
-msgstr "Bạn có chắc chắn muốn khôi phục tất cả cài đặt về giá trị mặc định?"
-
-#: settings-gui/ui/main_window.py:281
-msgid "Cannot Save"
-msgstr "Không thể lưu"
-
-#: settings-gui/ui/main_window.py:299
-msgid "Settings saved."
-msgstr "Cài đặt đã được lưu."
+#: settings-gui/ui/helpers.py:47
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:47
+msgid ""
+"Maximum consecutive uppercase letters to fix (after the first letter).\n"
+"\n"
+"Controls how many uppercase letters after the first one are lowered.\n"
+"0 = unlimited (any number of uppercase letters will be fixed)\n"
+"1 = only fix the second letter (default, e.g. 'THái' → 'Thái')\n"
+"2 = fix up to 2 letters (e.g. 'THÁi' → 'Thái')\n"
+"3 = fix up to 3 letters (e.g. 'THÁI' → 'Thái')\n"
+"\n"
+"Negative values count from the end:\n"
+"-1 = last 1 char is lowercase (e.g. 'THÁi' → 'Thái')\n"
+"-2 = last 2 chars are lowercase (e.g. 'THái' → 'Thái')\n"
+"\n"
+"Range: –7 to 7."
+msgstr ""
+"Số chữ viết hoa liền nhau tối đa được sửa (sau chữ cái đầu).\n"
+"\n"
+"Kiểm soát số chữ viết hoa sau chữ cái đầu sẽ được chuyển thành chữ thường.\n"
+"0 = không giới hạn (mọi chữ viết hoa sẽ được sửa)\n"
+"1 = chỉ sửa chữ cái thứ hai (mặc định, vd: 'THái' → 'Thái')\n"
+"2 = sửa tối đa 2 chữ (vd: 'THÁi' → 'Thái')\n"
+"3 = sửa tối đa 3 chữ (vd: 'THÁI' → 'Thái')\n"
+"\n"
+"Giá trị âm: đếm từ cuối:\n"
+"-1 = 1 ký tự cuối là chữ thường (vd: 'THÁi' → 'Thái')\n"
+"-2 = 2 ký tự cuối là chữ thường (vd: 'THái' → 'Thái')\n"
+"\n"
+"Khoảng: –7 đến 7."
 
 #: settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop.in:2
 msgid "Fcitx5 Lotus Settings"
@@ -896,6 +1269,56 @@ msgstr "Cài đặt Fcitx5 Lotus"
 #: settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop.in:3
 msgid "Configure Fcitx5 Lotus Input Method"
 msgstr "Tuỳ chỉnh bộ gõ Fcitx5 Lotus"
+
+#~ msgid "Quick Toggle"
+#~ msgstr "Bật/Tắt Nhanh"
+
+#~ msgid "Quick Toggle Shortcuts"
+#~ msgstr "Phím Tắt Bật/Tắt Nhanh"
+
+#~ msgid "Manage input mode shortcuts, display order, and fast cycling."
+#~ msgstr "Quản lý phím tắt, thứ tự hiển thị và chuyển nhanh các chế độ gõ."
+
+#~ msgid ""
+#~ "Assign hotkeys to open the mode menu or quickly cycle through enabled "
+#~ "modes."
+#~ msgstr ""
+#~ "Gán phím tắt để mở menu chế độ hoặc chuyển nhanh giữa các chế độ đang bật."
+
+#~ msgid "Enumerate"
+#~ msgstr "Liệt kê tuần tự"
+
+#~ msgid "Candidate List"
+#~ msgstr "Danh sách ứng viên"
+
+#~ msgid "Auto Restore Invalid Words Hotkey"
+#~ msgstr "Phím tắt tự động khôi phục từ không hợp lệ"
+
+#~ msgid "Macro Toggle Hotkey"
+#~ msgstr "Phím tắt bật/tắt Macro"
+
+#~ msgid "Mode Menu Style"
+#~ msgstr "Kiểu menu chế độ gõ"
+
+#~ msgid "Auto Restore Invalid Words: ON"
+#~ msgstr "Tự động khôi phục từ không hợp lệ: BẬT"
+
+#~ msgid "Auto Restore Invalid Words: OFF"
+#~ msgstr "Tự động khôi phục từ không hợp lệ: TẮT"
+
+#~ msgid "Macro: ON"
+#~ msgstr "Gõ tắt: BẬT"
+
+#~ msgid "Macro: OFF"
+#~ msgstr "Gõ tắt: TẮT"
+
+#~ msgid ""
+#~ "Auto capitalize after sentence-ending punctuation (. ! ? Enter) "
+#~ "(experimental)"
+#~ msgstr "Tự động ghi hoa sau dấu câu (. ! ? Enter) (thử nghiệm)"
+
+#~ msgid "Double Space to Period (experimental)"
+#~ msgstr "Phím cách 2 lần để chấm câu (thử nghiệm)"
 
 #~ msgid "MAIN SHORTCUTS"
 #~ msgstr "PHÍM TẮT CHÍNH"
