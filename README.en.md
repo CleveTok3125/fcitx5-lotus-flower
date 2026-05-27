@@ -53,6 +53,46 @@
 
 This project is an optimized fork of [VMK input method](https://github.com/thanhpy2009/VMK). Sincere thanks to the author Thanh for laying the foundation for this input method.
 
+## Fork Notes
+
+- Changes the typing mode menu from a candidate list to Fcitx-style enumeration. \
+  Input Method Settings -> Addons -> Lotus Wrapper For Fcitx
+  - Avoid the default `` ` `` mode hotkey because it conflicts with code, Markdown, and shell typing.
+  - Prefer another `Mode Menu Hotkey`, for example `Alt+Z`.
+
+- Added a checkbox to automatically restart the Lotus server when saving settings.
+  - Polkit agent is required to function.
+  - Not required/does not work with systems that do not use systemd.
+
+- Added keyboard shortcut configuration for `Auto Non-VN Restore`.
+
+- Added keyboard shortcut configuration to toggle `Macro`.
+
+- Added option to allow macros in Off mode.
+
+- Added auto-fix sticky Shift capitalization for words (3+ letters) \
+  (e.g.: `GHi` → `Ghi`, `THái` → `Thái`). Toggle on/off via status menu or settings.
+
+- Added `FixStickyShiftMaxChars` option to configure maximum consecutive uppercase \
+  letters to fix (default `1`). Negative values count from the end: `-1` fixes `THÁi` → `Thái`, \
+  `-2` fixes `THái` → `Thái`.
+
+- This fork is maintained as a patch stack on top of `upstream/main`; see [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) to sync with upstream or inspect the fork-specific patches.
+
+### Install
+
+#### Arch
+
+```bash
+git clone --recursive https://github.com/CleveTok3125/fcitx5-lotus-flower
+cd fcitx5-lotus-flower
+makepkg -si -f
+```
+
+#### Other distros
+
+reference [Compilation from source](#compilation-from-source-for-developers)
+
 ## Installation & Usage Guide
 
 To have the best experience and get the most out of insallation, configuration, and support for each Linux distribution (Arch, Debian, Ubuntu, Fedora, NixOS...), please visit the project website:
