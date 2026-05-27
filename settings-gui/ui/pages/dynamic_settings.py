@@ -59,7 +59,7 @@ SETTINGS_MAP = {
         ],
     },
     SettingsCategory.SHORTCUTS: {
-        "MAIN SHORTCUTS": ["ModeMenuKey", "CycleModeKey"],
+        "MAIN SHORTCUTS": ["ModeMenuKey", "CycleModeKey", "AutoNonVnRestoreKey"],
         "MODE SWITCHING": [
             "ShortcutSmooth",
             "ShortcutUinput",
@@ -278,7 +278,7 @@ class DynamicSettingsPage(QWidget):
 
                     found_any = True
                     type_str = item[1]
-                    if k in ["ModeMenuKey", "CycleModeKey"] or type_str == "Hotkey":
+                    if k in ["ModeMenuKey", "CycleModeKey", "AutoNonVnRestoreKey"] or type_str == "Hotkey":
                         self._render_hotkey(item, card.content_layout)
                     elif "Enum" in item[4]:
                         self._render_combobox(item, card.content_layout)
@@ -323,7 +323,12 @@ class DynamicSettingsPage(QWidget):
         key, type_str, label, default, annotations = item
         val = self.current_values.get(key, default)
 
-        hotkey_str = val.get("0", "") if isinstance(val, dict) else ""
+        if isinstance(val, dict):
+            hotkey_str = val.get("0", "")
+        elif isinstance(val, list):
+            hotkey_str = val[0] if val else ""
+        else:
+            hotkey_str = str(val) if val else ""
 
         row_layout = QHBoxLayout()
         row_layout.addWidget(QLabel(_(label)))
@@ -332,7 +337,7 @@ class DynamicSettingsPage(QWidget):
         hk_btn = HotkeyEditorWidget(hotkey_str)
         hk_btn.setFixedWidth(235)
         hk_btn.textChanged.connect(
-            lambda text, k=key: self.update_config(k, {"0": text})
+            lambda text, k=key: self.update_config(k, {"0": text} if text else {})
         )
 
         row_layout.addWidget(hk_btn)

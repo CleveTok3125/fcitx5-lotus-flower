@@ -697,6 +697,16 @@ namespace fcitx {
             keyEvent.filterAndAccept();
             return;
         }
+        if (!keyEvent.isRelease() && !config_.autoNonVnRestoreKey->empty() && keyEvent.key().checkKeyList(*config_.autoNonVnRestoreKey)) {
+            config_.autoNonVnRestore.setValue(!config_.autoNonVnRestore.value());
+            saveConfig();
+            refreshOption();
+            updateAction(ic, autoNonVnRestoreAction_, config_.autoNonVnRestore, _("Auto Non-VN Restore"));
+            ic->updateUserInterface(UserInterfaceComponent::StatusArea);
+            instance_->showCustomInputMethodInformation(ic, config_.autoNonVnRestore.value() ? _("Auto Restore Invalid Words: ON") : _("Auto Restore Invalid Words: OFF"));
+            keyEvent.filterAndAccept();
+            return;
+        }
         auto* state = keyEvent.inputContext()->propertyFor(&factory_);
         state->keyEvent(keyEvent);
         const auto&  s       = ic->surroundingText();
