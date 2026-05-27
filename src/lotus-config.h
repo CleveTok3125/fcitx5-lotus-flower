@@ -79,6 +79,13 @@ namespace fcitx {
 
     FCITX_CONFIG_ENUM_NAME_WITH_I18N(IconTheme, N_("Auto"), N_("Light"), N_("Dark"));
 
+    enum class ModeMenuStyle : std::uint8_t {
+        Enumerate,
+        CandidateList,
+    };
+
+    FCITX_CONFIG_ENUM_NAME_WITH_I18N(ModeMenuStyle, N_("Enumerate"), N_("Candidate List"));
+
     struct InputMethodConstrain;
     struct InputMethodAnnotation;
 
@@ -211,6 +218,7 @@ namespace fcitx {
         OptionWithAnnotation<std::string, StringListAnnotation> outputCharset{this, "OutputCharset", _("Output Charset"), "Unicode", {}, {}, StringListAnnotation()};
         KeyListOption                                           modeMenuKey{
             this, "ModeMenuKey", _("Mode Menu Hotkey"), {Key("grave")}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
+        OptionWithAnnotation<ModeMenuStyle, ModeMenuStyleI18NAnnotation>               modeMenuStyle{this, "ModeMenuStyle", _("Mode Menu Style"), ModeMenuStyle::Enumerate};
         SubConfigOption                                                                appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
         OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation>                           w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
         OptionWithAnnotation<BracketTransformMode, BracketTransformModeI18NAnnotation> bracketTransform{this, "BracketTransform", _("Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"),
