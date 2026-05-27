@@ -34,7 +34,7 @@ class SettingsCategory(Enum):
 SETTINGS_MAP = {
     SettingsCategory.GENERAL: {
         "HOTKEYS": ["ModeMenuKey"],
-        "INPUT METHOD": ["InputMethod", "Mode", "OutputCharset"],
+        "INPUT METHOD": ["InputMethod", "Mode", "ModeMenuStyle", "OutputCharset"],
         "LOADABLE MODES": [
             "ShowModeSmooth",
             "ShowModeUinput",
