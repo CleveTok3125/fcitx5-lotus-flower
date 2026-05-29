@@ -629,6 +629,16 @@ namespace fcitx {
             keyEvent.filterAndAccept();
             return;
         }
+        if (!keyEvent.isRelease() && !config_.macroToggleKey->empty() && keyEvent.key().checkKeyList(*config_.macroToggleKey)) {
+            config_.enableMacro.setValue(!config_.enableMacro.value());
+            saveConfig();
+            refreshOption();
+            updateAction(ic, macroAction_, config_.enableMacro, _("Macro"));
+            ic->updateUserInterface(UserInterfaceComponent::StatusArea);
+            instance_->showCustomInputMethodInformation(ic, config_.enableMacro.value() ? _("Macro: ON") : _("Macro: OFF"));
+            keyEvent.filterAndAccept();
+            return;
+        }
         auto* state = keyEvent.inputContext()->propertyFor(&factory_);
         state->keyEvent(keyEvent);
         const auto&  s       = ic->surroundingText();
