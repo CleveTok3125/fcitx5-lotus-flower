@@ -66,6 +66,8 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 
 - Thêm cấu hình phím tắt cho `Tự động khôi phục với từ không phải tiếng Việt`.
 
+- Thêm cấu hình phím tắt bật/tắt `Macro` (gõ tắt).
+
 - Bản fork này được duy trì bằng patch stack trên `upstream/main`; xem [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) nếu muốn sync lại với upstream hoặc kiểm tra các patch riêng của fork.
 
 ### Cài đặt
