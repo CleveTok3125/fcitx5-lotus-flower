@@ -214,6 +214,8 @@ namespace fcitx {
         KeyListOption cycleModeKey{this, "CycleModeKey", _("Cycle Mode Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
         KeyListOption autoNonVnRestoreKey{
             this, "AutoNonVnRestoreKey", _("Auto Restore Invalid Words Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
+        KeyListOption macroToggleKey{
+            this, "MacroToggleKey", _("Macro Toggle Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
         SubConfigOption                                                                appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
         OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation>                           w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
         OptionWithAnnotation<BracketTransformMode, BracketTransformModeI18NAnnotation> bracketTransform{this, "BracketTransform", _("Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"),

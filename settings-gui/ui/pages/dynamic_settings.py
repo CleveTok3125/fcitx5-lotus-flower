@@ -59,7 +59,7 @@ SETTINGS_MAP = {
         ],
     },
     SettingsCategory.SHORTCUTS: {
-        "MAIN SHORTCUTS": ["ModeMenuKey", "CycleModeKey", "AutoNonVnRestoreKey"],
+        "MAIN SHORTCUTS": ["ModeMenuKey", "CycleModeKey", "AutoNonVnRestoreKey", "MacroToggleKey"],
         "MODE SWITCHING": [
             "ShortcutSmooth",
             "ShortcutUinput",
@@ -278,7 +278,7 @@ class DynamicSettingsPage(QWidget):
 
                     found_any = True
                     type_str = item[1]
-                    if k in ["ModeMenuKey", "CycleModeKey", "AutoNonVnRestoreKey"] or type_str == "Hotkey":
+                    if k in ["ModeMenuKey", "CycleModeKey", "AutoNonVnRestoreKey", "MacroToggleKey"] or type_str == "Hotkey":
                         self._render_hotkey(item, card.content_layout)
                     elif "Enum" in item[4]:
                         self._render_combobox(item, card.content_layout)
