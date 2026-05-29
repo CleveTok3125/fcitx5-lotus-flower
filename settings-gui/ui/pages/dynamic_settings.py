@@ -33,7 +33,7 @@ class SettingsCategory(Enum):
 # Mapping of settings keys to categories and groups
 SETTINGS_MAP = {
     SettingsCategory.GENERAL: {
-        "HOTKEYS": ["ModeMenuKey", "AutoNonVnRestoreKey"],
+        "HOTKEYS": ["ModeMenuKey", "AutoNonVnRestoreKey", "MacroToggleKey"],
         "INPUT METHOD": ["InputMethod", "Mode", "ModeMenuStyle", "OutputCharset"],
         "LOADABLE MODES": [
             "ShowModeSmooth",
@@ -159,7 +159,7 @@ class DynamicSettingsPage(QWidget):
                     
                     found_any = True
                     type_str = item[1]
-                    if k in ("ModeMenuKey", "AutoNonVnRestoreKey") or type_str == "Hotkey":
+                    if k in ("ModeMenuKey", "AutoNonVnRestoreKey", "MacroToggleKey") or type_str == "Hotkey":
                         self._render_hotkey(item, card.content_layout)
                     elif "Enum" in item[4]:
                         self._render_combobox(item, card.content_layout)
