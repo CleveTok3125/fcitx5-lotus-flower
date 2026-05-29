@@ -220,6 +220,8 @@ namespace fcitx {
             this, "ModeMenuKey", _("Mode Menu Hotkey"), {Key("grave")}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
         KeyListOption autoNonVnRestoreKey{
             this, "AutoNonVnRestoreKey", _("Auto Restore Invalid Words Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
+        KeyListOption macroToggleKey{
+            this, "MacroToggleKey", _("Macro Toggle Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
         OptionWithAnnotation<ModeMenuStyle, ModeMenuStyleI18NAnnotation>               modeMenuStyle{this, "ModeMenuStyle", _("Mode Menu Style"), ModeMenuStyle::Enumerate};
         SubConfigOption                                                                appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
         OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation>                           w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
