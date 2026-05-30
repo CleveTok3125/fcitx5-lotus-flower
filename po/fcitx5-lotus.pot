@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-29 14:26+0700\n"
+"POT-Creation-Date: 2026-05-30 00:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -240,6 +240,10 @@ msgstr ""
 msgid "Show Default Typing"
 msgstr ""
 
+#: src/lotus-config.h:252
+msgid "Allow Macro in Off Mode"
+msgstr ""
+
 #: src/lotus-config.h:253
 msgid "Time Format ($TIME in macro)"
 msgstr ""
@@ -347,6 +351,13 @@ msgid ""
 "dictionary.\n"
 "This helps prevent accidental Vietnamese transformations on English words or "
 "mixed text."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:31
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:31
+msgid ""
+"Allow macros to work when the input mode is OFF.\n"
+"When disabled, macros are only available in active typing modes."
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:64
@@ -704,6 +715,11 @@ msgstr ""
 #: settings-gui/ui/pages/keymap_editor.py:464
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:464
 msgid ". Are you sure?"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:62
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:62
+msgid "Macro in Off Mode"
 msgstr ""
 
 #: settings-gui/ui/pages/macro_editor.py:75
