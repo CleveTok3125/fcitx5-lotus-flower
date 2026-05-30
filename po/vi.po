@@ -241,6 +241,10 @@ msgstr "Hiển thị chế độ Tắt"
 msgid "Show Default Typing"
 msgstr "Hiển thị chế độ gõ mặc định"
 
+#: src/lotus-config.h:252
+msgid "Allow Macro in Off Mode"
+msgstr "Cho phép gõ tắt ở chế độ TẮT"
+
 #: src/lotus-config.h:253
 msgid "Time Format ($TIME in macro)"
 msgstr "Định dạng giờ ($TIME trong gõ tắt)"
@@ -362,6 +366,15 @@ msgstr ""
 "Tựu động khôi phục chuỗi vừa gõ nếu từ đó không có trong từ điển.\n"
 "Nó giúp tránh các trường hợp gõ các từ tiếng Anh mà bị chuyển đổi qua Tiếng "
 "việt hoặc gõ song ngữ."
+
+#: settings-gui/ui/helpers.py:31
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:31
+msgid ""
+"Allow macros to work when the input mode is OFF.\n"
+"When disabled, macros are only available in active typing modes."
+msgstr ""
+"Cho phép gõ tắt hoạt động khi chế độ gõ là TẮT.\n"
+"Khi tắt, gõ tắt chỉ khả dụng ở các chế độ gõ đang hoạt động."
 
 #: settings-gui/ui/pages/about.py:64
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:64
@@ -727,6 +740,11 @@ msgstr "Việc này sẽ thay thế mọi phím sẵn có với "
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:464
 msgid ". Are you sure?"
 msgstr ". Bạn có chắc chắn?"
+
+#: settings-gui/ui/pages/macro_editor.py:62
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:62
+msgid "Macro in Off Mode"
+msgstr "Gõ tắt ở chế độ TẮT"
 
 #: settings-gui/ui/pages/macro_editor.py:75
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:75
