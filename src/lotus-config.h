@@ -218,10 +218,8 @@ namespace fcitx {
         OptionWithAnnotation<std::string, StringListAnnotation> outputCharset{this, "OutputCharset", _("Output Charset"), "Unicode", {}, {}, StringListAnnotation()};
         KeyListOption                                           modeMenuKey{
             this, "ModeMenuKey", _("Mode Menu Hotkey"), {Key("grave")}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
-        KeyListOption autoNonVnRestoreKey{
-            this, "AutoNonVnRestoreKey", _("Auto Restore Invalid Words Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
-        KeyListOption macroToggleKey{
-            this, "MacroToggleKey", _("Macro Toggle Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
+        KeyListOption autoNonVnRestoreKey{this, "AutoNonVnRestoreKey", _("Auto Restore Invalid Words Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
+        KeyListOption macroToggleKey{this, "MacroToggleKey", _("Macro Toggle Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess})};
         OptionWithAnnotation<ModeMenuStyle, ModeMenuStyleI18NAnnotation>               modeMenuStyle{this, "ModeMenuStyle", _("Mode Menu Style"), ModeMenuStyle::Enumerate};
         SubConfigOption                                                                appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
         OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation>                           w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
@@ -249,6 +247,7 @@ namespace fcitx {
         Option<bool> showModeSurroundingText{this, "ShowModeSurroundingText", _("Show Surrounding Text"), true};
         Option<bool> showModePreedit{this, "ShowModePreedit", _("Show Preedit"), true}; Option<bool> showModeEmoji{this, "ShowModeEmoji", _("Show Emoji Picker"), true};
         Option<bool> showModeOff{this, "ShowModeOff", _("Show OFF"), true}; Option<bool> showModeDefault{this, "ShowModeDefault", _("Show Default Typing"), true};
+        Option<bool>                                                                     enableMacroInOffMode{this, "EnableMacroInOffMode", _("Allow Macro in Off Mode"), false};
 
         OptionWithAnnotation<std::string, TimeFormatAnnotation>  timeFormat{this, "TimeFormat", _("Time Format ($TIME in macro)"), "%H:%M", {}, {}, TimeFormatAnnotation()};
         OptionWithAnnotation<std::string, DateFormatAnnotation>  dateFormat{this, "DateFormat", _("Date Format ($DATE in macro)"), "%d/%m/%Y", {}, {}, DateFormatAnnotation()};
