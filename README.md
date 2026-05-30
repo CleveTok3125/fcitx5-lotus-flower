@@ -68,6 +68,8 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 
 - Thêm cấu hình phím tắt bật/tắt `Macro` (gõ tắt).
 
+- Thêm tùy chọn cho phép gõ tắt ở chế độ tắt.
+
 - Bản fork này được duy trì bằng patch stack trên `upstream/main`; xem [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) nếu muốn sync lại với upstream hoặc kiểm tra các patch riêng của fork.
 
 ### Cài đặt

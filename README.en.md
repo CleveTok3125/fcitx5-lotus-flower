@@ -68,6 +68,8 @@ This project is an optimized fork of [VMK input method](https://github.com/thanh
 
 - Added keyboard shortcut configuration to toggle `Macro`.
 
+- Added option to allow macros in Off mode.
+
 - This fork is maintained as a patch stack on top of `upstream/main`; see [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) to sync with upstream or inspect the fork-specific patches.
 
 ### Install
