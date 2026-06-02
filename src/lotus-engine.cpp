@@ -202,6 +202,8 @@ namespace fcitx {
                          uiManager);
         initToggleAction(autoNonVnRestoreAction_, config_.autoNonVnRestore, "lotus-autonvnrestore", "edit-undo", _("Auto Restore Invalid Words"), _("Auto Non-VN Restore"),
                          uiManager);
+        initToggleAction(fixStickyShiftAction_, config_.fixStickyShift, "lotus-fixstickyshift", "format-text-uppercase", _("Auto Fix Sticky Shift"), _("Fix Sticky Shift"),
+                         uiManager);
         initToggleAction(enableDictionaryAction_, config_.enableDictionary, "lotus-dictionary", "accessories-dictionary", _("Custom Dictionary"), _("Custom Dictionary"),
                          uiManager);
 
@@ -229,8 +231,8 @@ namespace fcitx {
         instance_->inputContextManager().registerProperty("LotusState", &factory_);
         appRulesPath_ = configDir + "/lotus-app-rules.conf";
         loadAppRules();
-        toggleActions_ = {charsetAction_.get(),          spellCheckAction_.get(),       macroAction_.get(),   capitalizeMacroAction_.get(),
-                          autoNonVnRestoreAction_.get(), enableDictionaryAction_.get(), settingsAction_.get()};
+        toggleActions_ = {charsetAction_.get(),        spellCheckAction_.get(),       macroAction_.get(),   capitalizeMacroAction_.get(), autoNonVnRestoreAction_.get(),
+                          fixStickyShiftAction_.get(), enableDictionaryAction_.get(), settingsAction_.get()};
     }
 
     void LotusEngine::initToggleAction(std::unique_ptr<SimpleAction>& action, Option<bool>& option, const std::string& actionId, const std::string& iconName,
@@ -345,6 +347,7 @@ namespace fcitx {
         updateAction(nullptr, macroAction_, config_.enableMacro, _("Macro"));
         updateAction(nullptr, capitalizeMacroAction_, config_.capitalizeMacro, _("Capitalize Macro"));
         updateAction(nullptr, autoNonVnRestoreAction_, config_.autoNonVnRestore, _("Auto Non-VN Restore"));
+        updateAction(nullptr, fixStickyShiftAction_, config_.fixStickyShift, _("Fix Sticky Shift"));
         updateAction(nullptr, enableDictionaryAction_, config_.enableDictionary, _("Custom Dictionary"));
     }
 

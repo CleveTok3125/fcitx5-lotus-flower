@@ -191,13 +191,19 @@ namespace fcitx {
         return false;
     }
 
+    std::string LotusState::applyFix(const std::string& text) const {
+        if (!*engine_->config().fixStickyShift)
+            return text;
+        return fixStickyShift(text);
+    }
+
     void LotusState::handlePreeditMode(KeyEvent& keyEvent, KeySym currentSym) {
         if (EngineProcessKeyEvent(lotusEngine_.handle(), currentSym, keyEvent.rawKey().states()) != 0U)
             keyEvent.filterAndAccept();
         if (auto commit = UniqueCPtr<char>(EnginePullCommit(lotusEngine_.handle()))) {
             if (commit && (*commit.get() != 0)) {
                 LOTUS_INFO("Commit: " + std::string(commit.get()));
-                ic_->commitString(commit.get());
+                ic_->commitString(applyFix(commit.get()));
             }
         }
         ic_->inputPanel().reset();
@@ -592,6 +598,22 @@ namespace fcitx {
         auto commitF = UniqueCPtr<char>(EnginePullCommit(lotusEngine_.handle()));
         if (commitF && (*commitF.get() != 0)) {
             std::string commitStr = commitF.get();
+            std::string fixedStr  = applyFix(commitStr);
+
+            if (fixedStr != commitStr) {
+                if (!oldPreBuffer_.empty()) {
+                    performReplacement(oldPreBuffer_, fixedStr);
+                } else {
+                    ic_->commitString(fixedStr);
+                    LOTUS_INFO("Commit: " + fixedStr);
+                }
+                keyEvent.filterAndAccept();
+                hasHistory_ = false;
+                ResetEngine(lotusEngine_.handle());
+                oldPreBuffer_.clear();
+                return;
+            }
+
             std::string deletedPart;
             std::string addedPart;
             compareAndSplitStrings(oldPreBuffer_, commitStr, deletedPart, addedPart);
@@ -780,6 +802,20 @@ namespace fcitx {
             std::string deletedPart;
             std::string addedPart;
             compareAndSplitStrings(oldWord, newWord, deletedPart, addedPart);
+
+            std::string fixedWord = applyFix(newWord);
+            if (fixedWord != newWord && fixedWord != oldWord) {
+                size_t oldLen = utf8::length(oldWord);
+                if (oldLen > 0) {
+                    ic->deleteSurroundingText(-static_cast<int>(oldLen), static_cast<int>(oldLen));
+                }
+                ic->commitString(fixedWord);
+                LOTUS_INFO("Commit: " + fixedWord);
+                ResetEngine(lotusEngine_.handle());
+                keyEvent.filterAndAccept();
+                return;
+            }
+
             if ((deletedPart.empty() || deletedPart == oldWord) && addedPart == keyEvent.key().toString()) {
                 ResetEngine(lotusEngine_.handle());
                 keyEvent.forward();
@@ -824,7 +860,7 @@ namespace fcitx {
 
             if (!out.empty()) {
                 LOTUS_INFO("Commit: " + out);
-                ic->commitString(out);
+                ic->commitString(applyFix(out));
             }
 
             ResetEngine(lotusEngine_.handle());
@@ -1140,7 +1176,7 @@ namespace fcitx {
                 EngineCommitPreedit(lotusEngine_.handle());
                 UniqueCPtr<char> commit(EnginePullCommit(lotusEngine_.handle()));
                 if (commit && (*commit.get() != 0)) {
-                    ic_->commitString(commit.get());
+                    ic_->commitString(applyFix(commit.get()));
                     LOTUS_INFO("Commit: " + std::string(commit.get()));
                 }
             }
@@ -1184,7 +1220,7 @@ namespace fcitx {
                     EngineCommitPreedit(lotusEngine_.handle());
                     UniqueCPtr<char> commit(EnginePullCommit(lotusEngine_.handle()));
                     if (commit && (*commit.get() != 0))
-                        ic_->commitString(commit.get());
+                        ic_->commitString(applyFix(commit.get()));
                     ResetEngine(lotusEngine_.handle());
                 }
                 ic_->updateUserInterface(UserInterfaceComponent::InputPanel);
@@ -1254,12 +1290,31 @@ namespace fcitx {
             auto commitF = UniqueCPtr<char>(EnginePullCommit(lotusEngine_.handle()));
             if (commitF && (*commitF.get() != 0)) {
                 std::string commitStr = commitF.get();
+                std::string fixedStr  = applyFix(commitStr);
+
+                if (fixedStr != commitStr) {
+                    if (!oldPreBuffer_.empty()) {
+                        // Re-buffer remaining keys for next replay cycle.
+                        for (size_t j = i + 1; j < keys.size(); ++j) {
+                            if (buffered_keys_.size() < MAX_BUFFERED_KEYS) {
+                                buffered_keys_.push_back(keys[j]);
+                            }
+                        }
+                        performReplacement(oldPreBuffer_, fixedStr);
+                    } else {
+                        ic_->commitString(fixedStr);
+                    }
+                    hasHistory_ = false;
+                    ResetEngine(lotusEngine_.handle());
+                    oldPreBuffer_.clear();
+                    return;
+                }
+
                 std::string deletedPart;
                 std::string addedPart;
                 compareAndSplitStrings(oldPreBuffer_, commitStr, deletedPart, addedPart);
 
                 if (!deletedPart.empty()) {
-                    // Re-buffer remaining keys for next replay cycle.
                     for (size_t j = i + 1; j < keys.size(); ++j) {
                         if (buffered_keys_.size() < MAX_BUFFERED_KEYS) {
                             buffered_keys_.push_back(keys[j]);

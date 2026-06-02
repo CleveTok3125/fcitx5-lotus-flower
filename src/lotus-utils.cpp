@@ -101,3 +101,44 @@ std::string getFrontendName(fcitx::InputContext* ic) {
     }
     return ic->frontend();
 }
+
+std::string fixStickyShift(const std::string& word) {
+    size_t len = fcitx::utf8::length(word);
+    if (len < 3)
+        return word;
+
+    uint32_t ch1;
+    auto     it = fcitx::utf8::getNextChar(word.begin(), word.end(), &ch1);
+    if (ch1 < 'A' || ch1 > 'Z')
+        return word;
+
+    uint32_t ch2;
+    it = fcitx::utf8::getNextChar(it, word.end(), &ch2);
+    if (ch2 < 'A' || ch2 > 'Z')
+        return word;
+
+    bool hasNonUpper = false;
+    auto checkIt     = it;
+    while (checkIt != word.end()) {
+        uint32_t ch;
+        checkIt = fcitx::utf8::getNextChar(checkIt, word.end(), &ch);
+        if (ch < 'A' || ch > 'Z') {
+            hasNonUpper = true;
+            break;
+        }
+    }
+    if (!hasNonUpper)
+        return word;
+
+    std::string result;
+    result.reserve(word.size());
+    result += word[0];
+    for (size_t i = 1; i < word.size(); ++i) {
+        auto c = static_cast<unsigned char>(word[i]);
+        if (c >= 'A' && c <= 'Z')
+            result += static_cast<char>(c + 32);
+        else
+            result += word[i];
+    }
+    return result;
+}
