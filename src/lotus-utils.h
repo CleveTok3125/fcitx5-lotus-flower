@@ -89,6 +89,18 @@ bool isStartsWith(const std::string& str, const std::string& prefix);
  * @param ic Input context.
  * @return Frontend name.
  */
+/**
+ * @brief Auto-fix sticky Shift capitalization for words (3+ letters).
+ *
+ * If a word has >= 3 characters, starts with >= 2 uppercase ASCII letters,
+ * and contains at least one non-uppercase-ASCII character, lowercases all
+ * ASCII letters after the first one.
+ *
+ * @param word The word to fix.
+ * @return Corrected word, or original if no fix needed.
+ */
+std::string fixStickyShift(const std::string& word);
+
 std::string getFrontendName(fcitx::InputContext* ic);
 
 /**
