@@ -7,6 +7,7 @@
  */
 #include "lotus-utils.h"
 #include "lotus-config.h"
+#include "lotus-flower-shift-fix.h"
 
 #include <cstddef>
 #include <fcitx-utils/utf8.h>
@@ -100,4 +101,8 @@ std::string getFrontendName(fcitx::InputContext* ic) {
         return "unknown";
     }
     return ic->frontend();
+}
+
+std::string fixStickyShift(const std::string& word) {
+    return lotus_shift_fix::fixShift(word);
 }
