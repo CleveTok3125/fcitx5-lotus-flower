@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-30 00:00+0700\n"
+"POT-Creation-Date: 2026-06-02 18:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lotus-state.cpp:235
-msgid "Page "
-msgstr ""
-
-#: src/lotus-config.h:40 src/lotus-engine.cpp:850 src/lotus-engine.cpp:968
+#: src/lotus-config.h:40 src/lotus-engine.cpp:853 src/lotus-engine.cpp:971
 msgid "OFF"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:844 src/lotus-engine.cpp:962
+#: src/lotus-config.h:40 src/lotus-engine.cpp:847 src/lotus-engine.cpp:965
 msgid "Uinput (Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:851
+#: src/lotus-config.h:40 src/lotus-engine.cpp:854
 msgid "Uinput (Super Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:845 src/lotus-engine.cpp:963
+#: src/lotus-config.h:40 src/lotus-engine.cpp:848 src/lotus-engine.cpp:966
 msgid "Uinput (Slow)"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:847 src/lotus-engine.cpp:965
+#: src/lotus-config.h:40 src/lotus-engine.cpp:850 src/lotus-engine.cpp:968
 msgid "Surrounding Text"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:848 src/lotus-engine.cpp:966
+#: src/lotus-config.h:40 src/lotus-engine.cpp:851 src/lotus-engine.cpp:969
 msgid "Preedit"
 msgstr ""
 
-#: src/lotus-config.h:41 src/lotus-engine.cpp:849 src/lotus-engine.cpp:967
+#: src/lotus-config.h:41 src/lotus-engine.cpp:852 src/lotus-engine.cpp:970
 msgid "Emoji Picker"
 msgstr ""
 
-#: src/lotus-config.h:41 src/lotus-engine.cpp:846 src/lotus-engine.cpp:964
+#: src/lotus-config.h:41 src/lotus-engine.cpp:849 src/lotus-engine.cpp:967
 msgid "Minecraft"
 msgstr ""
 
@@ -94,11 +90,11 @@ msgid "Value"
 msgstr ""
 
 #: src/lotus-config.h:198 src/lotus-config.h:256 src/lotus-engine.cpp:200
-#: src/lotus-engine.cpp:345 src/lotus-engine.cpp:636
+#: src/lotus-engine.cpp:347 src/lotus-engine.cpp:639
 msgid "Macro"
 msgstr ""
 
-#: src/lotus-config.h:202 src/lotus-config.h:244 src/lotus-config.h:257
+#: src/lotus-config.h:202 src/lotus-config.h:243 src/lotus-config.h:257
 msgid "Custom Keymap"
 msgstr ""
 
@@ -126,121 +122,125 @@ msgstr ""
 msgid "Mode Menu Hotkey"
 msgstr ""
 
-#: src/lotus-config.h:222
+#: src/lotus-config.h:221
 msgid "Auto Restore Invalid Words Hotkey"
 msgstr ""
 
-#: src/lotus-config.h:224
+#: src/lotus-config.h:222
 msgid "Macro Toggle Hotkey"
 msgstr ""
 
-#: src/lotus-config.h:225
+#: src/lotus-config.h:223
 msgid "Mode Menu Style"
 msgstr ""
 
-#: src/lotus-config.h:226
+#: src/lotus-config.h:224
 msgid "App Rules"
 msgstr ""
 
-#: src/lotus-config.h:227
+#: src/lotus-config.h:225
 msgid "Type w to Produce ư"
 msgstr ""
 
-#: src/lotus-config.h:228
+#: src/lotus-config.h:226
 msgid "Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"
 msgstr ""
 
-#: src/lotus-config.h:231
+#: src/lotus-config.h:229
 msgid "Enable Spell Check"
 msgstr ""
 
-#: src/lotus-config.h:231
+#: src/lotus-config.h:229
 msgid "Enable Macro"
 msgstr ""
 
-#: src/lotus-config.h:232 src/lotus-engine.cpp:201 src/lotus-engine.cpp:346
+#: src/lotus-config.h:230 src/lotus-engine.cpp:201 src/lotus-engine.cpp:348
 msgid "Capitalize Macro"
 msgstr ""
 
-#: src/lotus-config.h:233
+#: src/lotus-config.h:231
 msgid ""
 "Auto capitalize after sentence-ending punctuation (. ! ? Enter) "
 "(experimental)"
 msgstr ""
 
-#: src/lotus-config.h:234
+#: src/lotus-config.h:232
+msgid "Auto fix sticky Shift capitalization for words (3+ letters)"
+msgstr ""
+
+#: src/lotus-config.h:233
 msgid "Double Space to Period (experimental)"
 msgstr ""
 
-#: src/lotus-config.h:235
+#: src/lotus-config.h:234
 msgid "Double Hyphen to Em-Dash (--)"
 msgstr ""
 
-#: src/lotus-config.h:236 src/lotus-engine.cpp:203
+#: src/lotus-config.h:235 src/lotus-engine.cpp:203
 msgid "Auto Restore Invalid Words"
 msgstr ""
 
-#: src/lotus-config.h:237
+#: src/lotus-config.h:236
 msgid "Use oà, uý (Instead Of òa, úy)"
 msgstr ""
 
-#: src/lotus-config.h:238
+#: src/lotus-config.h:237
 msgid "Allow Type With More Freedom"
 msgstr ""
 
-#: src/lotus-config.h:239
+#: src/lotus-config.h:238
 msgid "Allow dd To Produce đ When Auto Restore Invalid Words Is On"
 msgstr ""
 
-#: src/lotus-config.h:240
+#: src/lotus-config.h:239
 msgid "Fix Uinput Mode With Ack"
 msgstr ""
 
-#: src/lotus-config.h:241
+#: src/lotus-config.h:240
 msgid "Use Lotus Status Icons"
 msgstr ""
 
-#: src/lotus-config.h:243 src/lotus-engine.cpp:205 src/lotus-engine.cpp:348
+#: src/lotus-config.h:242 src/lotus-engine.cpp:207 src/lotus-engine.cpp:351
 msgid "Custom Dictionary"
 msgstr ""
 
-#: src/lotus-config.h:246
+#: src/lotus-config.h:245
 msgid "Show Uinput (Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:246
+#: src/lotus-config.h:245
 msgid "Show Uinput (Slow)"
 msgstr ""
 
-#: src/lotus-config.h:247
+#: src/lotus-config.h:246
 msgid "Show Uinput (Super Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:248
+#: src/lotus-config.h:247
 msgid "Show Minecraft"
 msgstr ""
 
-#: src/lotus-config.h:249
+#: src/lotus-config.h:248
 msgid "Show Surrounding Text"
 msgstr ""
 
-#: src/lotus-config.h:250
+#: src/lotus-config.h:249
 msgid "Show Preedit"
 msgstr ""
 
-#: src/lotus-config.h:250
+#: src/lotus-config.h:249
 msgid "Show Emoji Picker"
 msgstr ""
 
-#: src/lotus-config.h:251
+#: src/lotus-config.h:250
 msgid "Show OFF"
 msgstr ""
 
-#: src/lotus-config.h:251
+#: src/lotus-config.h:250
 msgid "Show Default Typing"
 msgstr ""
 
-#: src/lotus-config.h:252
+#: src/lotus-config.h:251
 msgid "Allow Macro in Off Mode"
 msgstr ""
 
@@ -256,51 +256,63 @@ msgstr ""
 msgid "Icon Color"
 msgstr ""
 
+#: src/lotus-state.cpp:241
+msgid "Page "
+msgstr ""
+
 #: src/lotus-engine.cpp:172
 msgid "Charset"
 msgstr ""
 
-#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:344
+#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:346
 msgid "Spell Check"
 msgstr ""
 
-#: src/lotus-engine.cpp:203 src/lotus-engine.cpp:347 src/lotus-engine.cpp:626
+#: src/lotus-engine.cpp:203 src/lotus-engine.cpp:349 src/lotus-engine.cpp:629
 msgid "Auto Non-VN Restore"
 msgstr ""
 
-#: src/lotus-engine.cpp:209
+#: src/lotus-engine.cpp:205
+msgid "Auto Fix Sticky Shift"
+msgstr ""
+
+#: src/lotus-engine.cpp:205 src/lotus-engine.cpp:350
+msgid "Fix Sticky Shift"
+msgstr ""
+
+#: src/lotus-engine.cpp:211
 msgid "Settings"
 msgstr ""
 
-#: src/lotus-engine.cpp:628
+#: src/lotus-engine.cpp:631
 msgid "Auto Restore Invalid Words: ON"
 msgstr ""
 
-#: src/lotus-engine.cpp:628
+#: src/lotus-engine.cpp:631
 msgid "Auto Restore Invalid Words: OFF"
 msgstr ""
 
-#: src/lotus-engine.cpp:638
+#: src/lotus-engine.cpp:641
 msgid "Macro: ON"
 msgstr ""
 
-#: src/lotus-engine.cpp:638
+#: src/lotus-engine.cpp:641
 msgid "Macro: OFF"
 msgstr ""
 
-#: src/lotus-engine.cpp:972 src/lotus-engine.cpp:988
+#: src/lotus-engine.cpp:975 src/lotus-engine.cpp:991
 msgid "Default Typing"
 msgstr ""
 
-#: src/lotus-engine.cpp:1007
+#: src/lotus-engine.cpp:1010
 msgid "Type"
 msgstr ""
 
-#: src/lotus-engine.cpp:1023
+#: src/lotus-engine.cpp:1026
 msgid "App: "
 msgstr ""
 
-#: src/lotus-engine.cpp:1059
+#: src/lotus-engine.cpp:1062
 msgid "Lotus - Off"
 msgstr ""
 
@@ -319,45 +331,6 @@ msgid ""
 msgstr ""
 
 msgid "Lotus Wrapper For Fcitx"
-msgstr ""
-
-#: settings-gui/ui/helpers.py:15
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:15
-msgid "You can type tone marks at the end of the word or anywhere inside."
-msgstr ""
-
-#: settings-gui/ui/helpers.py:18
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:18
-msgid ""
-"Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
-"Edge."
-msgstr ""
-
-#: settings-gui/ui/helpers.py:21
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:21
-msgid ""
-"Automatically match expansion case to trigger key case.\n"
-"\n"
-"Example if 'kg' is 'khô gà':\n"
-"- kg -> khô gà\n"
-"- Kg -> Khô gà\n"
-"- KG -> KHÔ GÀ"
-msgstr ""
-
-#: settings-gui/ui/helpers.py:28
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:28
-msgid ""
-"Automatically revert the typed sequence if the resulting word is not in the "
-"dictionary.\n"
-"This helps prevent accidental Vietnamese transformations on English words or "
-"mixed text."
-msgstr ""
-
-#: settings-gui/ui/helpers.py:31
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:31
-msgid ""
-"Allow macros to work when the input mode is OFF.\n"
-"When disabled, macros are only available in active typing modes."
 msgstr ""
 
 #: settings-gui/ui/pages/about.py:64
@@ -585,10 +558,10 @@ msgstr ""
 
 #: settings-gui/ui/pages/dict_editor.py:89
 #: settings-gui/ui/pages/keymap_editor.py:241
-#: settings-gui/ui/pages/macro_editor.py:79
+#: settings-gui/ui/pages/macro_editor.py:88
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:89
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:241
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:79
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:88
 msgid "Search:"
 msgstr ""
 
@@ -601,14 +574,14 @@ msgstr ""
 #: settings-gui/ui/pages/dict_editor.py:318
 #: settings-gui/ui/pages/keymap_editor.py:280
 #: settings-gui/ui/pages/keymap_editor.py:453
-#: settings-gui/ui/pages/macro_editor.py:167
-#: settings-gui/ui/pages/macro_editor.py:432
+#: settings-gui/ui/pages/macro_editor.py:176
+#: settings-gui/ui/pages/macro_editor.py:450
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:108
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:318
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:280
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:453
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:167
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:432
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:176
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:450
 msgid "Add"
 msgstr ""
 
@@ -619,12 +592,12 @@ msgstr ""
 
 #: settings-gui/ui/pages/dict_editor.py:134
 #: settings-gui/ui/pages/keymap_editor.py:308
-#: settings-gui/ui/pages/macro_editor.py:197
 #: settings-gui/ui/pages/mode_manager.py:377
+#: settings-gui/ui/pages/macro_editor.py:206
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dict_editor.py:134
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:308
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:197
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/mode_manager.py:377
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:206
 msgid "Remove"
 msgstr ""
 
@@ -691,9 +664,9 @@ msgid "Remove selected row"
 msgstr ""
 
 #: settings-gui/ui/pages/keymap_editor.py:449
-#: settings-gui/ui/pages/macro_editor.py:429
+#: settings-gui/ui/pages/macro_editor.py:447
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:449
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:429
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:447
 msgid "Update"
 msgstr ""
 
@@ -715,86 +688,6 @@ msgstr ""
 #: settings-gui/ui/pages/keymap_editor.py:464
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/keymap_editor.py:464
 msgid ". Are you sure?"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:62
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:62
-msgid "Macro in Off Mode"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:75
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:75
-msgid "Search macros..."
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:96
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:96
-msgid "Macros support dynamic placeholders: $TIME and $DATE."
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:118
-#: settings-gui/ui/pages/macro_editor.py:139 settings-gui/ui/components.py:275
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:118
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:139
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:275
-msgid "None"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:124
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:124
-msgid "Time Format:"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:145
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:145
-msgid "Date Format:"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:159
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:159
-msgid "Abbreviation (e.g. kg)"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:163
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:163
-msgid "Full text (e.g. khô gà)"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:172
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:172
-msgid "Key:"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:174
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:174
-msgid "Value:"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:181
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:181
-msgid "Abbreviation"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:181
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:181
-msgid "Expanded Text"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:199
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:199
-msgid "Move Up"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:201
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:201
-msgid "Move Down"
-msgstr ""
-
-#: settings-gui/ui/pages/macro_editor.py:373
-#: settings-gui/ui/pages/macro_editor.py:418
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:373
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:418
-msgid "Macro keys cannot contain spaces or special characters."
 msgstr ""
 
 #: settings-gui/ui/pages/mode_manager.py:120
@@ -898,6 +791,86 @@ msgstr ""
 msgid "No interface settings available yet."
 msgstr ""
 
+#: settings-gui/ui/pages/macro_editor.py:62
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:62
+msgid "Macro in Off Mode"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:84
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:84
+msgid "Search macros..."
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:105
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:105
+msgid "Macros support dynamic placeholders: $TIME and $DATE."
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:127
+#: settings-gui/ui/pages/macro_editor.py:148 settings-gui/ui/components.py:275
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:127
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:148
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:275
+msgid "None"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:133
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:133
+msgid "Time Format:"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:154
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:154
+msgid "Date Format:"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:168
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:168
+msgid "Abbreviation (e.g. kg)"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:172
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:172
+msgid "Full text (e.g. khô gà)"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:181
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:181
+msgid "Key:"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:183
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:183
+msgid "Value:"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:190
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:190
+msgid "Abbreviation"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:190
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:190
+msgid "Expanded Text"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:208
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:208
+msgid "Move Up"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:210
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:210
+msgid "Move Down"
+msgstr ""
+
+#: settings-gui/ui/pages/macro_editor.py:391
+#: settings-gui/ui/pages/macro_editor.py:436
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:391
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:436
+msgid "Macro keys cannot contain spaces or special characters."
+msgstr ""
+
 #: settings-gui/ui/components.py:188
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/components.py:188
 msgid "Clear hotkey"
@@ -983,6 +956,55 @@ msgstr ""
 #: settings-gui/ui/main_window.py:278
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/main_window.py:278
 msgid "Settings saved."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:15
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:15
+msgid "You can type tone marks at the end of the word or anywhere inside."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:18
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:18
+msgid ""
+"Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
+"Edge."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:21
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:21
+msgid ""
+"Automatically match expansion case to trigger key case.\n"
+"\n"
+"Example if 'kg' is 'khô gà':\n"
+"- kg -> khô gà\n"
+"- Kg -> Khô gà\n"
+"- KG -> KHÔ GÀ"
+msgstr ""
+
+#: settings-gui/ui/helpers.py:28
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:28
+msgid ""
+"Automatically revert the typed sequence if the resulting word is not in the "
+"dictionary.\n"
+"This helps prevent accidental Vietnamese transformations on English words or "
+"mixed text."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:32
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:32
+msgid ""
+"Allow macros to work when the input mode is OFF.\n"
+"When disabled, macros are only available in active typing modes."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:36
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:36
+msgid ""
+"Auto fix sticky Shift capitalization for words (3+ letters).\n"
+"\n"
+"When you hold Shift a bit too long while typing the first letter, the second "
+"letter may also be capitalized by accident.\n"
+"For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
 msgstr ""
 
 #: settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop.in:2
