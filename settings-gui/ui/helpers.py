@@ -34,6 +34,12 @@ HELPERS = {
         "Press and release the selected modifier key before typing to skip macro expansion for the next word.\n"
         "If another key is pressed between the modifier's press and release, the skip is cancelled."
     ),
+    "FixStickyShift": _(
+        "Auto fix sticky Shift capitalization for words (3+ letters).\n\n"
+        "When you hold Shift a bit too long while typing the first letter, "
+        "the second letter may also be capitalized by accident.\n"
+        "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
+    ),
 }
 
 
