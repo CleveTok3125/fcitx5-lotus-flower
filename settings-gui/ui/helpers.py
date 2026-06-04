@@ -32,6 +32,12 @@ HELPERS = {
         "Allow macros to work when the input mode is OFF.\n"
         "When disabled, macros are only available in active typing modes."
     ),
+    "FixStickyShift": _(
+        "Auto fix sticky Shift capitalization for words (3+ letters).\n\n"
+        "When you hold Shift a bit too long while typing the first letter, "
+        "the second letter may also be capitalized by accident.\n"
+        "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
+    ),
 }
 
 
