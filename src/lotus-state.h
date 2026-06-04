@@ -256,6 +256,13 @@ namespace fcitx {
          * @brief Clears the macro-skip state and re-syncs the engine.
          */
         void resetMacroSkip();
+
+        /**
+         * @brief Applies sticky Shift fix to text if config option is enabled.
+         * @param text The text to potentially fix.
+         * @return Fixed text, or original if config disabled or no fix applicable.
+         */
+        std::string applyFix(const std::string& text) const;
     };
 
 } // namespace fcitx
