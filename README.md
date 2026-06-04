@@ -70,6 +70,9 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 
 - Thêm tùy chọn cho phép gõ tắt ở chế độ tắt.
 
+- Thêm tính năng tự động sửa lỗi viết hoa dính Shift cho từ có độ dài từ 3 chữ cái trở lên \
+  (ví dụ: `GHi` → `Ghi`, `THái` → `Thái`). Có thể bật/tắt trong menu trạng thái hoặc cài đặt.
+
 - Bản fork này được duy trì bằng patch stack trên `upstream/main`; xem [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) nếu muốn sync lại với upstream hoặc kiểm tra các patch riêng của fork.
 
 ### Cài đặt
