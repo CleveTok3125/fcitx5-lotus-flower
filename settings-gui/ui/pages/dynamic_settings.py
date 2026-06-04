@@ -53,6 +53,7 @@ SETTINGS_MAP = {
             "ModernStyle",
             "FreeMarking",
             "FixUinputWithAck",
+            "FixStickyShift",
             "DoubleSpaceToPeriod",
             "DoubleHyphenToEmDash",
             "AutoCapitalizeAfterPunctuation",
