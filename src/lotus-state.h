@@ -226,6 +226,13 @@ namespace fcitx {
          * replacement completes.
          */
         void replayBufferedKeys();
+
+        /**
+         * @brief Applies sticky Shift fix to text if config option is enabled.
+         * @param text The text to potentially fix.
+         * @return Fixed text, or original if config disabled or no fix applicable.
+         */
+        std::string applyFix(const std::string& text) const;
     };
 
 } // namespace fcitx
