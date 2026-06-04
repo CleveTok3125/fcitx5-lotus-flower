@@ -4,6 +4,7 @@ set(fcitx_lotus_sources
   lotus-state.cpp
   lotus-candidates.cpp
   lotus-utils.cpp
+  lotus-flower-shift-fix.cpp
   lotus-monitor.cpp
   emoji.cpp
 )
