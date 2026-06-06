@@ -113,6 +113,6 @@ void eraseLastUtf8Codepoint(std::string& buffer) {
     }
     buffer.erase(pos);
 }
-std::string fixStickyShift(const std::string& word) {
-    return lotus_shift_fix::fixShift(word);
+std::string fixStickyShift(const std::string& word, int maxShifted) {
+    return lotus_shift_fix::fixShift(word, maxShifted);
 }
