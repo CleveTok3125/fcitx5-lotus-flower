@@ -5,7 +5,7 @@
 
 namespace lotus_shift_fix {
 
-    std::string fixShift(const std::string& word);
+    std::string fixShift(const std::string& word, int maxShifted = 1);
 
 } // namespace lotus_shift_fix
 
