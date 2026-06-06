@@ -38,6 +38,18 @@ HELPERS = {
         "the second letter may also be capitalized by accident.\n"
         "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
     ),
+    "FixStickyShiftMaxChars": _(
+        "Maximum consecutive uppercase letters to fix (after the first letter).\n\n"
+        "Controls how many uppercase letters after the first one are lowered.\n"
+        "0 = unlimited (any number of uppercase letters will be fixed)\n"
+        "1 = only fix the second letter (default, e.g. 'THái' → 'Thái')\n"
+        "2 = fix up to 2 letters (e.g. 'THÁi' → 'Thái')\n"
+        "3 = fix up to 3 letters (e.g. 'THÁI' → 'Thái')\n\n"
+        "Negative values count from the end:\n"
+        "-1 = last 1 char is lowercase (e.g. 'THÁi' → 'Thái')\n"
+        "-2 = last 2 chars are lowercase (e.g. 'THái' → 'Thái')\n\n"
+        "Range: –7 to 7."
+    ),
 }
 
 

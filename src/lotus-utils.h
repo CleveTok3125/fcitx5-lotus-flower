@@ -99,7 +99,7 @@ bool isStartsWith(const std::string& str, const std::string& prefix);
  * @param word The word to fix.
  * @return Corrected word, or original if no fix needed.
  */
-std::string fixStickyShift(const std::string& word);
+std::string fixStickyShift(const std::string& word, int maxShifted = 1);
 
 std::string getFrontendName(fcitx::InputContext* ic);
 
