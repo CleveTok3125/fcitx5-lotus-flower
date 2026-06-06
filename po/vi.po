@@ -979,11 +979,13 @@ msgstr "Bạn có chắc chắn muốn khôi phục tất cả cài đặt về 
 msgid "Settings saved."
 msgstr "Cài đặt đã được lưu."
 
-#: settings-gui/ui/helpers.py:15
+#: settings-gui/ui/helpers.py:16
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:16
 msgid "You can type tone marks at the end of the word or anywhere inside."
 msgstr "Bạn có thể gõ dấu câu ở cuối từ hoặc bất cứ đâu."
 
-#: settings-gui/ui/helpers.py:18
+#: settings-gui/ui/helpers.py:17
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:17
 msgid ""
 "Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
 "Edge."
@@ -991,7 +993,8 @@ msgstr ""
 "Sửa lỗi gõ trong chế độ Uinput cho trình duyệt Chromium-based như Chrome "
 "hoặc Edge."
 
-#: settings-gui/ui/helpers.py:21
+#: settings-gui/ui/helpers.py:19
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:19
 msgid ""
 "Automatically match expansion case to trigger key case.\n"
 "\n"
@@ -1007,7 +1010,8 @@ msgstr ""
 "- Kg -> Khô gà\n"
 "- KG -> KHÔ GÀ"
 
-#: settings-gui/ui/helpers.py:28
+#: settings-gui/ui/helpers.py:26
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:26
 msgid ""
 "Automatically revert the typed sequence if the resulting word is not in the "
 "dictionary.\n"
@@ -1018,7 +1022,8 @@ msgstr ""
 "Nó giúp tránh các trường hợp gõ các từ tiếng Anh mà bị chuyển đổi qua Tiếng "
 "việt hoặc gõ song ngữ."
 
-#: settings-gui/ui/helpers.py:32
+#: settings-gui/ui/helpers.py:30
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:30
 msgid ""
 "Allow macros to work when the input mode is OFF.\n"
 "When disabled, macros are only available in active typing modes."
@@ -1026,7 +1031,8 @@ msgstr ""
 "Cho phép gõ tắt hoạt động khi chế độ gõ là TẮT.\n"
 "Khi tắt, gõ tắt chỉ khả dụng ở các chế độ gõ đang hoạt động."
 
-#: settings-gui/ui/helpers.py:36
+#: settings-gui/ui/helpers.py:34
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:34
 msgid ""
 "Auto fix sticky Shift capitalization for words (3+ letters).\n"
 "\n"
@@ -1040,7 +1046,8 @@ msgstr ""
 "viết hoa nhầm.\n"
 "Ví dụ: 'GHi' → 'Ghi', 'THái' → 'Thái'."
 
-#: settings-gui/ui/helpers.py:42
+#: settings-gui/ui/helpers.py:40
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:40
 msgid ""
 "Maximum consecutive uppercase letters to fix (after the first letter).\n"
 "\n"

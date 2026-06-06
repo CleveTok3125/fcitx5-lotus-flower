@@ -25,3 +25,12 @@ def setup_i18n():
 
 
 _ = gettext.gettext
+
+
+def N_(message: str) -> str:
+    """Marker for translatable strings (extracted by xgettext, not translated).
+    Use N_() at module level to mark strings for .pot extraction without
+    actually translating them at import time. Call _() on the result later
+    after i18n setup.
+    """
+    return message

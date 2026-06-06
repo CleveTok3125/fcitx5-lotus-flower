@@ -5,40 +5,38 @@
 Helper utilities and shared mappings for the Lotus settings GUI.
 """
 
-from i18n import _
+from i18n import _, N_
 from ui.components import HelpIcon
 
 
-# Tooltip text for specific settings keys
+# N_() marks strings for xgettext extraction without translating them.
+# _() is called lazily in add_help_icon() so translations are looked up
+# after setup_i18n() has been called.
 HELPERS = {
-    "FreeMarking": _(
-        "You can type tone marks at the end of the word or anywhere inside."
-    ),
-    "FixUinputWithAck": _(
-        "Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or Edge."
-    ),
-    "CapitalizeMacro": _(
+    "FreeMarking": N_("You can type tone marks at the end of the word or anywhere inside."),
+    "FixUinputWithAck": N_("Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or Edge."),
+    "CapitalizeMacro": N_(
         "Automatically match expansion case to trigger key case.\n\n"
         "Example if 'kg' is 'khô gà':\n"
         "- kg -> khô gà\n"
         "- Kg -> Khô gà\n"
         "- KG -> KHÔ GÀ"
     ),
-    "AutoNonVnRestore": _(
+    "AutoNonVnRestore": N_(
         "Automatically revert the typed sequence if the resulting word is not in the dictionary.\n"
         "This helps prevent accidental Vietnamese transformations on English words or mixed text."
     ),
-    "EnableMacroInOffMode": _(
+    "EnableMacroInOffMode": N_(
         "Allow macros to work when the input mode is OFF.\n"
         "When disabled, macros are only available in active typing modes."
     ),
-    "FixStickyShift": _(
+    "FixStickyShift": N_(
         "Auto fix sticky Shift capitalization for words (3+ letters).\n\n"
         "When you hold Shift a bit too long while typing the first letter, "
         "the second letter may also be capitalized by accident.\n"
         "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
     ),
-    "FixStickyShiftMaxChars": _(
+    "FixStickyShiftMaxChars": N_(
         "Maximum consecutive uppercase letters to fix (after the first letter).\n\n"
         "Controls how many uppercase letters after the first one are lowered.\n"
         "0 = unlimited (any number of uppercase letters will be fixed)\n"
@@ -67,8 +65,8 @@ def add_help_icon(layout, key, clear_existing=False):
                 if widget:
                     widget.deleteLater()
 
-    # Only add if we have a mapped helper text
-    helper_text = HELPERS.get(key)
+    # Translate lazily so the lookup happens after setup_i18n() was called
+    helper_text = _(HELPERS.get(key)) if HELPERS.get(key) else None
     if helper_text:
         icon = HelpIcon(helper_text)
         layout.addWidget(icon)

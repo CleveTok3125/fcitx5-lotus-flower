@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-02 18:14+0700\n"
+"POT-Creation-Date: 2026-06-06 17:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,109 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:853 src/lotus-engine.cpp:971
-msgid "OFF"
+#: src/lotus-engine.cpp:172
+msgid "Charset"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:847 src/lotus-engine.cpp:965
+#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:346
+msgid "Spell Check"
+msgstr ""
+
+#: src/lotus-engine.cpp:200 src/lotus-engine.cpp:347 src/lotus-engine.cpp:639
+#: src/lotus-config.h:198 src/lotus-config.h:257
+msgid "Macro"
+msgstr ""
+
+#: src/lotus-engine.cpp:201 src/lotus-engine.cpp:348 src/lotus-config.h:230
+msgid "Capitalize Macro"
+msgstr ""
+
+#: src/lotus-engine.cpp:203 src/lotus-config.h:236
+msgid "Auto Restore Invalid Words"
+msgstr ""
+
+#: src/lotus-engine.cpp:203 src/lotus-engine.cpp:349 src/lotus-engine.cpp:629
+msgid "Auto Non-VN Restore"
+msgstr ""
+
+#: src/lotus-engine.cpp:205
+msgid "Auto Fix Sticky Shift"
+msgstr ""
+
+#: src/lotus-engine.cpp:205 src/lotus-engine.cpp:350
+msgid "Fix Sticky Shift"
+msgstr ""
+
+#: src/lotus-engine.cpp:207 src/lotus-engine.cpp:351 src/lotus-config.h:243
+msgid "Custom Dictionary"
+msgstr ""
+
+#: src/lotus-engine.cpp:211
+msgid "Settings"
+msgstr ""
+
+#: src/lotus-engine.cpp:631
+msgid "Auto Restore Invalid Words: ON"
+msgstr ""
+
+#: src/lotus-engine.cpp:631
+msgid "Auto Restore Invalid Words: OFF"
+msgstr ""
+
+#: src/lotus-engine.cpp:641
+msgid "Macro: ON"
+msgstr ""
+
+#: src/lotus-engine.cpp:641
+msgid "Macro: OFF"
+msgstr ""
+
+#: src/lotus-engine.cpp:847 src/lotus-engine.cpp:965 src/lotus-config.h:40
 msgid "Uinput (Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:854
-msgid "Uinput (Super Smooth)"
-msgstr ""
-
-#: src/lotus-config.h:40 src/lotus-engine.cpp:848 src/lotus-engine.cpp:966
+#: src/lotus-engine.cpp:848 src/lotus-engine.cpp:966 src/lotus-config.h:40
 msgid "Uinput (Slow)"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:850 src/lotus-engine.cpp:968
+#: src/lotus-engine.cpp:849 src/lotus-engine.cpp:967 src/lotus-config.h:41
+msgid "Minecraft"
+msgstr ""
+
+#: src/lotus-engine.cpp:850 src/lotus-engine.cpp:968 src/lotus-config.h:40
 msgid "Surrounding Text"
 msgstr ""
 
-#: src/lotus-config.h:40 src/lotus-engine.cpp:851 src/lotus-engine.cpp:969
+#: src/lotus-engine.cpp:851 src/lotus-engine.cpp:969 src/lotus-config.h:40
 msgid "Preedit"
 msgstr ""
 
-#: src/lotus-config.h:41 src/lotus-engine.cpp:852 src/lotus-engine.cpp:970
+#: src/lotus-engine.cpp:852 src/lotus-engine.cpp:970 src/lotus-config.h:41
 msgid "Emoji Picker"
 msgstr ""
 
-#: src/lotus-config.h:41 src/lotus-engine.cpp:849 src/lotus-engine.cpp:967
-msgid "Minecraft"
+#: src/lotus-engine.cpp:853 src/lotus-engine.cpp:971 src/lotus-config.h:40
+msgid "OFF"
+msgstr ""
+
+#: src/lotus-engine.cpp:854 src/lotus-config.h:40
+msgid "Uinput (Super Smooth)"
+msgstr ""
+
+#: src/lotus-engine.cpp:975 src/lotus-engine.cpp:991
+msgid "Default Typing"
+msgstr ""
+
+#: src/lotus-engine.cpp:1010
+msgid "Type"
+msgstr ""
+
+#: src/lotus-engine.cpp:1026
+msgid "App: "
+msgstr ""
+
+#: src/lotus-engine.cpp:1062
+msgid "Lotus - Off"
 msgstr ""
 
 #: src/lotus-config.h:58 src/lotus-config.h:69
@@ -89,12 +162,7 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
-#: src/lotus-config.h:198 src/lotus-config.h:256 src/lotus-engine.cpp:200
-#: src/lotus-engine.cpp:347 src/lotus-engine.cpp:639
-msgid "Macro"
-msgstr ""
-
-#: src/lotus-config.h:202 src/lotus-config.h:243 src/lotus-config.h:257
+#: src/lotus-config.h:202 src/lotus-config.h:244 src/lotus-config.h:258
 msgid "Custom Keymap"
 msgstr ""
 
@@ -154,10 +222,6 @@ msgstr ""
 msgid "Enable Macro"
 msgstr ""
 
-#: src/lotus-config.h:230 src/lotus-engine.cpp:201 src/lotus-engine.cpp:348
-msgid "Capitalize Macro"
-msgstr ""
-
 #: src/lotus-config.h:231
 msgid ""
 "Auto capitalize after sentence-ending punctuation (. ! ? Enter) "
@@ -169,151 +233,93 @@ msgid "Auto fix sticky Shift capitalization for words (3+ letters)"
 msgstr ""
 
 #: src/lotus-config.h:233
-msgid "Double Space to Period (experimental)"
+msgid ""
+"Maximum consecutive uppercase letters to fix (0 = unlimited, 1-7, negative = "
+"count from end)"
 msgstr ""
 
 #: src/lotus-config.h:234
+msgid "Double Space to Period (experimental)"
+msgstr ""
+
+#: src/lotus-config.h:235
 msgid "Double Hyphen to Em-Dash (--)"
 msgstr ""
 
-#: src/lotus-config.h:235 src/lotus-engine.cpp:203
-msgid "Auto Restore Invalid Words"
-msgstr ""
-
-#: src/lotus-config.h:236
+#: src/lotus-config.h:237
 msgid "Use oà, uý (Instead Of òa, úy)"
 msgstr ""
 
-#: src/lotus-config.h:237
+#: src/lotus-config.h:238
 msgid "Allow Type With More Freedom"
 msgstr ""
 
-#: src/lotus-config.h:238
+#: src/lotus-config.h:239
 msgid "Allow dd To Produce đ When Auto Restore Invalid Words Is On"
 msgstr ""
 
-#: src/lotus-config.h:239
+#: src/lotus-config.h:240
 msgid "Fix Uinput Mode With Ack"
 msgstr ""
 
-#: src/lotus-config.h:240
+#: src/lotus-config.h:241
 msgid "Use Lotus Status Icons"
 msgstr ""
 
-#: src/lotus-config.h:242 src/lotus-engine.cpp:207 src/lotus-engine.cpp:351
-msgid "Custom Dictionary"
-msgstr ""
-
-#: src/lotus-config.h:245
+#: src/lotus-config.h:246
 msgid "Show Uinput (Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:245
+#: src/lotus-config.h:246
 msgid "Show Uinput (Slow)"
 msgstr ""
 
-#: src/lotus-config.h:246
+#: src/lotus-config.h:247
 msgid "Show Uinput (Super Smooth)"
 msgstr ""
 
-#: src/lotus-config.h:247
+#: src/lotus-config.h:248
 msgid "Show Minecraft"
 msgstr ""
 
-#: src/lotus-config.h:248
+#: src/lotus-config.h:249
 msgid "Show Surrounding Text"
 msgstr ""
 
-#: src/lotus-config.h:249
+#: src/lotus-config.h:250
 msgid "Show Preedit"
 msgstr ""
 
-#: src/lotus-config.h:249
+#: src/lotus-config.h:250
 msgid "Show Emoji Picker"
 msgstr ""
 
-#: src/lotus-config.h:250
+#: src/lotus-config.h:251
 msgid "Show OFF"
 msgstr ""
 
-#: src/lotus-config.h:250
+#: src/lotus-config.h:251
 msgid "Show Default Typing"
 msgstr ""
 
-#: src/lotus-config.h:251
+#: src/lotus-config.h:252
 msgid "Allow Macro in Off Mode"
 msgstr ""
 
-#: src/lotus-config.h:253
+#: src/lotus-config.h:254
 msgid "Time Format ($TIME in macro)"
 msgstr ""
 
-#: src/lotus-config.h:254
+#: src/lotus-config.h:255
 msgid "Date Format ($DATE in macro)"
 msgstr ""
 
-#: src/lotus-config.h:258
+#: src/lotus-config.h:259
 msgid "Icon Color"
 msgstr ""
 
 #: src/lotus-state.cpp:241
 msgid "Page "
-msgstr ""
-
-#: src/lotus-engine.cpp:172
-msgid "Charset"
-msgstr ""
-
-#: src/lotus-engine.cpp:199 src/lotus-engine.cpp:346
-msgid "Spell Check"
-msgstr ""
-
-#: src/lotus-engine.cpp:203 src/lotus-engine.cpp:349 src/lotus-engine.cpp:629
-msgid "Auto Non-VN Restore"
-msgstr ""
-
-#: src/lotus-engine.cpp:205
-msgid "Auto Fix Sticky Shift"
-msgstr ""
-
-#: src/lotus-engine.cpp:205 src/lotus-engine.cpp:350
-msgid "Fix Sticky Shift"
-msgstr ""
-
-#: src/lotus-engine.cpp:211
-msgid "Settings"
-msgstr ""
-
-#: src/lotus-engine.cpp:631
-msgid "Auto Restore Invalid Words: ON"
-msgstr ""
-
-#: src/lotus-engine.cpp:631
-msgid "Auto Restore Invalid Words: OFF"
-msgstr ""
-
-#: src/lotus-engine.cpp:641
-msgid "Macro: ON"
-msgstr ""
-
-#: src/lotus-engine.cpp:641
-msgid "Macro: OFF"
-msgstr ""
-
-#: src/lotus-engine.cpp:975 src/lotus-engine.cpp:991
-msgid "Default Typing"
-msgstr ""
-
-#: src/lotus-engine.cpp:1010
-msgid "Type"
-msgstr ""
-
-#: src/lotus-engine.cpp:1026
-msgid "App: "
-msgstr ""
-
-#: src/lotus-engine.cpp:1062
-msgid "Lotus - Off"
 msgstr ""
 
 #: org.fcitx.Fcitx5.Addon.Lotus.metainfo.xml.in.in:7
@@ -781,16 +787,6 @@ msgstr ""
 msgid "Remove rules for this application?"
 msgstr ""
 
-#: settings-gui/ui/pages/dynamic_settings.py:125
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:125
-msgid "Failed to load configuration."
-msgstr ""
-
-#: settings-gui/ui/pages/dynamic_settings.py:173
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:173
-msgid "No interface settings available yet."
-msgstr ""
-
 #: settings-gui/ui/pages/macro_editor.py:62
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:62
 msgid "Macro in Off Mode"
@@ -869,6 +865,16 @@ msgstr ""
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:391
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/macro_editor.py:436
 msgid "Macro keys cannot contain spaces or special characters."
+msgstr ""
+
+#: settings-gui/ui/pages/dynamic_settings.py:126
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:126
+msgid "Failed to load configuration."
+msgstr ""
+
+#: settings-gui/ui/pages/dynamic_settings.py:176
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/dynamic_settings.py:176
+msgid "No interface settings available yet."
 msgstr ""
 
 #: settings-gui/ui/components.py:188
@@ -958,20 +964,20 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: settings-gui/ui/helpers.py:15
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:15
+#: settings-gui/ui/helpers.py:16
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:16
 msgid "You can type tone marks at the end of the word or anywhere inside."
 msgstr ""
 
-#: settings-gui/ui/helpers.py:18
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:18
+#: settings-gui/ui/helpers.py:17
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:17
 msgid ""
 "Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
 "Edge."
 msgstr ""
 
-#: settings-gui/ui/helpers.py:21
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:21
+#: settings-gui/ui/helpers.py:19
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:19
 msgid ""
 "Automatically match expansion case to trigger key case.\n"
 "\n"
@@ -981,8 +987,8 @@ msgid ""
 "- KG -> KHÔ GÀ"
 msgstr ""
 
-#: settings-gui/ui/helpers.py:28
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:28
+#: settings-gui/ui/helpers.py:26
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:26
 msgid ""
 "Automatically revert the typed sequence if the resulting word is not in the "
 "dictionary.\n"
@@ -990,21 +996,39 @@ msgid ""
 "mixed text."
 msgstr ""
 
-#: settings-gui/ui/helpers.py:32
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:32
+#: settings-gui/ui/helpers.py:30
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:30
 msgid ""
 "Allow macros to work when the input mode is OFF.\n"
 "When disabled, macros are only available in active typing modes."
 msgstr ""
 
-#: settings-gui/ui/helpers.py:36
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:36
+#: settings-gui/ui/helpers.py:34
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:34
 msgid ""
 "Auto fix sticky Shift capitalization for words (3+ letters).\n"
 "\n"
 "When you hold Shift a bit too long while typing the first letter, the second "
 "letter may also be capitalized by accident.\n"
 "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
+msgstr ""
+
+#: settings-gui/ui/helpers.py:40
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:40
+msgid ""
+"Maximum consecutive uppercase letters to fix (after the first letter).\n"
+"\n"
+"Controls how many uppercase letters after the first one are lowered.\n"
+"0 = unlimited (any number of uppercase letters will be fixed)\n"
+"1 = only fix the second letter (default, e.g. 'THái' → 'Thái')\n"
+"2 = fix up to 2 letters (e.g. 'THÁi' → 'Thái')\n"
+"3 = fix up to 3 letters (e.g. 'THÁI' → 'Thái')\n"
+"\n"
+"Negative values count from the end:\n"
+"-1 = last 1 char is lowercase (e.g. 'THÁi' → 'Thái')\n"
+"-2 = last 2 chars are lowercase (e.g. 'THái' → 'Thái')\n"
+"\n"
+"Range: –7 to 7."
 msgstr ""
 
 #: settings-gui/org.fcitx.Fcitx5.Addon.Lotus.Settings.desktop.in:2
