@@ -14,6 +14,7 @@ from qtpy.QtWidgets import (
     QScrollArea,
     QFrame,
     QComboBox,
+    QSpinBox,
 )
 from ui.components import HotkeyEditorWidget, HelpIcon
 from ui.helpers import HELPERS, add_help_icon
@@ -52,7 +53,7 @@ SETTINGS_MAP = {
     },
     SettingsCategory.TYPING: {
         "SPELLING & CORRECTIONS": ["SpellCheck", "AutoNonVnRestore", "DdFreeStyle"],
-        "TYPING OPTIONS": ["W2U", "BracketTransform", "ModernStyle", "FreeMarking", "FixUinputWithAck", "FixStickyShift", "DoubleSpaceToPeriod", "DoubleHyphenToEmDash", "AutoCapitalizeAfterPunctuation"],
+        "TYPING OPTIONS": ["W2U", "BracketTransform", "ModernStyle", "FreeMarking", "FixUinputWithAck", "FixStickyShift", "FixStickyShiftMaxChars", "DoubleSpaceToPeriod", "DoubleHyphenToEmDash", "AutoCapitalizeAfterPunctuation"],
     },
     SettingsCategory.SHORTCUTS: {
         "SHORTCUTS": ["ModeMenuKey"],
@@ -165,6 +166,8 @@ class DynamicSettingsPage(QWidget):
                         self._render_combobox(item, card.content_layout)
                     elif type_str == "Boolean":
                         self._render_checkbox(item, card.content_layout)
+                    elif type_str == "Integer":
+                        self._render_spinbox(item, card.content_layout)
                 
                 if found_any:
                     self.container_layout.addWidget(card)
@@ -252,6 +255,29 @@ class DynamicSettingsPage(QWidget):
             lambda text, k=key: self.update_config(k, combo.currentData())
         )
         row_layout.addWidget(combo)
+        layout.addLayout(row_layout)
+
+    def _render_spinbox(self, item, layout):
+        key, type_str, label, default, annotations = item
+        val = self.current_values.get(key, default)
+
+        row_layout = QHBoxLayout()
+        label_widget = QLabel(_(label))
+        row_layout.addWidget(label_widget)
+        add_help_icon(row_layout, key)
+        row_layout.addStretch()
+
+        spinbox = QSpinBox()
+        spinbox.setRange(-7, 7)
+        try:
+            spinbox.setValue(int(val) if val is not None else int(default))
+        except (ValueError, TypeError):
+            spinbox.setValue(int(default))
+
+        spinbox.valueChanged.connect(
+            lambda v, k=key: self.update_config(k, str(v))
+        )
+        row_layout.addWidget(spinbox)
         layout.addLayout(row_layout)
 
     def _render_checkbox(self, item, layout):
