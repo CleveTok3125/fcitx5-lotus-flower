@@ -73,6 +73,9 @@ Dự án này là bản fork được tối ưu hóa từ [bộ gõ VMK](https:/
 - Thêm tính năng tự động sửa lỗi viết hoa dính Shift cho từ có độ dài từ 3 chữ cái trở lên \
   (ví dụ: `GHi` → `Ghi`, `THái` → `Thái`). Có thể bật/tắt trong menu trạng thái hoặc cài đặt.
 
+- Thêm tuỳ chọn `FixStickyShiftMaxChars` để cấu hình số chữ viết hoa liền nhau tối đa được \
+  sửa (mặc định `1`). Giá trị âm đếm từ cuối: `-1` sửa `THÁi` → `Thái`, `-2` sửa `THái` → `Thái`.
+
 - Bản fork này được duy trì bằng patch stack trên `upstream/main`; xem [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) nếu muốn sync lại với upstream hoặc kiểm tra các patch riêng của fork.
 
 ### Cài đặt
