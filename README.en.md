@@ -73,6 +73,10 @@ This project is an optimized fork of [VMK input method](https://github.com/thanh
 - Added auto-fix sticky Shift capitalization for words (3+ letters) \
   (e.g.: `GHi` → `Ghi`, `THái` → `Thái`). Toggle on/off via status menu or settings.
 
+- Added `FixStickyShiftMaxChars` option to configure maximum consecutive uppercase \
+  letters to fix (default `1`). Negative values count from the end: `-1` fixes `THÁi` → `Thái`, \
+  `-2` fixes `THái` → `Thái`.
+
 - This fork is maintained as a patch stack on top of `upstream/main`; see [PATCH_WORKFLOW.md](PATCH_WORKFLOW.md) to sync with upstream or inspect the fork-specific patches.
 
 ### Install
