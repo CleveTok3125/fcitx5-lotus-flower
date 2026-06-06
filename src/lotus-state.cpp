@@ -194,7 +194,7 @@ namespace fcitx {
     std::string LotusState::applyFix(const std::string& text) const {
         if (!*engine_->config().fixStickyShift)
             return text;
-        return fixStickyShift(text);
+        return fixStickyShift(text, *engine_->config().fixStickyShiftMaxChars);
     }
 
     void LotusState::handlePreeditMode(KeyEvent& keyEvent, KeySym currentSym) {
