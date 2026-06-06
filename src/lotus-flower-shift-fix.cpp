@@ -235,7 +235,7 @@ namespace lotus_shift_fix {
         auto cps = utf8ToCodepoints(s);
         for (auto& cp : cps)
             cp = toLowerCp(cp);
-        std::string lower = codepointsToUtf8(cps);
+        std::string lower  = codepointsToUtf8(cps);
         std::string base   = toBase(lower);
         auto [init, rhyme] = extractInitialAndRhyme(base);
         return isValidRhyme(rhyme, init);
@@ -245,7 +245,7 @@ namespace lotus_shift_fix {
         return isVietnameseUpper(cp) || isVietnameseLower(cp);
     }
 
-    std::string fixShift(const std::string& word) {
+    std::string fixShift(const std::string& word, int maxShifted) {
         auto cps = utf8ToCodepoints(word);
         if (cps.size() < 3)
             return word;
@@ -257,15 +257,66 @@ namespace lotus_shift_fix {
         if (vnEnd < 3)
             return word;
 
-        if (!isVietnameseUpper(cps[0]) || !isVietnameseUpper(cps[1]))
+        if (!isVietnameseUpper(cps[0]))
             return word;
-        for (size_t i = 2; i < vnEnd; ++i)
+
+        if (maxShifted < 0) {
+            unsigned int n = static_cast<unsigned int>(-maxShifted);
+            if (vnEnd < static_cast<size_t>(n) + 2)
+                return word;
+
+            for (size_t i = vnEnd - n; i < vnEnd; ++i)
+                if (!isVietnameseLower(cps[i]))
+                    return word;
+
+            size_t stickyEnd = vnEnd - n;
+            if (stickyEnd <= 1)
+                return word;
+
+            bool hasSticky = false;
+            for (size_t i = 1; i < stickyEnd; ++i)
+                if (isVietnameseUpper(cps[i]))
+                    hasSticky = true;
+
+            if (!hasSticky)
+                return word;
+
+            std::vector<uint32_t> candCps(cps.begin(), cps.begin() + vnEnd);
+            for (size_t i = 1; i < stickyEnd; ++i)
+                if (isVietnameseUpper(cps[i]))
+                    candCps[i] = toLowerCp(cps[i]);
+
+            std::string candidate = codepointsToUtf8(candCps);
+            if (isValidSyllable(candidate)) {
+                if (vnEnd == cps.size())
+                    return candidate;
+                return candidate + codepointsToUtf8(std::vector<uint32_t>(cps.begin() + vnEnd, cps.end()));
+            }
+            return word;
+        }
+
+        size_t shifted = 0;
+        for (size_t i = 1; i < vnEnd; ++i) {
+            if (!isVietnameseUpper(cps[i]))
+                break;
+            shifted++;
+        }
+
+        if (shifted < 1)
+            return word;
+
+        if (maxShifted > 0 && shifted > static_cast<size_t>(maxShifted))
+            return word;
+
+        for (size_t i = 1 + shifted; i < vnEnd; ++i)
             if (!isVietnameseLower(cps[i]))
                 return word;
 
         std::vector<uint32_t> candCps(cps.begin(), cps.begin() + vnEnd);
-        candCps[1]                    = toLowerCp(cps[1]);
-        std::string candidate         = codepointsToUtf8(candCps);
+        for (size_t i = 1; i <= shifted; ++i)
+            candCps[i] = toLowerCp(cps[i]);
+
+        std::string candidate = codepointsToUtf8(candCps);
 
         if (isValidSyllable(candidate)) {
             if (vnEnd == cps.size())
