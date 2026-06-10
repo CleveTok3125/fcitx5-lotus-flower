@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fcitx5-lotus\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 21:32+0700\n"
+"POT-Creation-Date: 2026-06-10 11:24+0700\n"
 "PO-Revision-Date: 2026-06-08 15:44+0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -342,57 +342,6 @@ msgstr "Lotus là bộ gõ tiếng Việt cho Fcitx5, hỗ trợ nhiều chế �
 msgid "Lotus Wrapper For Fcitx"
 msgstr "Bộ gõ Lotus cho Fcitx"
 
-#: settings-gui/ui/helpers.py:15
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:15
-msgid "You can type tone marks at the end of the word or anywhere inside."
-msgstr "Bạn có thể gõ dấu câu ở cuối từ hoặc bất cứ đâu."
-
-#: settings-gui/ui/helpers.py:18
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:18
-msgid ""
-"Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
-"Edge."
-msgstr ""
-"Sửa lỗi gõ trong chế độ Uinput cho trình duyệt Chromium-based như Chrome "
-"hoặc Edge."
-
-#: settings-gui/ui/helpers.py:21
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:21
-msgid ""
-"Automatically match expansion case to trigger key case.\n"
-"\n"
-"Example if 'kg' is 'khô gà':\n"
-"- kg -> khô gà\n"
-"- Kg -> Khô gà\n"
-"- KG -> KHÔ GÀ"
-msgstr ""
-"Tự động khớp chữ hoa/thường của từ được kích hoạt.\n"
-"\n"
-"Ví dụ nếu 'kg' là 'khô gà':\n"
-"- kg -> khô gà\n"
-"- Kg -> Khô gà\n"
-"- KG -> KHÔ GÀ"
-
-#: settings-gui/ui/helpers.py:28
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:28
-msgid ""
-"Automatically revert the typed sequence if the resulting word is not in the "
-"dictionary.\n"
-"This helps prevent accidental Vietnamese transformations on English words or "
-"mixed text."
-msgstr ""
-"Tự động khôi phục chuỗi vừa gõ nếu từ đó không có trong từ điển.\n"
-"Nó giúp tránh các trường hợp gõ các từ tiếng Anh mà bị chuyển đổi qua Tiếng "
-"việt hoặc gõ song ngữ."
-
-#: settings-gui/ui/helpers.py:31
-#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:31
-msgid ""
-"Allow macros to work when the input mode is OFF.\n"
-"When disabled, macros are only available in active typing modes."
-msgstr ""
-"Cho phép gõ tắt hoạt động khi chế độ gõ là TẮT.\n"
-"Khi tắt, gõ tắt chỉ khả dụng ở các chế độ gõ đang hoạt động."
 #: settings-gui/ui/pages/about.py:64
 #: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/pages/about.py:64
 #, python-brace-format
@@ -1031,10 +980,12 @@ msgid "Settings saved."
 msgstr "Cài đặt đã được lưu."
 
 #: settings-gui/ui/helpers.py:15
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:16
 msgid "You can type tone marks at the end of the word or anywhere inside."
 msgstr "Bạn có thể gõ dấu câu ở cuối từ hoặc bất cứ đâu."
 
 #: settings-gui/ui/helpers.py:18
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:17
 msgid ""
 "Fix typing issues in Uinput mode for Chromium-based browsers like Chrome or "
 "Edge."
@@ -1043,6 +994,7 @@ msgstr ""
 "hoặc Edge."
 
 #: settings-gui/ui/helpers.py:21
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:19
 msgid ""
 "Automatically match expansion case to trigger key case.\n"
 "\n"
@@ -1059,6 +1011,7 @@ msgstr ""
 "- KG -> KHÔ GÀ"
 
 #: settings-gui/ui/helpers.py:28
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:26
 msgid ""
 "Automatically revert the typed sequence if the resulting word is not in the "
 "dictionary.\n"
@@ -1070,6 +1023,7 @@ msgstr ""
 "việt hoặc gõ song ngữ."
 
 #: settings-gui/ui/helpers.py:32
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:30
 msgid ""
 "Allow macros to work when the input mode is OFF.\n"
 "When disabled, macros are only available in active typing modes."
@@ -1078,6 +1032,7 @@ msgstr ""
 "Khi tắt, gõ tắt chỉ khả dụng ở các chế độ gõ đang hoạt động."
 
 #: settings-gui/ui/helpers.py:36
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:34
 msgid ""
 "Auto fix sticky Shift capitalization for words (3+ letters).\n"
 "\n"
@@ -1085,13 +1040,14 @@ msgid ""
 "letter may also be capitalized by accident.\n"
 "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
 msgstr ""
-"Tự động sửa lỗi viết hoa do giữ phím Shift quá lâu cho từ (3+ chữ cái).\n"
+"Tự động sửa lỗi viết hoa dính Shift cho từ (3+ chữ cái).\n"
 "\n"
-"Khi bạn giữ Shift hơi lâu khi gõ chữ cái đầu tiên, chữ cái thứ hai có thể bị "
-"viết hoa nhầm.\n"
+"Khi bạn giữ Shift hơi lâu khi gõ chữ cái đầu tiên, chữ cái thứ hai\n"
+"có thể vô tình bị viết hoa.\n"
 "Ví dụ: 'GHi' → 'Ghi', 'THái' → 'Thái'."
 
 #: settings-gui/ui/helpers.py:42
+#: pkg/fcitx5-lotus-flower/usr/share/fcitx5-lotus/settings-gui/ui/helpers.py:40
 msgid ""
 "Maximum consecutive uppercase letters to fix (after the first letter).\n"
 "\n"
