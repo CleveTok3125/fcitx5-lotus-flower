@@ -1,5 +1,5 @@
 pkgname=fcitx5-lotus-flower
-pkgver=3.2.1
+pkgver=3.2.2
 pkgrel=1
 pkgdesc="A fork of fcitx5-lotus - Vietnamese input method for fcitx5"
 arch=('x86_64')
