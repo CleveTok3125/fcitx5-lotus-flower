@@ -38,6 +38,11 @@ HELPERS = {
         "the second letter may also be capitalized by accident.\n"
         "For example: 'GHi' → 'Ghi', 'THái' → 'Thái'."
     ),
+    "QuickToggleKeepOpen": N_(
+        "Keep the quick toggle menu open after toggling an option.\n\n"
+        "When enabled, you can toggle multiple options in one session.\n"
+        "When disabled, the menu closes immediately after each toggle."
+    ),
     "FixStickyShiftMaxChars": _(
         "Maximum consecutive uppercase letters to fix (after the first letter).\n\n"
         "Controls how many uppercase letters after the first one are lowered.\n"
