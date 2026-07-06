@@ -219,7 +219,8 @@ namespace fcitx {
         CGoObject                                  dictionary_;
         std::unordered_map<std::string, LotusMode> appRules_;
         std::string                                appRulesPath_;
-        bool                                       isSelectingAppMode_ = false;
+        bool                                       isSelectingAppMode_   = false;
+        bool                                       isShowingQuickToggle_ = false;
         std::string                                currentConfigureApp_;
         std::unique_ptr<EventSourceTime>           cycleModeNotificationTimer_;
         static constexpr uint64_t                  CYCLE_MODE_NOTIFICATION_TIMEOUT_USEC = 800000; // 800ms in microseconds
@@ -228,6 +229,7 @@ namespace fcitx {
         bool                                  isGnome_ = false;
         mutable std::mutex                    appRulesMutex_;
         std::unordered_map<KeySym, LotusMode> modeMenuMapping_;
+        std::unordered_map<KeySym, int>       quickToggleKeyMapping_;
 
         /**
          * @brief Refreshes the bamboo engine with current settings.
@@ -321,6 +323,26 @@ namespace fcitx {
          * @brief Closes the application mode selection menu.
          */
         void closeAppModeMenu();
+
+        /**
+         * @brief Shows the quick toggle menu.
+         * @param ic Current input context.
+         */
+        void showQuickToggleMenu(InputContext* ic);
+
+        /**
+         * @brief Closes the quick toggle menu.
+         */
+        void closeQuickToggleMenu();
+
+        /**
+         * @brief Toggles a quick toggle option.
+         * @param ic Current input context.
+         * @param option The option to toggle.
+         * @param action Corresponding UI action (may be null).
+         * @param actionLabel Label for the UI action.
+         */
+        void toggleQuickToggleOption(InputContext* ic, Option<bool>& option, SimpleAction* action, const std::string& actionLabel);
 
         /**
          * @brief Sets the current input mode.

@@ -462,13 +462,101 @@ namespace fcitx {
     void LotusEngine::keyEvent(const InputMethodEntry& /*entry*/, KeyEvent& keyEvent) {
         auto* ic = keyEvent.inputContext();
 
-        if (isSelectingAppMode_ && g_mouse_clicked.load(std::memory_order_acquire)) {
-            closeAppModeMenu();
+        if ((isSelectingAppMode_ || isShowingQuickToggle_) && g_mouse_clicked.load(std::memory_order_acquire)) {
+            if (isSelectingAppMode_) {
+                closeAppModeMenu();
+                auto* state = ic->propertyFor(&factory_);
+                state->commitBuffer();
+                state->reset();
+            } else {
+                closeQuickToggleMenu();
+            }
             ic->inputPanel().reset();
             ic->updateUserInterface(UserInterfaceComponent::InputPanel);
-            auto* state = ic->propertyFor(&factory_);
-            state->commitBuffer();
-            state->reset();
+        }
+
+        if (isShowingQuickToggle_) {
+            if (keyEvent.isRelease())
+                return;
+
+            auto   baseList = ic->inputPanel().candidateList();
+            auto   menuList = std::dynamic_pointer_cast<CommonCandidateList>(baseList);
+            KeySym keySym   = keyEvent.key().sym();
+
+            auto   moveCursor = [&](int delta) {
+                if (!menuList || menuList->empty()) {
+                    return false;
+                }
+
+                int totalSize = menuList->totalSize();
+                if (totalSize <= 1) {
+                    return false;
+                }
+
+                int cursorIndex = menuList->globalCursorIndex();
+                if (cursorIndex < 0 || cursorIndex >= totalSize) {
+                    cursorIndex = 0;
+                }
+
+                int nextIndex = cursorIndex + delta;
+                if (nextIndex < 0) {
+                    nextIndex = totalSize - 1;
+                } else if (nextIndex >= totalSize) {
+                    nextIndex = 0;
+                }
+
+                menuList->setGlobalCursorIndex(nextIndex);
+                ic->updateUserInterface(UserInterfaceComponent::InputPanel);
+                return true;
+            };
+
+            keyEvent.filterAndAccept();
+
+            switch (keySym) {
+                case FcitxKey_Tab:
+                case FcitxKey_Down: {
+                    if (moveCursor(1)) {
+                        return;
+                    }
+                    break;
+                }
+                case FcitxKey_ISO_Left_Tab:
+                case FcitxKey_Up: {
+                    if (moveCursor(-1)) {
+                        return;
+                    }
+                    break;
+                }
+                case FcitxKey_space:
+                case FcitxKey_Return: {
+                    if (menuList && !menuList->empty()) {
+                        int selectedIndex = menuList->globalCursorIndex();
+                        if (selectedIndex < 0 || selectedIndex >= menuList->totalSize()) {
+                            selectedIndex = 0;
+                        }
+                        menuList->candidateFromAll(selectedIndex).select(ic);
+                        return;
+                    }
+                    break;
+                }
+                case FcitxKey_Escape: {
+                    closeQuickToggleMenu();
+                    ic->inputPanel().reset();
+                    ic->updateUserInterface(UserInterfaceComponent::InputPanel);
+                    return;
+                }
+                default: {
+                    auto it = quickToggleKeyMapping_.find(keySym);
+                    if (it != quickToggleKeyMapping_.end()) {
+                        if (menuList && !menuList->empty() && it->second < menuList->totalSize()) {
+                            menuList->candidateFromAll(it->second).select(ic);
+                        }
+                        return;
+                    }
+                    break;
+                }
+            }
+            return;
         }
 
         if (isSelectingAppMode_) {
@@ -700,6 +788,13 @@ namespace fcitx {
             keyEvent.filterAndAccept();
             return;
         }
+        if (!keyEvent.isRelease() && !config_.quickToggleKey->empty() && keyEvent.key().checkKeyList(*config_.quickToggleKey)) {
+            LOTUS_INFO("Quick toggle menu key pressed");
+            g_mouse_clicked.store(false, std::memory_order_release);
+            showQuickToggleMenu(ic);
+            keyEvent.filterAndAccept();
+            return;
+        }
         auto* state = keyEvent.inputContext()->propertyFor(&factory_);
         state->keyEvent(keyEvent);
         const auto&  s       = ic->surroundingText();
@@ -892,6 +987,141 @@ namespace fcitx {
     void LotusEngine::closeAppModeMenu() {
         isSelectingAppMode_ = false;
         g_mouse_clicked.store(false, std::memory_order_release);
+    }
+
+    void LotusEngine::closeQuickToggleMenu() {
+        isShowingQuickToggle_ = false;
+        g_mouse_clicked.store(false, std::memory_order_release);
+    }
+
+    void LotusEngine::toggleQuickToggleOption(InputContext* ic, Option<bool>& option, SimpleAction* action, const std::string& actionLabel) {
+        option.setValue(!option.value());
+        saveConfig();
+        refreshOption();
+        if (action) {
+            action->setShortText((option.value() ? "✔ " : "✖ ") + actionLabel);
+            if (ic)
+                action->update(ic);
+        }
+        if (ic)
+            ic->updateUserInterface(UserInterfaceComponent::StatusArea);
+        if (*config_.quickToggleKeepOpen) {
+            showQuickToggleMenu(ic);
+        } else {
+            closeQuickToggleMenu();
+            ic->inputPanel().reset();
+            ic->updateUserInterface(UserInterfaceComponent::InputPanel);
+        }
+    }
+
+    void LotusEngine::showQuickToggleMenu(InputContext* ic) {
+        isShowingQuickToggle_ = true;
+        g_mouse_clicked.store(false, std::memory_order_release);
+
+        auto candidateList = std::make_unique<CommonCandidateList>();
+        candidateList->setLayoutHint(CandidateLayoutHint::Vertical);
+        candidateList->setPageSize(10);
+
+        // Save cursor position from previous menu
+        int  savedCursorIndex = 0;
+        auto oldList          = ic->inputPanel().candidateList();
+        auto oldCommonList    = std::dynamic_pointer_cast<CommonCandidateList>(oldList);
+        if (oldCommonList) {
+            savedCursorIndex = oldCommonList->globalCursorIndex();
+        }
+
+        struct ToggleEntry {
+            Option<bool>* option;
+            KeySym        shortcut;
+            SimpleAction* action;
+            std::string   actionLabel;
+            std::string   label;
+        };
+
+        std::unordered_map<std::string, ToggleEntry> entryMap = {
+            {"SpellCheck", {&config_.spellCheck, Key(*config_.shortcutToggleSpellCheck).sym(), spellCheckAction_.get(), _("Spell Check"), _("Spell Check")}},
+            {"Macro", {&config_.enableMacro, Key(*config_.shortcutToggleMacro).sym(), macroAction_.get(), _("Macro"), _("Macro")}},
+            {"AutoRestore",
+             {&config_.autoNonVnRestore, Key(*config_.shortcutToggleAutoRestore).sym(), autoNonVnRestoreAction_.get(), _("Auto Non-VN Restore"), _("Auto Restore Invalid Words")}},
+            {"FixStickyShift",
+             {&config_.fixStickyShift, Key(*config_.shortcutToggleFixStickyShift).sym(), fixStickyShiftAction_.get(), _("Fix Sticky Shift"), _("Fix Sticky Shift")}},
+            {"CustomDictionary",
+             {&config_.enableDictionary, Key(*config_.shortcutToggleDictionary).sym(), enableDictionaryAction_.get(), _("Custom Dictionary"), _("Custom Dictionary")}},
+            {"CapitalizeMacro",
+             {&config_.capitalizeMacro, Key(*config_.shortcutToggleCapitalizeMacro).sym(), capitalizeMacroAction_.get(), _("Capitalize Macro"), _("Capitalize Macro")}},
+            {"ModernStyle", {&config_.modernStyle, Key(*config_.shortcutToggleModernStyle).sym(), nullptr, "", _("Modern Style (oà/uý)")}},
+            {"FreeMarking", {&config_.freeMarking, Key(*config_.shortcutToggleFreeMarking).sym(), nullptr, "", _("Free Marking")}},
+            {"DoubleSpace", {&config_.doubleSpaceToPeriod, Key(*config_.shortcutToggleDoubleSpace).sym(), nullptr, "", _("Double Space to Period")}},
+        };
+
+        std::unordered_map<std::string, Option<bool>*> visibilityMap = {
+            {"SpellCheck", &config_.showToggleSpellCheck},
+            {"Macro", &config_.showToggleMacro},
+            {"AutoRestore", &config_.showToggleAutoRestore},
+            {"FixStickyShift", &config_.showToggleFixStickyShift},
+            {"CustomDictionary", &config_.showToggleDictionary},
+            {"CapitalizeMacro", &config_.showToggleCapitalizeMacro},
+            {"ModernStyle", &config_.showToggleModernStyle},
+            {"FreeMarking", &config_.showToggleFreeMarking},
+            {"DoubleSpace", &config_.showToggleDoubleSpace},
+        };
+
+        // Build ordered entries from config
+        auto                            order = stringutils::split(*config_.quickToggleOrder, ",");
+        std::vector<ToggleEntry*>       orderedPtrs;
+        std::unordered_set<std::string> usedNames;
+
+        for (const auto& name : order) {
+            auto it = entryMap.find(name);
+            if (it != entryMap.end() && usedNames.insert(it->first).second) {
+                auto visIt = visibilityMap.find(name);
+                if (visIt == visibilityMap.end() || visIt->second->value()) {
+                    orderedPtrs.push_back(&it->second);
+                }
+            }
+        }
+        // Fallback for internal names not in order string
+        for (auto& [name, entry] : entryMap) {
+            if (usedNames.find(name) == usedNames.end()) {
+                auto visIt = visibilityMap.find(name);
+                if (visIt == visibilityMap.end() || visIt->second->value()) {
+                    orderedPtrs.push_back(&entry);
+                }
+            }
+        }
+
+        quickToggleKeyMapping_.clear();
+        std::unordered_set<KeySym> usedToggleKeys;
+        int                        idx = 0;
+        for (auto* entry : orderedPtrs) {
+            bool          hasShortcut = entry->shortcut != FcitxKey_None && entry->shortcut != FcitxKey_VoidSymbol;
+            std::string   keyUtf8     = hasShortcut ? Key::keySymToUTF8(entry->shortcut) : "";
+            std::string   keyLabel    = keyUtf8.empty() ? "" : "[" + keyUtf8 + "] ";
+            std::string   status      = entry->option->value() ? "✓" : "✖";
+            Text          text(keyLabel + status + " " + entry->label);
+
+            Option<bool>* entryOpt = entry->option;
+            SimpleAction* act      = entry->action;
+            std::string   actLabel = entry->actionLabel;
+            candidateList->append(
+                std::make_unique<AppModeCandidateWord>(text, [this, ic, entryOpt, act, actLabel](InputContext*) { toggleQuickToggleOption(ic, *entryOpt, act, actLabel); }));
+
+            if (hasShortcut && usedToggleKeys.insert(entry->shortcut).second) {
+                quickToggleKeyMapping_[entry->shortcut] = idx;
+            }
+            idx++;
+        }
+
+        if (savedCursorIndex >= 0 && savedCursorIndex < candidateList->totalSize()) {
+            candidateList->setGlobalCursorIndex(savedCursorIndex);
+        } else if (candidateList->totalSize() > 0) {
+            candidateList->setGlobalCursorIndex(0);
+        }
+
+        ic->inputPanel().reset();
+        ic->inputPanel().setCandidateList(std::move(candidateList));
+        ic->inputPanel().setAuxDown(Text(_("Select to toggle, Esc to close")));
+        ic->updateUserInterface(UserInterfaceComponent::InputPanel);
     }
 
     void LotusEngine::showAppModeMenu(InputContext* ic) {
