@@ -212,6 +212,27 @@ namespace fcitx {
         KeyListOption                                           modeMenuKey{
             this, "ModeMenuKey", _("Mode Menu Hotkey"), {Key("grave")}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
         KeyListOption cycleModeKey{this, "CycleModeKey", _("Cycle Mode Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
+        KeyListOption quickToggleKey{
+            this, "QuickToggleKey", _("Quick Toggle Menu Hotkey"), {}, KeyListConstrain({KeyConstrainFlag::AllowModifierLess, KeyConstrainFlag::AllowModifierOnly})};
+        Option<bool>        quickToggleKeepOpen{this, "QuickToggleKeepOpen", _("Keep Quick Toggle Menu Open After Toggle"), true};
+        Option<std::string> shortcutToggleSpellCheck{this, "ShortcutToggleSpellCheck", _("Quick Toggle: Spell Check"), "s"};
+        Option<std::string> shortcutToggleMacro{this, "ShortcutToggleMacro", _("Quick Toggle: Macro"), "m"};
+        Option<std::string> shortcutToggleAutoRestore{this, "ShortcutToggleAutoRestore", _("Quick Toggle: Auto Restore Invalid Words"), "a"};
+        Option<std::string> shortcutToggleFixStickyShift{this, "ShortcutToggleFixStickyShift", _("Quick Toggle: Fix Sticky Shift"), "x"};
+        Option<std::string> shortcutToggleDictionary{this, "ShortcutToggleDictionary", _("Quick Toggle: Custom Dictionary"), "d"};
+        Option<std::string> shortcutToggleCapitalizeMacro{this, "ShortcutToggleCapitalizeMacro", _("Quick Toggle: Capitalize Macro"), "p"};
+        Option<std::string> shortcutToggleModernStyle{this, "ShortcutToggleModernStyle", _("Quick Toggle: Modern Style (oà/uý)"), "n"};
+        Option<std::string> shortcutToggleFreeMarking{this, "ShortcutToggleFreeMarking", _("Quick Toggle: Free Marking"), "e"};
+        Option<std::string> shortcutToggleDoubleSpace{this, "ShortcutToggleDoubleSpace", _("Quick Toggle: Double Space to Period"), "b"};
+        Option<std::string> shortcutToggleAutoCapitalize{this, "ShortcutToggleAutoCapitalize", _("Quick Toggle: Auto Capitalize After Punctuation"), "c"};
+        Option<std::string> shortcutToggleDoubleHyphen{this, "ShortcutToggleDoubleHyphen", _("Quick Toggle: Double Hyphen to Em-Dash"), "h"};
+        Option<std::string> shortcutToggleFixUinput{this, "ShortcutToggleFixUinput", _("Quick Toggle: Fix Uinput With Ack"), "u"};
+        Option<bool> showToggleSpellCheck{this, "ShowToggleSpellCheck", "", true}; Option<bool> showToggleMacro{this, "ShowToggleMacro", "", true};
+        Option<bool> showToggleAutoRestore{this, "ShowToggleAutoRestore", "", true}; Option<bool> showToggleFixStickyShift{this, "ShowToggleFixStickyShift", "", true};
+        Option<bool> showToggleDictionary{this, "ShowToggleDictionary", "", true}; Option<bool> showToggleCapitalizeMacro{this, "ShowToggleCapitalizeMacro", "", true};
+        Option<bool> showToggleModernStyle{this, "ShowToggleModernStyle", "", true}; Option<bool> showToggleFreeMarking{this, "ShowToggleFreeMarking", "", true};
+        Option<bool> showToggleDoubleSpace{this, "ShowToggleDoubleSpace", "", true}; Option<bool> showToggleAutoCapitalize{this, "ShowToggleAutoCapitalize", "", true};
+        Option<bool> showToggleDoubleHyphen{this, "ShowToggleDoubleHyphen", "", true}; Option<bool> showToggleFixUinput{this, "ShowToggleFixUinput", "", true};
         SubConfigOption                                                                appRules{this, "AppRules", _("App Rules"), "fcitx://config/addon/lotus/app_rules"};
         OptionWithAnnotation<W2UMode, W2UModeI18NAnnotation>                           w2u{this, "W2U", _("Type w to Produce ư"), W2UMode::NonStart};
         OptionWithAnnotation<BracketTransformMode, BracketTransformModeI18NAnnotation> bracketTransform{this, "BracketTransform", _("Type [ -> ơ, ] -> ư, { -> Ơ, } -> Ư"),
@@ -219,22 +240,22 @@ namespace fcitx {
 
         Option<bool> spellCheck{this, "SpellCheck", _("Enable Spell Check"), true}; Option<bool> enableMacro{this, "EnableMacro", _("Enable Macro"), true};
         Option<bool>                                                                             capitalizeMacro{this, "CapitalizeMacro", _("Capitalize Macro"), true};
-        Option<bool>        autoCapitalizeAfterPunctuation{this, "AutoCapitalizeAfterPunctuation", _("Auto capitalize after sentence-ending punctuation (. ! ? Enter)"), false};
-        Option<bool>        fixStickyShift{this, "FixStickyShift", _("Auto fix sticky Shift capitalization for words (3+ letters)"), true};
-        Option<int>         fixStickyShiftMaxChars{this, "FixStickyShiftMaxChars", _("Maximum consecutive uppercase letters to fix (0 = unlimited, 1-7, negative = count from end)"), 1};
-        Option<bool>        doubleSpaceToPeriod{this, "DoubleSpaceToPeriod", _("Double Space to Period"), false};
-        Option<bool>        doubleHyphenToEmDash{this, "DoubleHyphenToEmDash", _("Double Hyphen to Em-Dash (--)"), false};
-        Option<bool>        autoNonVnRestore{this, "AutoNonVnRestore", _("Auto Restore Invalid Words"), true};
-        Option<bool>        modernStyle{this, "ModernStyle", _("Use oà, uý (Instead Of òa, úy)"), true};
-        Option<bool>        freeMarking{this, "FreeMarking", _("Allow Type With More Freedom"), true};
-        Option<bool>        ddFreeStyle{this, "DdFreeStyle", _("Allow dd To Produce đ When Auto Restore Invalid Words Is On"), true};
-        Option<bool>        fixUinputWithAck{this, "FixUinputWithAck", _("Fix Uinput Mode With Ack"), false};
-        Option<bool>        useLotusIcons{this, "UseLotusIcons", _("Use Lotus Status Icons"), false};
+        Option<bool> autoCapitalizeAfterPunctuation{this, "AutoCapitalizeAfterPunctuation", _("Auto capitalize after sentence-ending punctuation (. ! ? Enter)"), false};
+        Option<bool> fixStickyShift{this, "FixStickyShift", _("Auto fix sticky Shift capitalization for words (3+ letters)"), true};
+        Option<int>  fixStickyShiftMaxChars{this, "FixStickyShiftMaxChars", _("Maximum consecutive uppercase letters to fix (0 = unlimited, 1-7, negative = count from end)"), 1};
+        Option<bool> doubleSpaceToPeriod{this, "DoubleSpaceToPeriod", _("Double Space to Period"), false};
+        Option<bool> doubleHyphenToEmDash{this, "DoubleHyphenToEmDash", _("Double Hyphen to Em-Dash (--)"), false};
+        Option<bool> autoNonVnRestore{this, "AutoNonVnRestore", _("Auto Restore Invalid Words"), true};
+        Option<bool> modernStyle{this, "ModernStyle", _("Use oà, uý (Instead Of òa, úy)"), true};
+        Option<bool> freeMarking{this, "FreeMarking", _("Allow Type With More Freedom"), true};
+        Option<bool> ddFreeStyle{this, "DdFreeStyle", _("Allow dd To Produce đ When Auto Restore Invalid Words Is On"), true};
+        Option<bool> fixUinputWithAck{this, "FixUinputWithAck", _("Fix Uinput Mode With Ack"), false};
+        Option<bool> useLotusIcons{this, "UseLotusIcons", _("Use Lotus Status Icons"), false};
 
-        Option<bool>        enableDictionary{this, "EnableDictionary", _("Custom Dictionary"), false};
-        Option<bool>        enableCustomKeymap{this, "EnableCustomKeymap", _("Custom Keymap"), false};
+        Option<bool> enableDictionary{this, "EnableDictionary", _("Custom Dictionary"), false};
+        Option<bool> enableCustomKeymap{this, "EnableCustomKeymap", _("Custom Keymap"), false};
 
-        Option<bool>        showModeSmooth{this, "ShowModeSmooth", _("Show Uinput (Smooth)"), true};
+        Option<bool> showModeSmooth{this, "ShowModeSmooth", _("Show Uinput (Smooth)"), true};
         Option<std::string> shortcutSmooth{this, "ShortcutSmooth", _("Shortcut for Uinput (Smooth)"), "1"};
         Option<bool>        showModeUinput{this, "ShowModeUinput", _("Show Uinput (Slow)"), true};
         Option<std::string> shortcutUinput{this, "ShortcutUinput", _("Shortcut for Uinput (Slow)"), "2"};
@@ -250,9 +271,12 @@ namespace fcitx {
         Option<std::string> shortcutEmoji{this, "ShortcutEmoji", _("Shortcut for Emoji Picker"), "w"}; Option<bool> showModeOff{this, "ShowModeOff", _("Show OFF"), true};
         Option<std::string> shortcutOff{this, "ShortcutOff", _("Shortcut for OFF"), "e"}; Option<bool> showModeDefault{this, "ShowModeDefault", _("Show Default Typing"), true};
         Option<std::string> shortcutDefault{this, "ShortcutDefault", _("Shortcut for Default Typing"), "r"};
-        Option<bool>                                                                     enableMacroInOffMode{this, "EnableMacroInOffMode", _("Allow Macro in Off Mode"), false};
+        Option<bool>        enableMacroInOffMode{this, "EnableMacroInOffMode", _("Allow Macro in Off Mode"), false};
 
         Option<std::string> modeOrder{this, "ModeOrder", _("Mode Order"), "Smooth,Uinput,Minecraft,SurroundingText,Preedit,Emoji,Off,SuperSmooth,Default"};
+        Option<std::string> quickToggleOrder{
+            this, "QuickToggleOrder", _("Quick Toggle Order"),
+            "SpellCheck,Macro,AutoRestore,FixStickyShift,CustomDictionary,CapitalizeMacro,ModernStyle,FreeMarking,DoubleSpace,AutoCapitalize,DoubleHyphen,FixUinput"};
 
         OptionWithAnnotation<std::string, TimeFormatAnnotation>  timeFormat{this, "TimeFormat", _("Time Format ($TIME in macro)"), "%H:%M", {}, {}, TimeFormatAnnotation()};
         OptionWithAnnotation<std::string, DateFormatAnnotation>  dateFormat{this, "DateFormat", _("Date Format ($DATE in macro)"), "%d/%m/%Y", {}, {}, DateFormatAnnotation()};
