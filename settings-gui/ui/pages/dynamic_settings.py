@@ -62,7 +62,22 @@ SETTINGS_MAP = {
         ],
     },
     SettingsCategory.SHORTCUTS: {
-        "MAIN SHORTCUTS": ["ModeMenuKey", "CycleModeKey"],
+        "MAIN SHORTCUTS": ["ModeMenuKey", "CycleModeKey", "QuickToggleKey"],
+        "QUICK TOGGLE": ["QuickToggleKeepOpen"],
+        "QUICK TOGGLE SHORTCUTS": [
+            "ShortcutToggleSpellCheck",
+            "ShortcutToggleMacro",
+            "ShortcutToggleAutoRestore",
+            "ShortcutToggleFixStickyShift",
+            "ShortcutToggleDictionary",
+            "ShortcutToggleCapitalizeMacro",
+            "ShortcutToggleModernStyle",
+            "ShortcutToggleFreeMarking",
+            "ShortcutToggleDoubleSpace",
+            "ShortcutToggleAutoCapitalize",
+            "ShortcutToggleDoubleHyphen",
+            "ShortcutToggleFixUinput",
+        ],
         "MODE SWITCHING": [
             "ShortcutSmooth",
             "ShortcutUinput",
@@ -86,15 +101,19 @@ CATEGORY_DESCRIPTIONS = {
         "Fine-tune spelling corrections and advanced typing options."
     ),
     SettingsCategory.SHORTCUTS: _(
-        "Manage input mode shortcuts, display order, and fast cycling."
+        "Manage input mode shortcuts, display order, fast cycling, and quick toggle options."
     ),
 }
 
 GROUP_DESCRIPTIONS = {
     "MAIN SHORTCUTS": _(
-        "Assign hotkeys to open the mode menu or quickly cycle through enabled modes."
+        "Assign hotkeys to open the mode menu, cycle through enabled modes, or open the quick toggle menu."
+    ),
+    "QUICK TOGGLE SHORTCUTS": _(
+        "Customize single-character shortcuts for each option in the quick toggle menu (shown when the Quick Toggle Menu Hotkey is pressed)."
     ),
 }
+
 
 
 MODE_SHORTCUT_TO_VISIBILITY = {
@@ -122,6 +141,53 @@ MODE_KEY_TO_INTERNAL_NAME = {
 }
 
 MODE_SHORTCUT_KEYS = list(MODE_SHORTCUT_TO_VISIBILITY.keys())
+
+QUICK_TOGGLE_KEY_TO_INTERNAL_NAME = {
+    "ShortcutToggleSpellCheck": "SpellCheck",
+    "ShortcutToggleMacro": "Macro",
+    "ShortcutToggleAutoRestore": "AutoRestore",
+    "ShortcutToggleFixStickyShift": "FixStickyShift",
+    "ShortcutToggleDictionary": "CustomDictionary",
+    "ShortcutToggleCapitalizeMacro": "CapitalizeMacro",
+    "ShortcutToggleModernStyle": "ModernStyle",
+    "ShortcutToggleFreeMarking": "FreeMarking",
+    "ShortcutToggleDoubleSpace": "DoubleSpace",
+    "ShortcutToggleAutoCapitalize": "AutoCapitalize",
+    "ShortcutToggleDoubleHyphen": "DoubleHyphen",
+    "ShortcutToggleFixUinput": "FixUinput",
+}
+
+QUICK_TOGGLE_SHORTCUT_TO_VISIBILITY = {
+    "ShortcutToggleSpellCheck": "ShowToggleSpellCheck",
+    "ShortcutToggleMacro": "ShowToggleMacro",
+    "ShortcutToggleAutoRestore": "ShowToggleAutoRestore",
+    "ShortcutToggleFixStickyShift": "ShowToggleFixStickyShift",
+    "ShortcutToggleDictionary": "ShowToggleDictionary",
+    "ShortcutToggleCapitalizeMacro": "ShowToggleCapitalizeMacro",
+    "ShortcutToggleModernStyle": "ShowToggleModernStyle",
+    "ShortcutToggleFreeMarking": "ShowToggleFreeMarking",
+    "ShortcutToggleDoubleSpace": "ShowToggleDoubleSpace",
+    "ShortcutToggleAutoCapitalize": "ShowToggleAutoCapitalize",
+    "ShortcutToggleDoubleHyphen": "ShowToggleDoubleHyphen",
+    "ShortcutToggleFixUinput": "ShowToggleFixUinput",
+}
+
+QUICK_TOGGLE_INTERNAL_NAMES = set(QUICK_TOGGLE_KEY_TO_INTERNAL_NAME.values())
+
+QUICK_TOGGLE_SHORTCUT_KEYS = {
+    "ShortcutToggleSpellCheck",
+    "ShortcutToggleMacro",
+    "ShortcutToggleAutoRestore",
+    "ShortcutToggleFixStickyShift",
+    "ShortcutToggleDictionary",
+    "ShortcutToggleCapitalizeMacro",
+    "ShortcutToggleModernStyle",
+    "ShortcutToggleFreeMarking",
+    "ShortcutToggleDoubleSpace",
+    "ShortcutToggleAutoCapitalize",
+    "ShortcutToggleDoubleHyphen",
+    "ShortcutToggleFixUinput",
+}
 
 
 class CardWidget(QFrame):
@@ -272,6 +338,10 @@ class DynamicSettingsPage(QWidget):
                     self._render_mode_list(card_layout=self.container_layout)
                     continue
 
+                if group_name == "QUICK TOGGLE SHORTCUTS":
+                    self._render_quick_toggle_list(card_layout=self.container_layout)
+                    continue
+
                 card = CardWidget("")
                 found_any = False
                 for k in keys:
@@ -281,7 +351,7 @@ class DynamicSettingsPage(QWidget):
 
                     found_any = True
                     type_str = item[1]
-                    if k in ["ModeMenuKey", "CycleModeKey"] or type_str == "Hotkey":
+                    if k in ["ModeMenuKey", "CycleModeKey", "QuickToggleKey"] or type_str == "Hotkey":
                         self._render_hotkey(item, card.content_layout)
                     elif "Enum" in item[4]:
                         self._render_combobox(item, card.content_layout)
@@ -328,7 +398,12 @@ class DynamicSettingsPage(QWidget):
         key, type_str, label, default, annotations = item
         val = self.current_values.get(key, default)
 
-        hotkey_str = val.get("0", "") if isinstance(val, dict) else ""
+        if isinstance(val, dict):
+            hotkey_str = val.get("0", "")
+        elif isinstance(val, list):
+            hotkey_str = val[0] if val else ""
+        else:
+            hotkey_str = str(val) if val else ""
 
         row_layout = QHBoxLayout()
         row_layout.addWidget(QLabel(_(label)))
@@ -337,7 +412,7 @@ class DynamicSettingsPage(QWidget):
         hk_btn = HotkeyEditorWidget(hotkey_str)
         hk_btn.setFixedWidth(235)
         hk_btn.textChanged.connect(
-            lambda text, k=key: self.update_config(k, {"0": text})
+            lambda text, k=key: self.update_config(k, {"0": text} if text else {})
         )
 
         row_layout.addWidget(hk_btn)
@@ -448,8 +523,7 @@ class DynamicSettingsPage(QWidget):
         row_layout.addWidget(label_widget)
         row_layout.addStretch()
 
-        if key in MODE_SHORTCUT_KEYS:
-            # Use single key capture for shortcuts
+        if key in MODE_SHORTCUT_KEYS or key in QUICK_TOGGLE_SHORTCUT_KEYS:
             capture_btn = SingleKeyCaptureWidget(val)
             capture_btn.setFixedWidth(100)
             capture_btn.textChanged.connect(
@@ -576,6 +650,121 @@ class DynamicSettingsPage(QWidget):
             new_order.append(item.data(Qt.UserRole))
 
         self.update_config("ModeOrder", ",".join(new_order))
+
+    def _render_quick_toggle_list(self, card_layout):
+        from qtpy.QtWidgets import QListWidget, QListWidgetItem, QAbstractItemView
+
+        card = CardWidget("")
+        card.content_layout.setContentsMargins(4, 4, 4, 4)
+
+        list_widget = QListWidget()
+        list_widget.setDragDropMode(QAbstractItemView.InternalMove)
+        list_widget.setSelectionMode(QAbstractItemView.SingleSelection)
+        list_widget.setFocusPolicy(Qt.NoFocus)
+        list_widget.setFrameShape(QFrame.NoFrame)
+        list_widget.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        list_widget.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        list_widget.setStyleSheet(
+            "QListWidget { background: transparent; } QListWidget::item { margin: 2px 0; }"
+        )
+
+        order_str = self.current_values.get(
+            "QuickToggleOrder",
+            "SpellCheck,Macro,AutoRestore,FixStickyShift,CustomDictionary,CapitalizeMacro,ModernStyle,FreeMarking,DoubleSpace,AutoCapitalize,DoubleHyphen,FixUinput",
+        )
+        order = order_str.split(",")
+
+        order = [name for name in order if name in QUICK_TOGGLE_INTERNAL_NAMES]
+        for name in QUICK_TOGGLE_INTERNAL_NAMES:
+            if name not in order:
+                order.append(name)
+
+        internal_to_key = {v: k for k, v in QUICK_TOGGLE_KEY_TO_INTERNAL_NAME.items()}
+
+        total_height = 0
+        for name in order:
+            key = internal_to_key.get(name)
+            if not key:
+                continue
+
+            item_meta = self.all_metadata.get(key)
+            if not item_meta:
+                continue
+
+            list_item = QListWidgetItem(list_widget)
+            container = QWidget()
+            row_layout = QHBoxLayout(container)
+            row_layout.setContentsMargins(4, 2, 4, 2)
+            row_layout.setSpacing(4)
+
+            handle = QLabel()
+            icon = QIcon.fromTheme("list-drag-handle")
+            if icon.isNull():
+                icon = QIcon.fromTheme("view-restore")
+            if icon.isNull():
+                icon = QIcon.fromTheme("grabber")
+
+            if not icon.isNull():
+                handle.setPixmap(icon.pixmap(16, 16))
+            else:
+                handle.setText("☰")
+                handle.setStyleSheet(
+                    "font-size: 14px; color: palette(mid); font-weight: bold;"
+                )
+
+            handle.setFixedSize(24, 24)
+            handle.setAlignment(Qt.AlignCenter)
+            row_layout.addWidget(handle)
+
+            # Visibility checkbox
+            visibility_key = QUICK_TOGGLE_SHORTCUT_TO_VISIBILITY.get(key)
+            if visibility_key:
+                visibility_val = self.current_values.get(visibility_key, "True")
+                cb = QCheckBox()
+                cb.setChecked(str(visibility_val).lower() == "true")
+                cb.toggled.connect(
+                    lambda checked, k=visibility_key: self.update_config(
+                        k, "True" if checked else "False"
+                    )
+                )
+                row_layout.addWidget(cb)
+
+            label_widget = QLabel(_(item_meta[2]))
+            row_layout.addWidget(label_widget)
+            row_layout.addStretch()
+
+            val = str(self.current_values.get(key, item_meta[3]))
+            capture_btn = SingleKeyCaptureWidget(val)
+            capture_btn.setFixedWidth(100)
+            capture_btn.textChanged.connect(
+                lambda text, k=key: self.update_config(k, text)
+            )
+            row_layout.addWidget(capture_btn)
+
+            hint = container.sizeHint()
+            list_item.setSizeHint(QSize(100, hint.height()))
+            total_height += hint.height() + 4
+
+            list_widget.addItem(list_item)
+            list_widget.setItemWidget(list_item, container)
+
+            list_item.setData(Qt.UserRole, name)
+
+        self.list_widgets.append(list_widget)
+        list_widget.model().rowsMoved.connect(
+            lambda *args: self._update_quick_toggle_order(list_widget)
+        )
+
+        card.content_layout.addWidget(list_widget)
+        card_layout.addWidget(card)
+
+    def _update_quick_toggle_order(self, list_widget):
+        new_order = []
+        for i in range(list_widget.count()):
+            item = list_widget.item(i)
+            new_order.append(item.data(Qt.UserRole))
+
+        self.update_config("QuickToggleOrder", ",".join(new_order))
 
     def _validate_mode_shortcuts(self):
         """Check for duplicate shortcuts among enabled modes."""
