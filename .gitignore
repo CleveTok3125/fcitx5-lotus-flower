@@ -1,6 +1,8 @@
 build*/
 .*
 !.git*
+.gitconfig
+.git-credentials
 .git/
 *.tar.*
 *.kdev4
